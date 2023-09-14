@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-3"></div>
         <div class="col-6">
-            <h1>Registrer deg</h1>
+            <h1>Lag ny jobb</h1>
             <form>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Navn</label>
@@ -27,8 +27,8 @@
                     <input type="checkbox" class="form-check-input" id="exampleCheck1">
                     <label class="form-check-label" for="exampleCheck1">Jeg vil registrere meg som arbeidsgiver</label>
                 </div>
-                <button type="submit" class="btn btn-success" href="index.php">Registrer meg</button>
-                <a href="login.php" class="btn btn-danger">Tilbake</a>
+                <button type="submit" class="btn btn-success">Registrer meg</button>
+                <button type="submit" class="btn btn-danger">Avbryt</button>
             </form>
         </div>
         <div class="col-3"></div>
