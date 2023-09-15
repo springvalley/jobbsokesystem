@@ -1,5 +1,31 @@
 .job-listing-small{
-    background-color: orange;
     margin: 1rem 1rem;
     padding: 1rem;
+    background-color: #eee;
+    border-radius: 1rem;
+}
+.logindiv{
+    background-color: #eee;
+    border-radius: 6%;
+    padding: 2rem;
+}
+.logindiv h1{
+    text-align: center;
+    color: #1273E2;
+}
+.form-group{
+    margin-bottom: 1rem;
+}
+.logindiv
+.loginbtndiv button{
+    width: 100%;
+    margin: 2rem 1rem 1rem 0rem;
+    background-color: #1273E2;
+}
+#loginbutton{
+    width: 100%;
+    margin-bottom: 3rem;
+}
+.container{
+    padding-top: 2rem;
 }
