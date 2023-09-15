@@ -24,6 +24,13 @@
       <li class="nav-item">
         <a class="nav-link" href="#">Språk</a>
       </li>
+      <a href="index.php">index || </a>
+      <a href="forgotPassword.php">forgot password || </a>
+      <a href="login.php">login || </a>
+      <a href="signup.php">signup || </a>
+      <a href="applicantprofile.php">applicantprofile || </a>
+      <a href="companyrprofile.php">companyprofile ||</a>
+      <a href="applyjob.php">applyjob </a>
       
     </ul>
   </div>

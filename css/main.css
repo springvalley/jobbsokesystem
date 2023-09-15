@@ -9,6 +9,9 @@
     border-radius: 6%;
     padding: 2rem;
 }
+#applybutton{
+    width: 10%;
+}
 .logindiv h1{
     text-align: center;
     color: #1273E2;

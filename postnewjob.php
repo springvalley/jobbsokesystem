@@ -5,29 +5,33 @@
     <div class="row">
         <div class="col-3"></div>
         <div class="col-6">
-            <h1>Lag ny jobb</h1>
+            <h1>Lag en ny jobbannonse!</h1>
             <form>
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Navn</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                    <label for="companyName">Firmanavn</label>
+                    <input type="text" class="form-control" id="companyName" aria-describedby="emailHelp" placeholder="Skriv inn ditt firmanavn">
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputEmail1">E-post</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                    <label for="sectorName">Bransje</label>
+                    <input type="text" class="form-control" id="sectorName" aria-describedby="emailHelp" placeholder="Bransje">
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputPassword1">Passord</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                    <label for="positionName">Stillingstittel</label>
+                    <input type="text" class="form-control" id="positionName" aria-describedby="emailHelp" placeholder="Stillingstittel">
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputPassword1">Gjenta passord</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                    <label for="positionName">Ansettelesform</label>
+                    <input type="text" class="form-control" id="positionName" aria-describedby="emailHelp" placeholder="Ansettelsesform">
                 </div>
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    <label class="form-check-label" for="exampleCheck1">Jeg vil registrere meg som arbeidsgiver</label>
+                <div class="form-group">
+                    <label for="timeFrame">Frist</label>
+                    <input type="date" class="form-control" id="timeFrame" aria-describedby="emailHelp" placeholder="Frist for ansettelse...">
                 </div>
-                <button type="submit" class="btn btn-success">Registrer meg</button>
+                <div class="form-group">
+                    <label for="jobdescription">Jobbbeskrivelse</label>
+                    <input type="textarea" class="form-control" id="jobdescription" aria-describedby="emailHelp" placeholder="Beskrivelse av jobben">
+                </div>
+                <button type="submit" class="btn btn-success">Publiser annonse</button>
                 <button type="submit" class="btn btn-danger">Avbryt</button>
             </form>
         </div>
