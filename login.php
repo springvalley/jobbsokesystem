@@ -1,32 +1,67 @@
 <?php include "components/header_noNav.php" ?>
 <div class="container">
-    <div class="row">
-        <div class="col-1"></div>
-        <div class="col-3 loginbtndiv">
-            <br>
-            <br>
-                <button type="submit" class="btn btn-primary">Arbeidsgiver <svg xmlns="http://www.w3.org/2000/svg"  style="margin-left: 1rem;"  fill="white" height="1em" viewBox="0 0 320 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"/></svg></button>
-                <p></p>
-                <button type="submit" class="btn btn-primary">Arbeidssøker <svg xmlns="http://www.w3.org/2000/svg" style="margin-left: 1rem;" fill="white" height="1em" viewBox="0 0 320 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"/></svg></button>
-        </div>
-        <div class="col-4 logindiv">
-            <h1>Logg Inn</h1>
-            <form>
-                <div class="form-group">
-                    <label for="exampleInputEmail1">E-post</label>
-                    <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" placeholder="Skriv inn din email">
+    <div class="row d-flex justify-content-center align-items-center">
+        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+            <div class="card" style="border-radius: 1rem;">
+                <div class="card-body p-5">
+                    <h1>Logg Inn</h1>
+                    <nav style="margin-bottom: 1rem">
+                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                            <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Jobbsøker</button>
+                            <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Arbeidsgiver</button>
+                        </div>
+                    </nav>
+                    <div class="tab-content" id="nav-tabContent">
+                        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                            <form>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">E-post</label>
+                                    <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" placeholder="Skriv inn din email">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Passord</label>
+                                    <input type="password" class="form-control" name="passord" id="passord" placeholder="Skriv inn ditt passord">
+                                </div>
+                                <p><a href="forgotPassword.php">Glemt passord?</a></p>
+                                <!--Denne må endres til en button når vi får forms-->
+                                <div class="button">
+                                    <a type="submit" id="cancelButton" class="btn btn-danger" href="index.php">Avbryt</a>
+                                    <a type="submit" id="loginButton" class="btn btn-success" href="index.php">Logg
+                                        inn</a>
+                                </div>
+
+                                <p style="text-align:center">Har du ikke en konto?<a href="signup.php"> Registrer deg
+                                        her</a></p>
+                            </form>
+                        </div>
+                        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                            <form>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">E-post</label>
+                                    <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" placeholder="Skriv inn din email">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Passord</label>
+                                    <input type="password" class="form-control" name="passord" id="passord" placeholder="Skriv inn ditt passord">
+                                </div>
+                                <p><a href="forgotPassword.php">Glemt passord?</a></p>
+                                <!--Denne må endres til en button når vi får forms-->
+                                <div class="button">
+                                    <a type="submit" id="cancelButton" class="btn btn-danger" href="index.php">Avbryt</a>
+                                    <a type="submit" id="loginButton" class="btn btn-success" href="index.php">Logg
+                                        inn</a>
+
+                                </div>
+
+                                <p style="text-align:center">Har du ikke en konto?<a href="signup.php"> Registrer
+                                        deg
+                                        her</a></p>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="exampleInputPassword1">Passord</label>
-                    <input type="password" class="form-control" name="passord" id="passord" placeholder="Skriv inn ditt passord">
-                </div>
-                <p><a href="forgotPassword.php">Glemt passord?</a></p>
-                    <!--Denne må endres til en button når vi får forms-->
-                    <a type="submit" id="loginbutton" class="btn btn-success" href="index.php">Logg inn</a>
-                <p>Har du ikke en konto?<a href="signup.php"> Registrer deg her</a></p>
-            </form>
+            </div>
         </div>
-        <div class="col-4"></div>
     </div>
 </div>
 

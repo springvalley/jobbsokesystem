@@ -1,13 +1,14 @@
 <?php include "components/header.php" ?>
+<style>
+    <?php include "main.css" ?>
+</style>
 <div class="container">
-    <div class="row">
-        <h1>Finn din nye jobb!</h1>
-    </div>
-    <div class="row">
-        <div class="col-2">
-        <input type="text" class="form-control" id="searchText" aria-describedby="searchText" placeholder="Søk i fritekst (eks: 1,2,3)">
+    <h1>Finn din nye jobb</h1>
+    <div class="row mt-3">
+        <div class="col">
+            <input type="text" class="form-control" id="searchText" aria-describedby="searchText" placeholder="Søk i fritekst (eks: 1,2,3)">
         </div>
-        <div class="col-2">
+        <div class="col">
             <select class="form-select form-select-sm" aria-label=".form-select-sm example">
                 <option selected>Ansettelsesform</option>
                 <option value="1">Fulltid</option>
@@ -15,7 +16,7 @@
                 <option value="3">Freelance</option>
             </select>
         </div>
-        <div class="col-2">
+        <div class="col">
             <select class="form-select form-select-sm" aria-label=".form-select-sm example">
                 <option selected>Bransje</option>
                 <option value="1">IT</option>
@@ -23,7 +24,7 @@
                 <option value="3">Annet</option>
             </select>
         </div>
-        <div class="col-3">
+        <div class="col">
             <select class="form-select form-select-sm" aria-label=".form-select-sm example">
                 <option selected>Sted</option>
                 <option value="1">Kristiansand</option>
@@ -31,28 +32,27 @@
                 <option value="3">Trondheim</option>
             </select>
         </div>
-        <div class="col-2">
-            <button type="submit" class="btn btn-info">Søk</button>
+        <div class="col">
+            <button type="submit" class="search-button">Søk</button>
         </div>
+        <hr class="my-4">
+        <div class="row">
+            <div class="col-9">
+                <p>Alle ledige stillinger(20000)</p>
+            </div>
+            <div class="col-3">
+                <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                    <option selected>Filtrer</option>
+                    <option value="1">Kristiansand</option>
+                    <option value="2">Oslo</option>
+                    <option value="3">Trondheim</option>
+                </select>
+            </div>
+        </div>
+        <?php include "components/joblist.php" ?>
+        <?php include "components/joblist.php" ?>
+        <?php include "components/joblist.php" ?>
+        <?php include "components/joblist.php" ?>
     </div>
-    <hr class="my-4">
-    <div class="row">
-        <div class="col-9">
-
-            <p>Alle ledige stillinger(20000)</p>
-        </div>
-        <div class="col-3">
-        <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                <option selected>Filtrer</option>
-                <option value="1">Kristiansand</option>
-                <option value="2">Oslo</option>
-                <option value="3">Trondheim</option>
-            </select>
-        </div>
-    </div>
-    <?php include "components/job_small.php"?>
-    <?php include "components/job_small.php"?>
-    <?php include "components/job_small.php"?>
-    <?php include "components/job_small.php"?>
+    <?php include "components/footer.php" ?>
 </div>
-<?php include "components/footer.php" ?>

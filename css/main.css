@@ -1,34 +1,156 @@
-.job-listing-small{
-    margin: 1rem 1rem;
-    padding: 1rem;
-    background-color: #eee;
+.container {
+    font-family: Arial, Helvetica, sans-serif;
+    padding-top: 2rem;        
+    font-size: 16px;
+}
+
+.container h1 {
+    color:#1273E2;
+    font-weight: 700;
+}
+
+.goBackLink a {
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+}
+
+.job-listing-small{    
+    padding: 5px;    
     border-radius: 1rem;
 }
-.logindiv{
-    background-color: #eee;
-    border-radius: 6%;
-    padding: 2rem;
+
+.job-title {
+    text-align: center;
+    color: #1273E2;    
+    font-size: 34px;
+    font-weight: 600;   
 }
-#applybutton{
-    width: 10%;
+.searchButtonIcon {
+    width: 80px;
+    height: 30px;
+    margin-top: 16px;
+    color: white;
+    background-color: #1273E2;
+    border: none;
+    border-radius: 5px;
 }
-.logindiv h1{
+.searchButtonIcon:hover {
+    box-shadow: inset 0 0 0 50px #0d47a1;  
+    color: white;
+}
+.searchInJobHistory {
+    border-radius: 5px;
+    margin-left: 3px;
+    border-style: solid 1px;
+}
+.editProfileButton {
+    width: auto;
+    height: 30px;
+    margin-top: 16px;
+    color: white;
+    background-color: #1273E2;
+    border: none;
+    border-radius: 5px;
+  
+}
+.editProfileButton:hover {
+    box-shadow: inset 0 0 0 50px #0d47a1;  
+    color: white;
+}
+
+.contactInfo {
+    margin-top: 5px;    
+}
+.CV-header p {
+    font-size: 22px;
+    font-weight: 600;
+    margin-top: 1rem;
+}
+
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.card-body{
+    font-size: 16px;
+}
+
+.card:hover {
+    border-color:#1273E2;
+}
+
+#applyjobb-button{   
+   justify-content: center;
+}
+
+.card-body h1{
     text-align: center;
     color: #1273E2;
+    font-size: 34px;
+    font-weight: 700;
 }
+
+
 .form-group{
-    margin-bottom: 1rem;
+    margin-bottom: 15px;     
 }
-.logindiv
-.loginbtndiv button{
-    width: 100%;
-    margin: 2rem 1rem 1rem 0rem;
-    background-color: #1273E2;
+
+.button {
+    text-align: center;
+    margin-bottom: 20px;    
 }
-#loginbutton{
-    width: 100%;
-    margin-bottom: 3rem;
+
+.btn {
+    border-radius: 5px;     
+    border-style: solid;
+    background-color: #1273E2;  
+    border: none;
+    color: white;
+    box-shadow: inset 0 0 0 0 #1273E2;
+
 }
-.container{
-    padding-top: 2rem;
+.btn:hover {
+    box-shadow: inset 0 0 0 50px #0d47a1;  
+    color: white;
 }
+
+.search-button {
+    border-radius: 5px;
+    width: 80%;
+    height: 100%;  
+    border-style: solid;
+    background-color: #1273E2;  
+    border: none;
+    color: white;
+    box-shadow: inset 0 0 0 0 #1273E2;
+}
+
+.search-button:hover {
+    box-shadow: inset 0 0 0 50px #0d47a1;   
+}
+
+#searchText {
+    height: 30px;
+}
+
+@media only screen and (max-width: 600px) {
+    .search-button {
+        width: 100%;
+        height: 100%;
+    }
+    .applicantProfile {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+    .contactInfo {
+        margin-top: 2rem;
+    }
+}
+
+/* .candidate-infoBox {
+    margin-left: 10px;
+} */
