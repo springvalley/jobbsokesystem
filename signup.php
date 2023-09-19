@@ -46,7 +46,7 @@
                                 <!--Denne må endres til en button når vi får forms-->
                                 <div class="button mb-0">
                                     <a type="submit" class="btn btn-danger" href="login.php">Avbryt</a>
-                                    <a type="submit" class="btn btn-success" href="index.php">Registrer</a>
+                                    <a type="submit" class="btn btn-primary" href="index.php">Registrer</a>
                                 </div>
                             </form>
                         </div>
@@ -81,7 +81,7 @@
                                 <!--Denne må endres til en button når vi får forms-->
                                 <div class="button mb-0">
                                     <a type="submit" class="btn btn-danger" href="login.php">Avbryt</a>
-                                    <a type="submit" class="btn btn-success" href="index.php">Registrer</a>
+                                    <a type="submit" class="btn btn-primary" href="index.php">Registrer</a>
                                 </div>
                             </form>
                         </div>

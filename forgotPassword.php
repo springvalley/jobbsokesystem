@@ -12,7 +12,7 @@
                     <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" placeholder="Skriv inn din email">
                 </div>
                     <!--Denne må endres til en button når vi får forms-->
-                    <a type="submit" id="loginbutton" class="btn btn-success">Tilbakestill Passord</a>
+                    <a type="submit" id="loginbutton" class="btn btn-primary">Tilbakestill Passord</a>
                     <a href="login.php">Tilbake</a>
             </form>
         </div>

@@ -2,7 +2,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <div class="job-listing-small">
-    <div class="card">
+    <div class="card cardhover">
         <div class="card-body">
             <div class="row">
                 <div class="col-5">Bedriftsnavn</div>
@@ -24,20 +24,17 @@
                 <div>Publiseringdato: dd.mm.YYYY</div>
                 <div style="color: red;">Frist: dd.mm.YYYY</div>
                 <div>
-                    <a class="btn btn-info" data-toggle="collapse" href="#joblist" role="button" aria-expanded="false">Se
-                        detaljer...</a>
+                    <a class="btn btn-primary" data-toggle="collapse" href="jobadvertisementdetail.php" role="button" aria-expanded="false">Se
+                        annonse</a>
                 </div>
-
             </div>
-
         </div>
-
     </div>
 
     <div class="row">
         <div class="overflow-auto collapse" id="joblist" style="height: 200px">
             <p class="card-text">Lorem ipsum osv</p>
-            <button class="btn btn-info">Søk Jobb</button>
+            <button class="btn btn-primary">Søk Jobb</button>
         </div>
     </div>
 </div>
