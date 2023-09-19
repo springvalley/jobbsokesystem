@@ -47,7 +47,7 @@
 .editProfileButton {
     width: auto;
     height: 30px;
-    margin-top: 16px;
+    /* margin-top: 16px; */
     color: white;
     background-color: #1273E2;
     border: none;
@@ -62,7 +62,8 @@
 .contactInfo {
     margin-top: 5px;    
 }
-.CV-header p {
+
+.profile-header p {
     font-size: 22px;
     font-weight: 600;
     margin-top: 1rem;
@@ -78,12 +79,9 @@
     font-size: 16px;
 }
 
-.card:hover {
-    border-color:#1273E2;
-}
-
-#applyjobb-button{   
-   justify-content: center;
+.cardhover:hover {
+    border-color:#0d47a1; 
+    
 }
 
 .card-body h1{
@@ -92,7 +90,6 @@
     font-size: 34px;
     font-weight: 700;
 }
-
 
 .form-group{
     margin-bottom: 15px;     
@@ -103,19 +100,20 @@
     margin-bottom: 20px;    
 }
 
-.btn {
+.btn .btn-primary {
     border-radius: 5px;     
     border-style: solid;
     background-color: #1273E2;  
     border: none;
     color: white;
     box-shadow: inset 0 0 0 0 #1273E2;
-
 }
-.btn:hover {
+.btn .btn-primary:hover {
     box-shadow: inset 0 0 0 50px #0d47a1;  
     color: white;
 }
+
+
 
 .search-button {
     border-radius: 5px;
@@ -136,6 +134,24 @@
     height: 30px;
 }
 
+/* @media only screen and (max-width: 990px) {
+    img {
+        max-width: 100%;
+        height: auto;            
+    }
+    
+} */
+@media only screen and (max-width: 330px) {
+    img {
+        max-width: 80%;
+        height: 80%;            
+    }
+    .profile-tab {
+        margin-top: 10px;
+    }
+    
+}
+
 @media only screen and (max-width: 600px) {
     .search-button {
         width: 100%;
@@ -146,11 +162,88 @@
         flex-direction: row;
         justify-content: space-around;
     }
+  
     .contactInfo {
         margin-top: 2rem;
+    }
+    img {
+        max-width: 100%;
+        height: auto;            
+    }
+    .profile-tab {
+        margin-top: 10px;
     }
 }
 
 /* .candidate-infoBox {
     margin-left: 10px;
 } */
+.db-header {
+    margin-left: 50px;
+    margin-top: 100px;
+}
+
+.card-title {
+    font-size: 18px;
+    font-weight: 600; 
+}
+
+.card1 {
+    background-color: #a9def9;
+    border-top-right-radius: 0.33rem; 
+    border-top-left-radius: 0.33rem;
+    
+}
+.card2 {
+    background-color: #d0f4de;
+    border-top-right-radius: 0.33rem; 
+    border-top-left-radius: 0.33rem;
+}
+.card3 {
+    background-color: #fcf6bd;
+    border-top-right-radius: 0.33rem; 
+    border-top-left-radius: 0.33rem;
+}
+.card4 {
+    background-color: #f9bec7;
+    border-top-right-radius: 0.33rem; 
+    border-top-left-radius: 0.33rem;
+}
+.card5 {
+    background-color: #b8c0ff;
+    border-top-right-radius: 0.33rem; 
+    border-top-left-radius: 0.33rem;
+}
+
+.footer1 {
+   background-color: #a9def9; 
+}
+.footer2 {
+    background-color: #d0f4de;   
+}
+.footer3 {
+    background-color: #fcf6bd;  
+}
+.footer4 {
+    background-color: #f9bec7;   
+}
+.footer5 {
+    background-color: #b8c0ff;   
+}
+.box-container {
+    margin-top: 50px;   
+    margin-left: 50px;
+    padding-right: 50px;
+}
+
+.company-image {
+    width: 120%;
+    height: auto;
+    position:relative;
+}
+
+.candidate-jobapplication:hover {
+    border-color: white;
+}
+
+

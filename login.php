@@ -26,7 +26,7 @@
                                 <!--Denne må endres til en button når vi får forms-->
                                 <div class="button">
                                     <a type="submit" id="cancelButton" class="btn btn-danger" href="index.php">Avbryt</a>
-                                    <a type="submit" id="loginButton" class="btn btn-success" href="index.php">Logg
+                                    <a type="submit" id="loginButton" class="btn btn-primary" href="index.php">Logg
                                         inn</a>
                                 </div>
 
@@ -48,7 +48,7 @@
                                 <!--Denne må endres til en button når vi får forms-->
                                 <div class="button">
                                     <a type="submit" id="cancelButton" class="btn btn-danger" href="index.php">Avbryt</a>
-                                    <a type="submit" id="loginButton" class="btn btn-success" href="index.php">Logg
+                                    <a type="submit" id="loginButton" class="btn btn-primary" href="index.php">Logg
                                         inn</a>
 
                                 </div>

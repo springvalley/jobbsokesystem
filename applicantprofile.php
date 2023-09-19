@@ -12,7 +12,7 @@
         </div>
         <div class="col-md-9 profile-info">
             <nav>
-                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <div class="nav nav-tabs mb-2" id="nav-tab" role="tablist">
                     <button class="nav-link active" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Min profil</button>
                     <button class="nav-link" id="nav-history-tab" data-bs-toggle="tab" data-bs-target="#nav-history" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Jobbhistorikk</button>
                     <button class="nav-link" id="nav-favorite-tab" data-bs-toggle="tab" data-bs-target="#nav-favorite" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Favoritter</button>
@@ -27,7 +27,7 @@
                         <button type="button" class="editProfileButton"> Redigere Profil
                         </button>
                     </div>
-                    <div class="CV-header">
+                    <div class="profile-header">
                         <p>Sammendrag:</p>
                     </div>
                     <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum rutrum lectus nulla, nec
@@ -47,7 +47,7 @@
                         sagittis mattis, imperdiet et magna. Interdum et malesuada fames ac ante ipsum primis in
                         faucibus.
                         Sed dignissim elementum nunc eget tincidunt. </p>
-                    <div class="CV-header">
+                    <div class="profile-header">
                         <p>Erfaring:</p>
                     </div>
                     <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum rutrum lectus nulla, nec
@@ -67,7 +67,7 @@
                         sagittis mattis, imperdiet et magna. Interdum et malesuada fames ac ante ipsum primis in
                         faucibus.
                         Sed dignissim elementum nunc eget tincidunt. </p>
-                    <div class="CV-header">
+                    <div class="profile-header">
                         <p>Utdanning:</p>
                     </div>
                     <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum rutrum lectus nulla, nec
@@ -87,7 +87,7 @@
                         sagittis mattis, imperdiet et magna. Interdum et malesuada fames ac ante ipsum primis in
                         faucibus.
                         Sed dignissim elementum nunc eget tincidunt. </p>
-                    <div class="CV-header">
+                    <div class="profile-header">
                         <p>Kompetanse:</p>
                     </div>
                     <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum rutrum lectus nulla, nec
@@ -107,7 +107,7 @@
                         sagittis mattis, imperdiet et magna. Interdum et malesuada fames ac ante ipsum primis in
                         faucibus.
                         Sed dignissim elementum nunc eget tincidunt. </p>
-                    <div class="CV-header">
+                    <div class="profile-header">
                         <p>Oppdater CV</p>
                     </div>
                     <form>

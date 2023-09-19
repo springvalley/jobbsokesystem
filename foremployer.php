@@ -1,6 +1,13 @@
 <?php include "components/header.php" ?>
 <div class="container">
-    <h1>Finn kandidater</h1>
+    <div class="flex-container">
+        <div>
+            <h1>Finn kandidater</h1>
+        </div>
+        <div>
+            <a type="submit" id="createJobAdsButton" class="btn btn-primary" href="postnewjob.php">Lag ny jobbannonse</a>
+        </div>
+    </div>   
     <div class="row mt-3">
         <div class="col">
             <input type="text" class="form-control" id="searchText" aria-describedby="searchText" placeholder="Søk i fritekst (eks: 1,2,3)">
