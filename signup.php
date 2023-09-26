@@ -41,7 +41,7 @@
                                         placeholder="Skriv inn ditt passord">
                                 </div>
                                 <div class="form-group">
-                                    <label for="repeatPassword">Passord</label>
+                                    <label for="repeatPassword">Bekreft passord</label>
                                     <input type="password" class="form-control" name="repeatPassword"
                                         id="repeatPassword" placeholder="Skriv inn ditt passord igjen">
                                 </div>
@@ -50,8 +50,12 @@
                                     <input class="form-control" type="file" id="formFile">
                                 </div>
                                 <!--Denne må endres til en button når vi får forms-->
-                                    <a type="submit" class="btn btn-danger" href="login.php">Avbryt</a>
-                                    <button name="submit" type="submit" class="btn btn-primary" >Registrer</button>
+                                <div class="row">
+                                    <div class="col-md-12 text-center mt-3">
+                                        <a type="submit" id="cancelButton" class="btn btn-danger" style="margin-right: 10px" href="index.php">Avbryt</a>
+                                        <a name="submit" type="submit" id="loginButton" class="btn btn-primary" href="index.php">Registrer</a>
+                                    </div>
+                                </div>
                             </form>
                         </div>
                         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
@@ -84,13 +88,17 @@
                                         placeholder="Skriv inn ditt passord">
                                 </div>
                                 <div class="form-group">
-                                    <label for="repeatPassword">Passord</label>
+                                    <label for="repeatPassword">Bekreft passord</label>
                                     <input type="password" class="form-control" name="repeatPassword"
                                         id="repeatPassword" placeholder="Skriv inn ditt passord igjen">
                                 </div>
                                 <!--Denne må endres til en button når vi får forms-->
-                                    <a type="submit" class="btn btn-danger" href="login.php">Avbryt</a>
-                                    <button name="submit" type="submit" class="btn btn-primary" >Registrer</button>
+                                <div class="row">
+                                    <div class="col-md-12 text-center mt-3">
+                                        <a type="submit" id="cancelButton" class="btn btn-danger" style="margin-right: 10px" href="index.php">Avbryt</a>
+                                        <a name="submit" type="submit" id="loginButton" class="btn btn-primary" href="index.php">Registrer</a>
+                                    </div>
+                                </div>
                             </form>
                         </div>
                     </div>
