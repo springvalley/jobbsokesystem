@@ -13,45 +13,42 @@
                     </nav>
                     <div class="tab-content" id="nav-tabContent">
                         <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                            <form>
+                            <form action="./includes/login.inc.php" method="POST">
+                            <input name="jobapplicant" value=1 hidden/>
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">E-post</label>
                                     <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" placeholder="Skriv inn din email">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Passord</label>
-                                    <input type="password" class="form-control" name="passord" id="passord" placeholder="Skriv inn ditt passord">
+                                    <input type="password" class="form-control" name="password" id="passord" placeholder="Skriv inn ditt passord">
                                 </div>
                                 <p><a href="forgotPassword.php">Glemt passord?</a></p>
                                 <!--Denne må endres til en button når vi får forms-->
-                                <div class="button">
                                     <a type="submit" id="cancelButton" class="btn btn-danger" href="index.php">Avbryt</a>
-                                    <a type="submit" id="loginButton" class="btn btn-primary" href="index.php">Logg
-                                        inn</a>
-                                </div>
+                                    <button name="submit" type="submit" id="loginButton" class="btn btn-primary" href="index.php">Logg
+                                        inn</button>
 
                                 <p style="text-align:center">Har du ikke en konto?<a href="signup.php"> Registrer deg
                                         her</a></p>
                             </form>
                         </div>
                         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                            <form>
+                            <form action="./includes/login.inc.php" method="POST">
                                 <div class="form-group">
+                                <input name="jobapplicant" value=0 hidden/>
                                     <label for="exampleInputEmail1">E-post</label>
                                     <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" placeholder="Skriv inn din email">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Passord</label>
-                                    <input type="password" class="form-control" name="passord" id="passord" placeholder="Skriv inn ditt passord">
+                                    <input type="password" class="form-control" name="password" id="passord" placeholder="Skriv inn ditt passord">
                                 </div>
                                 <p><a href="forgotPassword.php">Glemt passord?</a></p>
                                 <!--Denne må endres til en button når vi får forms-->
-                                <div class="button">
-                                    <a type="submit" id="cancelButton" class="btn btn-danger" href="index.php">Avbryt</a>
-                                    <a type="submit" id="loginButton" class="btn btn-primary" href="index.php">Logg
-                                        inn</a>
-
-                                </div>
+                                <a type="submit" id="cancelButton" class="btn btn-danger" href="index.php">Avbryt</a>
+                                    <button name="submit" type="submit" id="loginButton" class="btn btn-primary" href="index.php">Logg
+                                        inn</button>
 
                                 <p style="text-align:center">Har du ikke en konto?<a href="signup.php"> Registrer
                                         deg

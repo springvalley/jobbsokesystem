@@ -4,6 +4,11 @@
 </style>
 <div class="container">
     <h1>Finn din nye jobb</h1>
+    <?php 
+              if(isset($_SESSION["name"])){
+                echo "<p> logget inn </p>";
+              }
+            ?>
     <div class="row mt-3">
         <div class="col">
             <input type="text" class="form-control" id="searchText" aria-describedby="searchText" placeholder="Søk i fritekst (eks: 1,2,3)">

@@ -38,6 +38,13 @@
           <li class="nav-item">
             <a class="nav-link" href="#">EN/NO</a>
           </li>
+          <li class="nav-item">
+            <?php 
+              if(isset($_SESSION["name"])){
+                echo "<p> logget inn </p>";
+              }
+            ?>
+          </li>
         </ul>
       </div>
     </div>

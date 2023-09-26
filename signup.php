@@ -18,7 +18,8 @@
                     <div class="tab-content" id="nav-tabContent">
                         <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
                             aria-labelledby="nav-home-tab">
-                            <form>
+                            <form action="includes/signup.inc.php" method="POST">
+                                <input name="jobapplicant" value=1 hidden/>
                                 <div class="form-group">
                                     <label for="name">Navn</label>
                                     <input type="text" class="form-control" name="name" id="name"
@@ -28,6 +29,11 @@
                                     <label for="email">E-post</label>
                                     <input type="email" class="form-control" name="email" id="email"
                                         aria-describedby="email" placeholder="Skriv inn din email">
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone">Telefon</label>
+                                    <input type="phone" class="form-control" name="phone" id="phone"
+                                        aria-describedby="phone" placeholder="Skriv inn ditt telefonnummer">
                                 </div>
                                 <div class="form-group">
                                     <label for="password">Passord</label>
@@ -44,17 +50,16 @@
                                     <input class="form-control" type="file" id="formFile">
                                 </div>
                                 <!--Denne må endres til en button når vi får forms-->
-                                <div class="button mb-0">
                                     <a type="submit" class="btn btn-danger" href="login.php">Avbryt</a>
-                                    <a type="submit" class="btn btn-primary" href="index.php">Registrer</a>
-                                </div>
+                                    <button name="submit" type="submit" class="btn btn-primary" >Registrer</button>
                             </form>
                         </div>
                         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                            <form>
+                        <form action="includes/signup.inc.php" method="POST">
+                            <input name="jobapplicant" value=0 hidden/>
                                 <div class="form-group">
-                                    <label for="companyname">Bedriftsnavn</label>
-                                    <input type="text" class="form-control" name="companyname" id="companyname"
+                                    <label for="name">Bedriftsnavn</label>
+                                    <input type="text" class="form-control" name="name" id="name"
                                         aria-describedby="companyname" placeholder="Skriv inn navnet på din bedrift">
                                 </div>
                                 <div class="form-group">
@@ -69,6 +74,11 @@
                                         aria-describedby="email" placeholder="Skriv inn din email">
                                 </div>
                                 <div class="form-group">
+                                    <label for="phone">Telefon</label>
+                                    <input type="phone" class="form-control" name="phone" id="phone"
+                                        aria-describedby="phone" placeholder="Skriv inn ditt telefonnummer">
+                                </div>
+                                <div class="form-group">
                                     <label for="password">Passord</label>
                                     <input type="password" class="form-control" name="password" id="password"
                                         placeholder="Skriv inn ditt passord">
@@ -79,10 +89,8 @@
                                         id="repeatPassword" placeholder="Skriv inn ditt passord igjen">
                                 </div>
                                 <!--Denne må endres til en button når vi får forms-->
-                                <div class="button mb-0">
                                     <a type="submit" class="btn btn-danger" href="login.php">Avbryt</a>
-                                    <a type="submit" class="btn btn-primary" href="index.php">Registrer</a>
-                                </div>
+                                    <button name="submit" type="submit" class="btn btn-primary" >Registrer</button>
                             </form>
                         </div>
                     </div>

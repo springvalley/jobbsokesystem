@@ -235,6 +235,9 @@
     margin-left: 50px;
     padding-right: 50px;
 }
+.col-xl-2{
+    width: 20%;
+}
 
 .company-image {
     width: 120%;
