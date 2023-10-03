@@ -19,7 +19,7 @@
                         <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
                             aria-labelledby="nav-home-tab">
                             <form action="includes/signup.inc.php" method="POST">
-                                <input name="jobapplicant" value=1 hidden/>
+                                <input name="jobapplicant" value=1 hidden />
                                 <div class="form-group">
                                     <label for="name">Navn</label>
                                     <input type="text" class="form-control" name="name" id="name"
@@ -52,15 +52,17 @@
                                 <!--Denne må endres til en button når vi får forms-->
                                 <div class="row">
                                     <div class="col-md-12 text-center mt-3">
-                                        <a type="submit" id="cancelButton" class="btn btn-danger" style="margin-right: 10px" href="index.php">Avbryt</a>
-                                        <a name="submit" type="submit" id="loginButton" class="btn btn-primary" href="index.php">Registrer</a>
+                                        <a type="submit" id="cancelButton" class="btn btn-danger"
+                                            style="margin-right: 10px" href="index.php">Avbryt</a>
+                                        <a name="submit" type="submit" id="loginButton" class="btn btn-primary"
+                                            href="index.php">Registrer</a>
                                     </div>
                                 </div>
                             </form>
                         </div>
                         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                        <form action="includes/signup.inc.php" method="POST">
-                            <input name="jobapplicant" value=0 hidden/>
+                            <form action="includes/signup.inc.php" method="POST">
+                                <input name="jobapplicant" value=0 hidden />
                                 <div class="form-group">
                                     <label for="name">Bedriftsnavn</label>
                                     <input type="text" class="form-control" name="name" id="name"
@@ -95,8 +97,10 @@
                                 <!--Denne må endres til en button når vi får forms-->
                                 <div class="row">
                                     <div class="col-md-12 text-center mt-3">
-                                        <a type="submit" id="cancelButton" class="btn btn-danger" style="margin-right: 10px" href="index.php">Avbryt</a>
-                                        <a name="submit" type="submit" id="loginButton" class="btn btn-primary" href="index.php">Registrer</a>
+                                        <button type="submit" id="cancelButton" class="btn btn-danger"
+                                            style="margin-right: 10px" href="index.php">Avbryt</button>
+                                        <button name="submit" type="submit" id="loginButton" class="btn btn-primary"
+                                            href="index.php">Registrer</button>
                                     </div>
                                 </div>
                             </form>
