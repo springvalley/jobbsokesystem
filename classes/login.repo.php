@@ -35,7 +35,7 @@ class LogInRepo extends DB_Handler{
 
             if($stmt->rowCount() == 0){
                 $stmt = null;
-                header("location: ../login.php?error=userNotFoundfinal");
+                header("location: ../login.php?error=userNotFound");
                 exit();
             }
 
@@ -44,6 +44,7 @@ class LogInRepo extends DB_Handler{
             session_start();
             $_SESSION["jobApplicant_id"] = $user[0]["jobApplicant_id"];
             $_SESSION["name"] = $user[0]["name"];
+            header("location: ../index.php/name=". $_SESSION["name"]);
 
             $stmt = null;
 
@@ -85,7 +86,7 @@ class LogInRepo extends DB_Handler{
 
             if($stmt->rowCount() == 0){
                 $stmt = null;
-                header("location: ../login.php?error=userNotFoundfinal");
+                header("location: ../login.php?error=userNotFound");
                 exit();
             }
 
