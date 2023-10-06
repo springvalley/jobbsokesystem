@@ -1,47 +1,82 @@
-<?php include "components/header.php" ?>
+<?php include "components/header.php";
+include "classes/dbh.php";
+include "models/joblisting.model.php";
+include "controllers/joblisting.controller.php";
+include "views/joblisting.view.php";
+$joblisting = new JobListingView();
+?>
 <br>
 <br>
 <div class="container">
-    <form>
+    <form action="includes/postnewjob.inc.php" method="post">
         <div class="row d-flex justify-content-center align-items-center">
             <div class="col-sm-8 form-group">
                 <h1>Lag en ny jobbannonse!</h1>
-                <label for="companyName">Firmanavn</label>
-                <input type="text" class="form-control" id="companyName" aria-describedby="emailHelp" placeholder="Skriv inn ditt firmanavn">
+                <label for="jobtitle">Jobbtittel</label>
+                <input type="text" class="form-control" name="jobtitle" placeholder="Jobbtittel">
+                <!-- <label for="companyname">Firmanavn</label>
+                <input type="text" class="form-control" name="companyname" placeholder="Skriv inn ditt firmanavn"> -->
             </div>
+
+
             <div class="col-sm-8 form-group">
-                <label for="sectorName">Bransje</label>
-                <input type="text" class="form-control" id="sectorName" aria-describedby="emailHelp" placeholder="Bransje">
+                <label for="positionname">Stillingstittel</label>
+                <input type="text" class="form-control" name="positionname" placeholder="Stillingstittel">
             </div>
-            <div class="col-sm-8 form-group">
-                <label for="positionName">Stillingstittel</label>
-                <input type="text" class="form-control" id="positionName" aria-describedby="emailHelp" placeholder="Stillingstittel">
-            </div>
-            <div class="col-sm-8 form-group">
-                <label for="positionName">Ansettelesform</label>
-                <select class="form-select" aria-label="Default select example">
-                    <option selected>Ansettelesform</option>
-                    <option value="1">Heltid</option>
-                    <option value="2">Fulltid</option>
-                    <option value="3">Freelance</option>
-                    <option value="4">Sommerjobb</option>
+            <div class="col-sm-12"></div>
+            <div class="col-sm-4 form-group">
+                <label for="location">Sted</label>
+                <select class="form-select" name="location" aria-label="Default select example">
+                    <option selected>Velg sted</option>
+                    <?php
+                    $locations = $joblisting->fetchAllLocation(); // Fetch locations
+                    foreach ($locations as $location) {
+                        echo '<option value="' . $location["location_id"] . '">' . $location["location_name"] . '</option>';
+                    }
+                    ?>
                 </select>
-                <!-- <input type="text" class="form-control" id="positionName" aria-describedby="emailHelp" placeholder="Ansettelsesform"> -->
             </div>
-            <div class="col-sm-8 form-group">
-                <label for="timeFrame">Frist</label>
-                <input type="date" class="form-control" id="timeFrame" aria-describedby="emailHelp" placeholder="Frist for ansettelse...">
+            <div class="col-sm-4 form-group">
+                <label for="industry">Bransje</label>
+                <select class="form-select" name="industry" aria-label="Default select example">
+                    <option selected>Velg bransje</option>
+                    <?php
+                    $industries = $joblisting->fetchAllIndustry(); // Fetch industries
+                    foreach ($industries as $industry) {
+                        echo '<option value="' . $industry["industry_id"] . '">' . $industry["industry_name"] . '</option>';
+                    }
+                    ?>
+                </select>
+            </div>
+            <div class="col-sm-12"></div>
+            <div class="col-sm-4 form-group">
+                <label for="jobtype">Ansettelesform</label>
+                <select class="form-select" name="jobtype" aria-label="Default select example">
+                    <option selected>Ansettelesform</option>
+                    <?php
+                    $jobtypes = $joblisting->fetchAllJobType(); // Fetch jobtypes
+                    foreach ($jobtypes as $jobtype) {
+                        echo '<option value="' . $jobtype["jobType_id"] . '">' . $jobtype["jobType"] . '</option>';
+                    }
+                    ?>
+                </select>
+            </div>
+            <div class="col-sm-4 form-group">
+                <label for="deadline">Frist</label>
+                <input type="date" class="form-control" name="deadline" placeholder="Frist for ansettelse...">
             </div>
             <div class="col-sm-8 form-group">
                 <label for="jobdescription">Jobbbeskrivelse</label>
-                <textarea class="form-control" rows="5" id="jobdescription" name="jobdescription" aria-describedby="jobdescription" placeholder="Skriv om jobbstilling her..."></textarea>
+                <textarea class="form-control" rows="5" name="jobdescription" name="jobdescription"
+                    aria-describedby="jobdescription" placeholder="Skriv om jobbstilling her..."></textarea>
             </div>
+
         </div>
         <div class="form-group text-center">
-            <button type="submit" class="btn btn-danger">Avbryt</button>
-            <button type="submit" class="btn btn-primary">Publiser annonse</button>
+            <button type="submit" name="cancel" class="btn btn-danger">Avbryt</button>
+            <button type="submit" name="addjob" class="btn btn-primary" href="index.php">Publiser annonse</button>
         </div>
     </form>
 </div>
 
-<?php include "components/footer.php" ?>
+<?php include "components/footer.php"; ?>

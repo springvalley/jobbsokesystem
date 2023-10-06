@@ -1,4 +1,7 @@
-<?php include "components/header.php" ?>
+<?php include "components/header.php"
+
+
+?>
 <div class="container">
     <div class="flex-container">
         <div>
