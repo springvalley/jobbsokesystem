@@ -5,6 +5,27 @@
             <div class="card" style="border-radius: 1rem;">
                 <div class="card-body p-5">
                     <h1>Logg Inn</h1>
+                    <p class="errormessage"><?php
+                                            if (isset($_GET["error"])) {
+                                                $error = $_GET["error"];
+                                                switch ($error) {
+                                                    case "stmtFailed":
+                                                        echo "En uventet feil skjedde, kontakt systemadministrator";
+                                                        break;
+                                                    case "emptyInputs":
+                                                        echo "Vennligst fyll ut alle feltene";
+                                                        break;
+                                                    case "userNotFound":
+                                                        echo "Brukeren ble ikke funnet";
+                                                        break;
+                                                    case "wrongPassword":
+                                                        echo "Passordet er feil, vennligst prøv igjen";
+                                                        break;
+                                                    default:
+                                                        echo "En uventet feil skjedde, kontakt systemadministrator";
+                                                }
+                                            };
+                                            ?></p>
                     <nav style="margin-bottom: 1rem">
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
                             <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Jobbsøker</button>
@@ -25,11 +46,11 @@
                                 </div>
                                 <p><a href="forgotPassword.php">Glemt passord?</a></p>
                                 <!--Denne må endres til en button når vi får forms-->
-                               <!--Denne må endres til en button når vi får forms-->
-                               <div class="row">
+                                <!--Denne må endres til en button når vi får forms-->
+                                <div class="row">
                                     <div class="col-md-12 text-center mb-3">
                                         <a type="submit" id="cancelButton" class="btn btn-danger" style="margin-right: 10px" href="index.php">Avbryt</a>
-                                        <a name="submit" type="submit" id="loginButton" class="btn btn-primary" href="index.php">Logg inn</a>
+                                        <button name="submit" type="submit" id="loginButton" class="btn btn-primary">Logg inn</button>
                                     </div>
                                 </div>
                                 <p style="text-align:center">
@@ -54,7 +75,7 @@
                                 <div class="row">
                                     <div class="col-md-12 text-center mb-3">
                                         <a type="submit" id="cancelButton" class="btn btn-danger" style="margin-right: 10px" href="index.php">Avbryt</a>
-                                        <a name="submit" type="submit" id="loginButton" class="btn btn-primary" href="index.php">Logg inn</a>
+                                        <button name="submit" type="submit" id="loginButton" class="btn btn-primary">Logg inn</button>
                                     </div>
                                 </div>
                                 <p style="text-align:center">

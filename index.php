@@ -1,12 +1,16 @@
-<?php include "components/header.php" ?>
+<?php 
+
+include "components/header.php" ?>
 <style>
     <?php include "main.css" ?>
 </style>
 <div class="container">
     <h1>Finn din nye jobb</h1>
     <?php 
+    
+            print_r($_SESSION);
               if(isset($_SESSION["name"])){
-                echo "<p> logget inn </p>";
+                echo "<h1> logget inn </h1>";
               }
             ?>
     <div class="row mt-3">
