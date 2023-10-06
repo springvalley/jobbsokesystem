@@ -13,7 +13,7 @@ class JobListingView extends Joblisting
         echo  $joblisting[0]["job_title"];
     }
 
-    public function fetchJobDescritopn($jobListingId)
+    public function fetchJobDescription($jobListingId)
     {
         $joblisting = $this->getJobAdsByEmployer($jobListingId);
         echo  $joblisting[0]["employer_id"];
@@ -25,21 +25,25 @@ class JobListingView extends Joblisting
         echo  $joblisting[0]["posistion_name"];
     }
 
-    public function fetchLocation($locationId)
+    public function fetchAllLocation()
     {
-        $joblisting = $this->getLocation($locationId);
-        echo  $joblisting[0]["location_name"];
+        $joblisting = new JobListing(); // Create a new instance of JobListing
+        $locations = $joblisting->getAllLocations();
+
+        return $locations;
     }
 
-    public function fetchJobType($jobTypeId)
+    public function fetchAllJobType()
     {
-        $joblisting = $this->getJobType($jobTypeId);
-        echo  $joblisting[0]["jobtype"];
+        $joblisting = new Joblisting();
+        $jobtypes = $this->getAllJobType();
+        return $jobtypes;
     }
 
-    public function fetchIndustry($industryId)
+    public function fetchAllIndustry()
     {
-        $joblisting = $this->getIndustry($industryId);
-        echo  $joblisting[0]["industry_name"];
+        $joblisting = new Joblisting();
+        $industries = $this->getAllIndustry();
+        return $industries;
     }
 }
