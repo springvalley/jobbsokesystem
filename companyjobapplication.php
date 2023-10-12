@@ -1,4 +1,13 @@
 <?php include "components/header.php" ?>
+<?php include "./views/allJobApplicants.viewModel.php"; 
+    $allJobApplicantViewModel = new allJobApplicantsViewModel();
+    foreach($allJobApplicantViewModel->getAllJobApplicants() as $applicant){
+        print_r($applicant);
+        echo "<br>";
+        echo "<br>";
+        echo "<br>";
+    }
+?>
 <div class="container">
     <div class="flex-container">
         <div>

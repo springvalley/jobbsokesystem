@@ -1,4 +1,4 @@
-<?php include "components/header_noNav.php" ?>
+<?php include "components/header.php" ?>
 <div class="container">
     <div class="flex-container">
         <div>
@@ -34,8 +34,7 @@
         </div>
         <!--Denne må endres til en button når vi får forms-->
         <div class="col-sm-12 text-center mt-3">
-            <a type="submit" id="loginbutton" class="btn btn-primary">Send</a>
-
+            <button type="submit" name="submit" id="loginbutton" class="btn btn-primary">Send nytt passord</a>
         </div>
     </form>
 

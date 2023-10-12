@@ -1,4 +1,4 @@
-<?php include "components/header_noNav.php" ?>
+<?php include "components/header.php" ?>
 <div class="container">
     <div class="row d-flex justify-content-center align-items-center">
         <div class="col-12 col-md-8 col-lg-6 col-xl-5">
@@ -21,6 +21,9 @@
                                                     case "wrongPassword":
                                                         echo "Passordet er feil, vennligst prøv igjen";
                                                         break;
+                                                    case "userCreated":
+                                                        echo "Brukeren ble opprettet!";
+                                                        break;
                                                     default:
                                                         echo "En uventet feil skjedde, kontakt systemadministrator";
                                                 }
@@ -34,7 +37,8 @@
                     </nav>
                     <div class="tab-content" id="nav-tabContent">
                         <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                            <form action="./includes/login.inc.php" method="POST">
+                            <form action="./controllers/users.controller.php" method="POST">
+                                <input name="type" value="login" hidden/>
                                 <input name="jobapplicant" value=1 hidden />
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">E-post</label>
@@ -45,11 +49,9 @@
                                     <input type="password" class="form-control" name="password" id="passord" placeholder="Skriv inn ditt passord">
                                 </div>
                                 <p><a href="forgotPassword.php">Glemt passord?</a></p>
-                                <!--Denne må endres til en button når vi får forms-->
-                                <!--Denne må endres til en button når vi får forms-->
                                 <div class="row">
                                     <div class="col-md-12 text-center mb-3">
-                                        <a type="submit" id="cancelButton" class="btn btn-danger" style="margin-right: 10px" href="index.php">Avbryt</a>
+                                        <a id="cancelButton" class="btn btn-danger" style="margin-right: 10px" href="index.php">Avbryt</a>
                                         <button name="submit" type="submit" id="loginButton" class="btn btn-primary">Logg inn</button>
                                     </div>
                                 </div>
@@ -60,8 +62,9 @@
                             </form>
                         </div>
                         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                            <form action="./includes/login.inc.php" method="POST">
+                            <form action="./controllers/users.controller.php" method="POST">
                                 <div class="form-group">
+                                    <input name="type" value="login" hidden/>
                                     <input name="jobapplicant" value=0 hidden />
                                     <label for="exampleInputEmail1">E-post</label>
                                     <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" placeholder="Skriv inn din email">
@@ -74,7 +77,7 @@
                                 <!--Denne må endres til en button når vi får forms-->
                                 <div class="row">
                                     <div class="col-md-12 text-center mb-3">
-                                        <a type="submit" id="cancelButton" class="btn btn-danger" style="margin-right: 10px" href="index.php">Avbryt</a>
+                                        <a id="cancelButton" class="btn btn-danger" style="margin-right: 10px" href="index.php">Avbryt</a>
                                         <button name="submit" type="submit" id="loginButton" class="btn btn-primary">Logg inn</button>
                                     </div>
                                 </div>

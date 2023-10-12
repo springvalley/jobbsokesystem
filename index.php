@@ -1,18 +1,9 @@
 <?php 
 
 include "components/header.php" ?>
-<style>
-    <?php include "main.css" ?>
-</style>
 <div class="container">
+    <a href="applicantprofile.php?id=10">TEST</a>
     <h1>Finn din nye jobb</h1>
-    <?php 
-    
-            print_r($_SESSION);
-              if(isset($_SESSION["name"])){
-                echo "<h1> logget inn </h1>";
-              }
-            ?>
     <div class="row mt-3">
         <div class="col">
             <input type="text" class="form-control" id="searchText" aria-describedby="searchText" placeholder="Søk i fritekst (eks: 1,2,3)">

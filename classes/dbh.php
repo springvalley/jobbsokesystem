@@ -2,7 +2,6 @@
 
 class DB_Handler
 {
-
     protected function connect()
     {
         try {
@@ -14,5 +13,5 @@ class DB_Handler
             print "Error!: " . $e->getMessage() . "<br/>";
             die();
         }
-    }
+    }   
 }
