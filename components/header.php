@@ -55,11 +55,11 @@
     </div>
   </nav>
 
-  <a href="index.php">index || </a>
+  <a  href="index.php">index || </a>
   <a href="forgotPassword.php">forgot password || </a>
-  <a href="login.php">login || </a>
-  <a href="signup.php">signup || </a>
-  <a href="applicantprofile.php">applicantprofile || </a>
+  <a class="done" href="login.php">login || </a>
+  <a class="done" href="signup.php">signup || </a>
+  <a class="done" href="applicantprofile.php">applicantprofile || </a>
   <a href="postnewjob.php">postnewjob ||</a>
   <a href="companyprofile.php">companyprofile ||</a>
   <a href="companydashboard.php">companydashboard ||</a>

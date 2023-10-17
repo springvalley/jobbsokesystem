@@ -12,6 +12,9 @@
     width: 69%;
     height: 10rem;
 }
+.done{
+    color:green;
+}
 
 .container h1 {
     color:#1273E2;

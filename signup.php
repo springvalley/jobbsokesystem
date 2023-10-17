@@ -1,6 +1,5 @@
 <?php include "components/header.php" ?>
-<?php include "classes/dbh.php" ?>
-<?php include "classes/signup.repo.php" ?>
+<?php include "library/dbh.php" ?>
 <div class="container">
     <div class="row d-flex justify-content-center align-items-center">
         <div class="col-12 col-md-8 col-lg-6 col-xl-5">
