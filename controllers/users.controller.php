@@ -25,19 +25,6 @@ class UserController
             "userPasswordRepeat" => htmlspecialchars(trim($_POST["repeatPassword"])),
             "userOrgNumber" => htmlspecialchars(trim($_POST["orgNumber"]))
         ];
-        /*
-            ob_implicit_flush();
-            foreach($data as $pieceOfData){
-                echo "<br>";
-                echo $pieceOfData . " : " . empty($pieceOfData);
-                echo "<br>";
-            }
-            print_r($data);
-            ob_flush();
-            sleep(1000);*/
-
-
-
 
         //Validate inputs
         if (empty($data["userName"]) || empty($data["userEmail"]) || empty($data["userPhone"]) || empty($data["userPassword"]) || empty($data["userPasswordRepeat"]) || empty($data["userOrgNumber"])) {

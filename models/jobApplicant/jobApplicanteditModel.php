@@ -1,7 +1,8 @@
 <?php
-class JobApplicantViewModel extends JobApplicantModel
+include "models\helpers.php";
+class JobApplicantEditModel extends JobApplicantModel
 {
-
+    private $helper;
     private $jobApplicant_id;
     private $name;
     private $email;
@@ -11,11 +12,15 @@ class JobApplicantViewModel extends JobApplicantModel
     private $profilePicture;
     private $skills = array();
     private $educationData;
+    private $possibleEducations = array();
+    private $locations = array();
+    private $possibleSkills = array();
     private $allData;
 
     public function __construct($jobApplicant_id)
     {
         parent::__construct();
+        $this->helper = new Helper();
         $this->jobApplicant_id = $jobApplicant_id;
         $jobApplicantData = $this->getJobApplicantProfile($jobApplicant_id);
         $this->allData = $jobApplicantData;
@@ -27,6 +32,28 @@ class JobApplicantViewModel extends JobApplicantModel
         $this->profilePicture = $jobApplicantData->location_name;
         $this->educationData =  $this->getEducationData($jobApplicant_id);
         $this->skills = $this->getSkillData($jobApplicant_id);
+        $this->locations = $this->helper->getAllLocations();
+        $this->possibleSkills = $this->helper->getAllSkills();
+        $this->possibleEducations = $this->helper->getAllEducations();
+    }
+
+    public function getPossibleEducations(){
+        return $this->possibleEducations;
+    }
+
+    public function getPossibleSkills(){
+        return $this->possibleSkills;
+    }
+    public function getLocations(){
+        return $this->locations;
+    }
+
+    public function getSkillNames(){
+        $newArray = array();
+        foreach($this->skills as $skill){
+            array_push($newArray, $skill->skill_name);
+        }
+        return $newArray;
     }
 
 
@@ -74,5 +101,14 @@ class JobApplicantViewModel extends JobApplicantModel
     public function getSkills()
     {
         return $this->skills;
+    }
+
+    public function addSkill($id){
+        array_push($this->skills, $id);
+        var_dump($this->skills);
+        exit();
+    }
+    public function removeSKill($id){
+        //foreach
     }
 }
