@@ -1,7 +1,7 @@
 <?php
 
-require_once("../classes/dbhImproved.php");
-require_once("../models/jobApplicant.model.php");
+require_once("../library/dbhImproved.php");
+require_once("../models/jobApplicant/jobApplicant.model.php");
 
 class JobApplicantController
 {

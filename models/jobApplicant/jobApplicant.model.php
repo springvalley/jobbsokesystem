@@ -1,5 +1,5 @@
 <?php
-require_once "/xampp/htdocs/jobbsokesystem/classes/dbhImproved.php";
+require_once "/xampp/htdocs/jobbsokesystem/library/dbhImproved.php";
 class JobApplicantModel
 {
 

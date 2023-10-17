@@ -1,6 +1,6 @@
 <?php
 
-require_once "../classes/dbhImproved.php";
+require_once "../library/dbhImproved.php";
 
 class UserModel{
     private $db;

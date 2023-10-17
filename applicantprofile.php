@@ -1,6 +1,6 @@
 <?php include "components/header.php";
-include "models/jobApplicant.model.php";
-include "models/jobApplicant.viewModel.php";
+include "models/jobApplicant/jobApplicant.model.php";
+include "models/jobApplicant/jobApplicant.viewModel.php";
 $applicantToGet = isset($_GET["id"]) ? $_GET["id"] : 11;
 $jobApplicantView = new JobApplicantViewModel($applicantToGet);
 ?>

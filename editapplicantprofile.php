@@ -1,6 +1,6 @@
 <?php include "components/header.php";
-include "models/jobApplicant.model.php";
-include "models/jobApplicant/jobApplicanteditModel.php";
+include ".\models\jobApplicant\jobApplicant.model.php";
+include ".\models\jobApplicant\jobApplicanteditModel.php";
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     $applicantToGet = (int)$_POST["applicant_id"];
 }else{

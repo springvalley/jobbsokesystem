@@ -1,5 +1,5 @@
 <?php
-include "models\helpers.php";
+require_once "/xampp/htdocs/jobbsokesystem/models/helpers.php";
 class JobApplicantEditModel extends JobApplicantModel
 {
     private $helper;
