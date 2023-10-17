@@ -11,7 +11,11 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 
+
 <body>
+  <?php 
+    var_dump($_SESSION);
+  ?>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -42,7 +46,7 @@
           <li class="nav-item">
             <?php 
               if(isset($_SESSION["name"])){
-                echo "<p> logget inn </p>";
+                echo "<li class=nav-item> <a class=nav-link href=applicantprofile.php?id=".$_SESSION["jobApplicant_id"].">Min Side</a></li>";
               }
             ?>
           </li>
@@ -51,11 +55,11 @@
     </div>
   </nav>
 
-  <a href="index.php">index || </a>
+  <a  href="index.php">index || </a>
   <a href="forgotPassword.php">forgot password || </a>
-  <a href="login.php">login || </a>
-  <a href="signup.php">signup || </a>
-  <a href="applicantprofile.php">applicantprofile || </a>
+  <a class="done" href="login.php">login || </a>
+  <a class="done" href="signup.php">signup || </a>
+  <a class="done" href="applicantprofile.php">applicantprofile || </a>
   <a href="postnewjob.php">postnewjob ||</a>
   <a href="companyprofile.php">companyprofile ||</a>
   <a href="companydashboard.php">companydashboard ||</a>

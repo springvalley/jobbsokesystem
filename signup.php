@@ -1,4 +1,5 @@
-<?php include "components/header_noNav.php" ?>
+<?php include "components/header.php" ?>
+<?php include "library/dbh.php" ?>
 <div class="container">
     <div class="row d-flex justify-content-center align-items-center">
         <div class="col-12 col-md-8 col-lg-6 col-xl-5">
@@ -47,8 +48,10 @@
                     </nav>
                     <div class="tab-content" id="nav-tabContent">
                         <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                            <form action="includes/signup.inc.php" method="POST">
+                            <form action="./controllers/users.controller.php" method="POST">
                                 <input name="jobapplicant" value=1 hidden />
+                                <input name="orgNumber" value=9999999 hidden />
+                                <input name="type" value="register" hidden />
                                 <div class="form-group">
                                     <label for="name">Navn</label>
                                     <input type="text" class="form-control" name="name" id="name" aria-describedby="name" placeholder="Skriv inn ditt navn">
@@ -83,8 +86,9 @@
                             </form>
                         </div>
                         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                            <form action="includes/signup.inc.php" method="POST">
+                            <form action="./controllers/users.controller.php" method="POST">
                                 <input name="jobapplicant" value=0 hidden />
+                                <input name="type" value="register" hidden />
                                 <div class="form-group">
                                     <label for="name">Bedriftsnavn</label>
                                     <input type="text" class="form-control" name="name" id="name" aria-describedby="companyname" placeholder="Skriv inn navnet på din bedrift">
