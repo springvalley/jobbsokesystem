@@ -1,6 +1,6 @@
 <?php
 require_once "library\dbhImproved.php";
-class Helper
+class IndexModel
 {
 
     private $db;
@@ -24,26 +24,6 @@ class Helper
 
     public function getAllSkills(){
         $this->db->query("SELECT * FROM Skill");
-        $row = $this->db->fetchMultiRow();
-        if($this->db->rowCount() > 0){
-            return $row;
-        }else{
-            return false;
-        }
-    }
-
-    public function getAllJobTypes(){
-        $this->db->query("SELECT * FROM jobtype");
-        $row = $this->db->fetchMultiRow();
-        if($this->db->rowCount() > 0){
-            return $row;
-        }else{
-            return false;
-        }
-    }
-
-    public function getAllIndustries(){
-        $this->db->query("SELECT * FROM industry");
         $row = $this->db->fetchMultiRow();
         if($this->db->rowCount() > 0){
             return $row;

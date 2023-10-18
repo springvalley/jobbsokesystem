@@ -7,15 +7,18 @@ Se users.controller.php for bruk
 
 class DB_Handler_Improved
 {
+    //Database variables
     private $dbHost = "localhost";
     private $dbUsername = "root";
     private $dbpwd = "";
     private $dbName = "is115";
 
+    //Class variables
     private $dbh;
     private $stmt;
     private $error;
 
+    //Construcotr
     public function __construct()
     {
         //Set dsn
@@ -26,7 +29,6 @@ class DB_Handler_Improved
         );
 
         //Create PDO instance
-
         try {
             $this->dbh = new PDO($dsn, $this->dbUsername, $this->dbpwd, $options);
         } catch (PDOException $e) {
@@ -35,13 +37,23 @@ class DB_Handler_Improved
         }
     }
 
-    //Prepared statement query
+      /**
+     * Description: This function is used to prepare a SQL statement. 
+     * Param1: $sql = The sql statement you want to send to the database. 
+     * Returns:
+     */
     public function query($sql)
     {
         $this->stmt = $this->dbh->prepare($sql);
     }
 
-    //Denne funksjonen brukes til for å binde parametere til verdier, samme som PDO::bind
+      /**
+     * Description: This function is used to bind parameters to the PDO statement. 
+     * Param1: $param: The paramter you want to bind. 
+     * Param2: $value: The value you want to bind to the parameter
+     * Param3: $type: Type of the value you want to bind, null by default.
+     * Returns: Nothing.
+     */
     public function bind($param, $value, $type = null)
     {
         if (is_null($type)) {
@@ -63,24 +75,41 @@ class DB_Handler_Improved
         $this->stmt->bindValue($param, $value, $type);
     }
 
-    //Execute a prepared statement
+    /**
+     * Description: This function is used to execute a prepared statement in the database
+     * Params:
+     * Returns: True or false based on if the prepared statement executede successfully.
+     */
+
     public function execute(){
         return $this->stmt->execute();
     }
 
-    //Fetch multiple rows of data, returns PHP Object.
+      /**
+     * Description: This function is used to fetch multiple rows of data from a database. 
+     * Params:
+     * Returns: An array of objects or false if no rows were found.
+     */
     public function fetchMultiRow(){
         $this->execute();
         return $this->stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
-    //Fetch a single row of data, returns a single PHP Object.
+      /**
+     * Description: This function is used to fetch a single row of data from the database
+     * Params:
+     * Returns: A single object or false if no rows were found.
+     */
     public function fetchSingleRow(){
         $this->execute();
         return $this->stmt->fetch(PDO::FETCH_OBJ);
     }
 
-    //Returns the rowcount (i.e how many rows were returned by the statement)
+      /**
+     * Description: This function is used to retrieve the rowcount of the previously executed statement.
+     * Params:
+     * Returns: The amount of rows affected by the previous SQL statement.
+     */
     public function rowCount(){
         return $this->stmt->rowCount();
     }
