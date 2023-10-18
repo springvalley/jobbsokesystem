@@ -6,11 +6,18 @@ class UserController
 
     private $userModel;
 
+    //Constructor
     public function __construct()
     {
         $this->userModel = new UserModel;
     }
 
+
+      /**
+     * Description: This function is used to process the form input from a new user and register them into the database
+     * Params:
+     * Returns:
+     */
     public function register()
     {
         //process form
@@ -26,22 +33,25 @@ class UserController
             "userOrgNumber" => htmlspecialchars(trim($_POST["orgNumber"]))
         ];
 
-        //Validate inputs
+        //Validate empty inputs
         if (empty($data["userName"]) || empty($data["userEmail"]) || empty($data["userPhone"]) || empty($data["userPassword"]) || empty($data["userPasswordRepeat"]) || empty($data["userOrgNumber"])) {
             header("location: ../signup.php?error=emptyInputs");
             exit();
         }
 
+        //Validate a valid name
         if (!preg_match("/^([a-åA-å' ]+)$/", $data["userName"])) {
             header("location: ../signup.php?error=invalidName");
             exit();
         }
 
+        //Validate a valid email
         if (!filter_var($data["userEmail"], FILTER_VALIDATE_EMAIL)) {
             header("location: ../signup.php?error=invalidEmail");
             exit();
         }
 
+        //Validate if the passwords match
         if ($data["userPassword"] !== $data["userPasswordRepeat"]) {
             header("location: ../signup.php?error=invalidPassword");
             exit();
@@ -57,6 +67,8 @@ class UserController
         //Passed all the validation, now its time to hash the password. 
         $data["userPassword"] = password_hash($data["userPassword"], PASSWORD_DEFAULT);
 
+        //Register the user in the database using the model. If the registration is successful send them
+        //To the login page otherwise return to the singup page with an error. 
         if ($this->userModel->registerUser($data)) {
             header("location: ../login.php?error=userCreated");
             exit();
@@ -65,6 +77,13 @@ class UserController
             exit();
         }
     }
+
+      /**
+     * Description: This function is used to process the form input and log in a user.
+     * Params:
+     * Returns:
+     */
+
     public function login(){
 
         $data = [
@@ -92,6 +111,12 @@ class UserController
         }
     }
 
+     /**
+     * Description: This function is used to create a new session and store variables about the user in the $_SESSION superglobal.
+     * Params:
+     * Returns:
+     */
+
     public function createUserSession($user, $jobApplicant){
         if($jobApplicant == 1){
             $_SESSION["name"] = $user->name;
@@ -105,6 +130,12 @@ class UserController
         header("location: ../index.php");
     }
 
+     /**
+     * Description: This function is used to logout a user i.e remove the session variables and destroy the session.
+     * Params:
+     * Returns:
+     */
+
     public function logout(){
         unset($_SESSION["name"]);
         unset($_SESSION["id"]);
@@ -117,8 +148,11 @@ class UserController
 
 
 
+//This handles routing for the controller.
 $init = new UserController();
+//If we access this via a post request
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    //We have a hidden input called type which tells the controller which function to execute. 
     switch ($_POST["type"]) {
         case "register":
             $init->register();

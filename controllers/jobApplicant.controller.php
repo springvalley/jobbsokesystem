@@ -80,6 +80,10 @@ class JobApplicantController
 
     public function display($id){
     }
+
+    public function applyToJob(){
+
+    }
 }
 
 $init = new JobApplicantController();
@@ -88,8 +92,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         case "edit":
             $init->edit();
             break;
-        case "login":
-            $init->delete($id);
+        case "apply":
+            $init->applyToJob();
             break;
     }
 }else{

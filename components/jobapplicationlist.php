@@ -1,6 +1,9 @@
-<head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-</head>
+<?php
+include "..\models\jobListing/tempJobListing.model.php";
+include "..\models\jobListing\jobListing.viewModel.php";
+$jobApplicantView = new JobListingViewModel(1);
+?>
+
 <div class="row">
     <div class="col-sm-12 mb-3">
         <div class="card cardhover">

@@ -1,4 +1,23 @@
-<?php include "components/header.php" ?>
+<?php include "components/header.php" ;
+include_once "models\jobListing/tempJobListing.model.php";
+include_once "models\jobListing\jobListing.viewModel.php";
+
+$jobToGet = $_GET["id"];
+if(!isset($_GET["id"])){
+    header("location: index.php");
+    exit();
+}
+
+//You have to be signed in to apply for a job
+
+if(!isset($_SESSION["jobApplicant_id"])){
+    header("location: index.php");
+    exit();
+}
+
+$jobListingViewModel = new JobListingViewModel($jobToGet);
+
+?>
 <div class="container">
     <div class="goBackLink">
         <i class="fa-solid fa-angle-left"></i>
@@ -8,7 +27,7 @@
         <form>
             <div class="row">
                 <div class="job-title">
-                    <p> Søk på stilling som: STILLINGSTITTEL</p>
+                    <p> Søk på stilling som: <?php echo $jobListingViewModel->getJobTitle()?></p>
                 </div>
 
                 <div class="col-md-6">

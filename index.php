@@ -1,6 +1,14 @@
-<?php 
+<?php
+include "components/header.php";
+include_once "models\jobListing/tempJobListing.model.php";
+include_once "models\jobListing\jobListing.viewModel.php";
+include_once "library\dbhImproved.php";
+include_once "models\helpers.php";
 
-include "components/header.php" ?>
+$helperModel = new Helper();
+?>
+
+
 <div class="container">
     <a href="applicantprofile.php?id=10">TEST</a>
     <h1>Finn din nye jobb</h1>
@@ -9,27 +17,30 @@ include "components/header.php" ?>
             <input type="text" class="form-control" id="searchText" aria-describedby="searchText" placeholder="Søk i fritekst (eks: 1,2,3)">
         </div>
         <div class="col">
-            <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                <option selected>Ansettelsesform</option>
-                <option value="1">Fulltid</option>
-                <option value="2">Deltid</option>
-                <option value="3">Freelance</option>
+            <select class="form-select" name="location">
+                <?php
+                $data = $helperModel->getAllJobTypes();
+                foreach ($data as $jobtype) {
+                    echo '<option value="' . $jobtype->jobType_id . '">' . $jobtype->jobType . '</option>';
+                } ?>
             </select>
         </div>
         <div class="col">
-            <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                <option selected>Bransje</option>
-                <option value="1">IT</option>
-                <option value="2">Service</option>
-                <option value="3">Annet</option>
+        <select class="form-select" name="location">
+                <?php
+                $data = $helperModel->getAllIndustries();
+                foreach ($data as $industry) {
+                    echo '<option value="' . $industry->industry_id . '">' . $industry->industry_name . '</option>';
+                } ?>
             </select>
         </div>
         <div class="col">
-            <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                <option selected>Sted</option>
-                <option value="1">Kristiansand</option>
-                <option value="2">Oslo</option>
-                <option value="3">Trondheim</option>
+            <select class="form-select" name="location">
+                <?php
+                $data = $helperModel->getAllLocations();
+                foreach ($data as $location) {
+                    echo '<option value="' . $location->location_id . '">' . $location->location_name . '</option>';
+                } ?>
             </select>
         </div>
         <div class="col">
@@ -49,10 +60,15 @@ include "components/header.php" ?>
                 </select>
             </div>
         </div>
-        <?php include "components/joblist.php" ?>
-        <?php include "components/joblist.php" ?>
-        <?php include "components/joblist.php" ?>
-        <?php include "components/joblist.php" ?>
+        <?php
+        $model = new JobListingModel();
+        $amountOfJobs = $model->getNumberOfJobListingsInDB();
+        for ($i = 1; $i <= $amountOfJobs; $i++) {
+            $jobListingView = new JobListingViewModel($i);
+            require "components/joblist.php";
+            echo "<br>";
+        }
+        ?>
     </div>
     <?php include "components/footer.php" ?>
 </div>
