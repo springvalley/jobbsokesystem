@@ -14,9 +14,9 @@ class UserController
 
 
       /**
-     * Description: This function is used to process the form input from a new user and register them into the database
-     * Params:
-     * Returns:
+     * This function is used to process the form input from a new user and register them into the database
+     * @param
+     * @return
      */
     public function register()
     {
@@ -79,9 +79,9 @@ class UserController
     }
 
       /**
-     * Description: This function is used to process the form input and log in a user.
-     * Params:
-     * Returns:
+     * This function is used to process the form input and log in a user.
+     * @param
+     * @return
      */
 
     public function login(){
@@ -112,9 +112,9 @@ class UserController
     }
 
      /**
-     * Description: This function is used to create a new session and store variables about the user in the $_SESSION superglobal.
-     * Params:
-     * Returns:
+     * This function is used to create a new session and store variables about the user in the $_SESSION superglobal.
+     * @param 
+     * @return
      */
 
     public function createUserSession($user, $jobApplicant){
@@ -131,9 +131,9 @@ class UserController
     }
 
      /**
-     * Description: This function is used to logout a user i.e remove the session variables and destroy the session.
-     * Params:
-     * Returns:
+     * This function is used to logout a user i.e remove the session variables and destroy the session.
+     * @param
+     * @return
      */
 
     public function logout(){

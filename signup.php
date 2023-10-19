@@ -1,5 +1,8 @@
-<?php include "components/header.php" ?>
-<?php include "library/dbh.php" ?>
+<?php 
+include "components/header.php";
+require_once "/xampp/htdocs/jobbsokesystem/library/database_handler.php";
+?>
+
 <div class="container">
     <div class="row d-flex justify-content-center align-items-center">
         <div class="col-12 col-md-8 col-lg-6 col-xl-5">

@@ -2,8 +2,8 @@
 include "components/header.php";
 include_once "models\jobListing/tempJobListing.model.php";
 include_once "models\jobListing\jobListing.viewModel.php";
-include_once "library\dbhImproved.php";
-include_once "models\helpers.php";
+require_once "/xampp/htdocs/jobbsokesystem/models/helpers.php";
+require_once "/xampp/htdocs/jobbsokesystem/library/database_handler.php";
 
 $helperModel = new Helper();
 ?>

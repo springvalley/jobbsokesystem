@@ -1,11 +1,11 @@
 <?php
-/* 
-Denne klassen er lik den gamle DB_Handler vi hadde men den lar oss binde parametere osv direkte i klassen
-Se users.controller.php for bruk
-*/
 
+/**
+ * DB_Handler is a class responsible for establishing a connection to a phpMyAdmin database using PDO(PHP Data Objects).
+ * @since 0.5.0 
+ */
 
-class DB_Handler_Improved
+class DB_Handler
 {
     //Database variables
     private $dbHost = "localhost";
@@ -18,7 +18,7 @@ class DB_Handler_Improved
     private $stmt;
     private $error;
 
-    //Construcotr
+    //Constructor
     public function __construct()
     {
         //Set dsn
@@ -38,9 +38,9 @@ class DB_Handler_Improved
     }
 
       /**
-     * Description: This function is used to prepare a SQL statement. 
-     * Param1: $sql = The sql statement you want to send to the database. 
-     * Returns:
+     * This function is used to prepare a SQL statement for execution.
+     * @param string $sql The SQL statement to be prepared. 
+     * @return void
      */
     public function query($sql)
     {
@@ -48,11 +48,11 @@ class DB_Handler_Improved
     }
 
       /**
-     * Description: This function is used to bind parameters to the PDO statement. 
-     * Param1: $param: The paramter you want to bind. 
-     * Param2: $value: The value you want to bind to the parameter
-     * Param3: $type: Type of the value you want to bind, null by default.
-     * Returns: Nothing.
+     * This function is used to bind parameters to the PDO statement. 
+     * @param mixed $param The parameter to bind. 
+     * @param mixed $value The value to bind to the parameter
+     * @param int $type The type of the value to bind, default is null.
+     * 
      */
     public function bind($param, $value, $type = null)
     {
@@ -76,9 +76,8 @@ class DB_Handler_Improved
     }
 
     /**
-     * Description: This function is used to execute a prepared statement in the database
-     * Params:
-     * Returns: True or false based on if the prepared statement executede successfully.
+     * This function is used to execute a prepared statement in the database.     
+     * @return boolean True or false based on if the prepared statement executede successfully.
      */
 
     public function execute(){
@@ -86,9 +85,8 @@ class DB_Handler_Improved
     }
 
       /**
-     * Description: This function is used to fetch multiple rows of data from a database. 
-     * Params:
-     * Returns: An array of objects or false if no rows were found.
+     * This function is used to fetch multiple rows of data from a database. 
+     * @return array|boolean An array of objects or false if no rows were found.
      */
     public function fetchMultiRow(){
         $this->execute();
@@ -96,9 +94,8 @@ class DB_Handler_Improved
     }
 
       /**
-     * Description: This function is used to fetch a single row of data from the database
-     * Params:
-     * Returns: A single object or false if no rows were found.
+     * This function is used to fetch a single row of data from the database.
+     * @return mixed A single object or false if no rows were found.
      */
     public function fetchSingleRow(){
         $this->execute();
@@ -106,9 +103,8 @@ class DB_Handler_Improved
     }
 
       /**
-     * Description: This function is used to retrieve the rowcount of the previously executed statement.
-     * Params:
-     * Returns: The amount of rows affected by the previous SQL statement.
+     * This function is used to retrieve the rowcount of the previously executed statement.
+     * @return int The number of rows affected by the previous SQL statement.
      */
     public function rowCount(){
         return $this->stmt->rowCount();

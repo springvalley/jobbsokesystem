@@ -1,5 +1,5 @@
 <?php include "components/header.php";
-require_once "./library/dbhImproved.php";
+require_once "/xampp/htdocs/jobbsokesystem/library/database_handler.php";
 require_once "./models/jobListing/JobListingModel.php";
 require_once "./controllers/JobListingController.php";
 require_once "./views/JobListingView.php";
@@ -53,7 +53,7 @@ $joblisting = new JobListingView();
             <div class="col-sm-4 form-group">
                 <label for="jobtype">Ansettelesform</label>
                 <select class="form-select" name="jobtype" aria-label="Default select example">
-                    <option selected> Velg ansettelesform</option>
+                    <option selected>Velg ansettelesform</option>
                     <?php
                     $jobtypes = $joblisting->fetchAllJobTypes(); // Fetch jobtypes
                     foreach ($jobtypes as $jobtype) {

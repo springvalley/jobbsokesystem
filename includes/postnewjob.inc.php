@@ -1,6 +1,6 @@
 <?php
 // Include necessary files
-require_once "/xampp/htdocs/jobbsokesystem/library/dbhImproved.php";
+require_once "/xampp/htdocs/jobbsokesystem/library/database_handler.php";
 require_once "/xampp/htdocs/jobbsokesystem/models/jobListing/JobListingModel.php";
 require_once "/xampp/htdocs/jobbsokesystem/controllers/JobListingController.php";
 
@@ -30,10 +30,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $jobDescription = htmlspecialchars($_POST["jobdescription"], ENT_QUOTES, "UTF-8");
 
     try {
-        // require_once "./library/dbhImproved.php";
-        // require_once "./models/jobListing/JobListingModel.php";
-        // require_once "./controllers/JobListingController.php";
-
         //Error handlers
         $errors = [];
         $jobListingController = new JobListingController();
@@ -42,14 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
         if ($jobListingController->is_empty_input_form($jobTitle, $positionName, $jobDescription)) {
             $errors["empty_form"] = "Vennsligst, fyll ut alle feltene!";
-        }       
-        
-        // if ($jobListingController->is_empty_jobTitle($jobTitle)) {           
-        //     $errors["empty_jobTitle"] = "Vennsligst, fyll ut en jobbtittel!";
-        // }
-        // if ($jobListingController->is_empty_positionName($positionName)) {
-        //     $errors["empty_positionName"] = "Vennsligst, fyll ut en stillingstittel!";
-        // }
+        }         
         if ($jobListingController->is_empty_select_location($location)) {
             $errors["empty_select_location"] = "Vennsligst, velg et sted!";
         }
@@ -63,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $errors["empty_applicationDeadline"] = "Vennsligst, velg en gyldig søknadsfrist dato!";
         }
         if ($jobListingController->is_invalid_applicationDeadline($applicationDeadline)) {
-            $errors["empty_select_applicationDeadline"] = "Dato til søknadsfrist er ugyldig! Vennligst, velg en ny dato!";
+            $errors["invalid_applicationDeadline"] = "Dato til søknadsfrist er ugyldig! Vennligst, velg en ny dato!";
         }       
 
         if ($errors) {

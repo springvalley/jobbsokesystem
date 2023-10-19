@@ -1,12 +1,12 @@
 <?php
-require_once "/xampp/htdocs/jobbsokesystem/library/dbhImproved.php";
+require_once "/xampp/htdocs/jobbsokesystem/library/database_handler.php";
 
 class JobListingModel {
     private $db;
 
     public function __construct()
     {
-        $this->db = new DB_Handler_Improved;
+        $this->db = new DB_Handler;
     }
 
     public function insertNewJobAd ($employerId, $jobTitle, $jobDescription, $jobType, $location, $industry, $applicationDeadline, $positionName) {
