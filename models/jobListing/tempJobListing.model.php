@@ -1,5 +1,5 @@
 <?php
-require_once "/xampp/htdocs/jobbsokesystem/library/dbhImproved.php";
+require_once "/xampp/htdocs/jobbsokesystem/library/database_handler.php";
 class JobListingModel
 {
 
@@ -7,7 +7,7 @@ class JobListingModel
 
     public function __construct()
     {
-        $this->db = new DB_Handler_Improved;
+        $this->db = new DB_Handler;
     }
 
     /**

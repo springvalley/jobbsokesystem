@@ -1,5 +1,13 @@
 <?php
-require_once "/xampp/htdocs/jobbsokesystem/library/dbhImproved.php";
+/**
+ * JobApplicantModel is a class responsible for for managing job applicant data in the database. 
+ * It provides methods to update job applicant profiles, retrieve job applicant data, and manage their skills.
+ * @since 0.5.0
+ * @see DB_Handler which is the database class used by JobApplicantModel.
+ */
+
+
+require_once "/xampp/htdocs/jobbsokesystem/library/database_handler.php";
 class JobApplicantModel
 {
 
@@ -7,13 +15,13 @@ class JobApplicantModel
 
     public function __construct()
     {
-        $this->db = new DB_Handler_Improved;
+        $this->db = new DB_Handler;
     }
 
      /**
-     * Description: This function is used to update the data about a job applicant in the database.
-     * Param1: $data = An array of data about the user which we want to input into the database.
-     * Returns:
+     * This function is used to update the data about a job applicant in the database.
+     * @param array $data An array of data about the user which we want to input into the database.
+     * @return
      */
 
     public function updateJobApplicantProfile($data){
@@ -50,9 +58,10 @@ class JobApplicantModel
     }
 
      /**
-     * Description: This function is used to update the skills of a jobapplicant in the db.
-     * Params:
-     * Returns: True if amount of updated skills matches the expected number, false otherwise. 
+     * This function is used to update the skills of a jobapplicant in the database.
+     * @param int $jobApplicantID The ID of job applicant.
+     * @param array $skills The skills array.
+     * @return boolean True if the number of updated skills matches the expected number, otherwise false. 
      */
     private function updateJobApplicantSkill($jobApplicantID, $skills){
         //First we remove all the skills the applicant already has registered because this makes it easier
@@ -92,9 +101,9 @@ class JobApplicantModel
     }
 
      /**
-     * Description: This function is used to retrieve the profile of a jobapplicant in the database.
-     * Params1: $jobapplicantID = The ID (int) of a job applicant in the database
-     * Returns: The jobapplicant requesteed if it was found in the database as an object, false otherwise. 
+     * This function is used to retrieve the profile of a jobapplicant in the database.
+     * @param int $jobapplicantID The ID of a job applicant in the database
+     * @return: The jobapplicant requesteed if it was found in the database as an object, false otherwise. 
      */
     protected function getJobApplicantProfile($jobApplicantID)
     {
@@ -110,9 +119,8 @@ class JobApplicantModel
     }
 
      /**
-     * Description: This function is used to retrieve the total amount of jobapplicants in the database.
-     * Params:
-     * Returns: The number of jobapplicants in the database as an int. 
+     * This function is used to retrieve the total amount of jobapplicants in the database.
+     * @return: The number of jobapplicants in the database as an int. 
      */
     protected function getNumberOfJobApplicantsInDB(){
         $this->db->query("SELECT COUNT(*) as headcount FROM jobapplicant");
@@ -126,9 +134,8 @@ class JobApplicantModel
 
 
      /**
-     * Description: This function is used to retrieve the top i.e first registered jobapplicant in the database.
-     * Params:
-     * Returns: The ID of the first registered jobapplicant if found, false otherwise. 
+     * This function is used to retrieve the top i.e first registered jobapplicant in the database.
+     * @return: The ID of the first registered jobapplicant if found, false otherwise. 
      */
     protected function getTopJobApplicantInDB(){
         $this->db->query("SELECT * FROM jobapplicant LIMIT 1");
@@ -142,9 +149,9 @@ class JobApplicantModel
     }
 
      /**
-     * Description: This function is used to retrieve the education data of a specific job applicant.
-     * Param1: $jobApplicantID = The ID (int) of a job applicant in the database
-     * Returns: An object containing the education data of the specified job applicant, otherwise an empty array.
+     * This function is used to retrieve the education data of a specific job applicant.
+     * @param int $jobApplicantID  The ID of a job applicant in the database.
+     * @return: An object containing the education data of the specified job applicant, otherwise an empty array.
      */
     protected function getEducationData($jobApplicantID){
         $this->db->query("SELECT educationlevel_name from educationlevel as el INNER JOIN jobapplicant as ja ON el.educationlevel_id = ja.educationlevel_id WHERE ja.jobapplicant_id = :jobapplicant_id");
@@ -159,9 +166,9 @@ class JobApplicantModel
     }
 
      /**
-     * Description: This function is used to retrieve the skill data of a specific job applicant.
-     * Param1: $jobApplicantID = The ID (int) of a job applicant in the database
-     * Returns: An object containing the skill data of the specified job applicant, otherwise an empty array.
+     * This function is used to retrieve the skill data of a specific job applicant.
+     * @param int $jobApplicantID  The ID of a job applicant in the database.
+     * @return: An object containing the skill data of the specified job applicant, otherwise an empty array.
      */
     protected function getSkillData($jobApplicantID){
         $this->db->query("SELECT s.skill_name FROM skill as s INNER JOIN applicantskill as appskill ON appskill.skill_id = s.skill_id INNER JOIN jobapplicant as ja on ja.jobapplicant_id = appskill.jobapplicant_id WHERE ja.jobapplicant_id = :jobapplicant_id");
