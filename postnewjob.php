@@ -1,8 +1,9 @@
 <?php include "components/header.php";
-include "classes/dbh.php";
-include "models/joblisting.model.php";
-include "controllers/joblisting.controller.php";
-include "views/joblisting.view.php";
+require_once "./library/dbhImproved.php";
+require_once "./models/jobListing/JobListingModel.php";
+require_once "./controllers/JobListingController.php";
+require_once "./views/JobListingView.php";
+
 $joblisting = new JobListingView();
 ?>
 <br>
@@ -12,12 +13,12 @@ $joblisting = new JobListingView();
         <div class="row d-flex justify-content-center align-items-center">
             <div class="col-sm-8 form-group">
                 <h1>Lag en ny jobbannonse!</h1>
+                <?php $joblisting->check_input_errors(); ?>
                 <label for="jobtitle">Jobbtittel</label>
                 <input type="text" class="form-control" name="jobtitle" placeholder="Jobbtittel">
                 <!-- <label for="companyname">Firmanavn</label>
                 <input type="text" class="form-control" name="companyname" placeholder="Skriv inn ditt firmanavn"> -->
             </div>
-
 
             <div class="col-sm-8 form-group">
                 <label for="positionname">Stillingstittel</label>
@@ -29,9 +30,9 @@ $joblisting = new JobListingView();
                 <select class="form-select" name="location" aria-label="Default select example">
                     <option selected>Velg sted</option>
                     <?php
-                    $locations = $joblisting->fetchAllLocation(); // Fetch locations
+                    $locations = $joblisting->fetchAllLocations(); // Fetch locations
                     foreach ($locations as $location) {
-                        echo '<option value="' . $location["location_id"] . '">' . $location["location_name"] . '</option>';
+                        echo '<option value="' . $location->location_id . '">' . $location->location_name . '</option>';
                     }
                     ?>
                 </select>
@@ -41,9 +42,9 @@ $joblisting = new JobListingView();
                 <select class="form-select" name="industry" aria-label="Default select example">
                     <option selected>Velg bransje</option>
                     <?php
-                    $industries = $joblisting->fetchAllIndustry(); // Fetch industries
+                    $industries = $joblisting->fetchAllIndustries(); // Fetch industries
                     foreach ($industries as $industry) {
-                        echo '<option value="' . $industry["industry_id"] . '">' . $industry["industry_name"] . '</option>';
+                        echo '<option value="' . $industry->industry_id . '">' . $industry->industry_name . '</option>';
                     }
                     ?>
                 </select>
@@ -52,18 +53,18 @@ $joblisting = new JobListingView();
             <div class="col-sm-4 form-group">
                 <label for="jobtype">Ansettelesform</label>
                 <select class="form-select" name="jobtype" aria-label="Default select example">
-                    <option selected>Ansettelesform</option>
+                    <option selected> Velg ansettelesform</option>
                     <?php
-                    $jobtypes = $joblisting->fetchAllJobType(); // Fetch jobtypes
+                    $jobtypes = $joblisting->fetchAllJobTypes(); // Fetch jobtypes
                     foreach ($jobtypes as $jobtype) {
-                        echo '<option value="' . $jobtype["jobType_id"] . '">' . $jobtype["jobType"] . '</option>';
+                        echo '<option value="' . $jobtype->jobType_id . '">' . $jobtype->jobType . '</option>';
                     }
                     ?>
                 </select>
             </div>
             <div class="col-sm-4 form-group">
-                <label for="deadline">Frist</label>
-                <input type="date" class="form-control" name="deadline" placeholder="Frist for ansettelse...">
+                <label for="applicationdeadline">Søknadsfrist</label>
+                <input type="date" class="form-control" name="applicationdeadline">
             </div>
             <div class="col-sm-8 form-group">
                 <label for="jobdescription">Jobbbeskrivelse</label>
