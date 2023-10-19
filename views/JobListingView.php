@@ -87,7 +87,7 @@ class JobListingView {
 
         } else if(isset($_GET["postnewjob"]) && $_GET["postnewjob"] === "success") {
             echo "<br>";
-            echo "<div class= 'alert alert-success'>" . "Post New Job Ad Success" . "</div>";
+            echo "<div class= 'alert alert-success'>" . "Din jobbannonse har blitt publisert!" . "</div>";
 
         }
     }

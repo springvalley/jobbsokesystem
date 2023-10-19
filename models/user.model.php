@@ -1,13 +1,13 @@
 <?php
 
-require_once "../library/dbhImproved.php";
+require_once "/xampp/htdocs/jobbsokesystem/library/database_handler.php";
 
 class UserModel{
     private $db;
 
     public function __construct()
     {
-        $this->db = new DB_Handler_Improved;
+        $this->db = new DB_Handler;
     }
 
     public function findUserByMatch($email, $phone, $orgNumber, $isJobApplicant){
