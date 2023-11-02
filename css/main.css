@@ -90,6 +90,10 @@
 .card-body{
     font-size: 16px;
 }
+/* 
+.cardhover {
+    width: 50px;
+} */
 
 .cardhover:hover {
     border-color:#0d47a1; 
@@ -189,12 +193,12 @@
     margin-left: 50px;
     margin-top: 100px;
 }
-
+/* Dashboard */
 .card-title {
     font-size: 18px;
     font-weight: 600; 
 }
-
+/* Dashboard */
 .card1 {
     background-color: #a9def9;
     border-top-right-radius: 0.33rem; 
@@ -255,5 +259,3 @@
 .candidate-jobapplication:hover {
     border-color: white;
 }
-
-

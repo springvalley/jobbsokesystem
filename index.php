@@ -1,13 +1,10 @@
 <?php
-include "components/header.php";
-include_once "models\jobListing/tempJobListing.model.php";
-include_once "models\jobListing\jobListing.viewModel.php";
-require_once "/xampp/htdocs/jobbsokesystem/models/helpers.php";
+include "/xampp/htdocs/jobbsokesystem/components/header.php";
 require_once "/xampp/htdocs/jobbsokesystem/library/database_handler.php";
-
-$helperModel = new Helper();
+require_once "/xampp/htdocs/jobbsokesystem/models/jobListing/JobListingModel.php";
+require_once "/xampp/htdocs/jobbsokesystem/controllers/JobListingController.php";
+require_once "/xampp/htdocs/jobbsokesystem/views/JobListingView.php";
 ?>
-
 
 <div class="container">
     <a href="applicantprofile.php?id=10">TEST</a>
@@ -15,33 +12,6 @@ $helperModel = new Helper();
     <div class="row mt-3">
         <div class="col">
             <input type="text" class="form-control" id="searchText" aria-describedby="searchText" placeholder="Søk i fritekst (eks: 1,2,3)">
-        </div>
-        <div class="col">
-            <select class="form-select" name="location">
-                <?php
-                $data = $helperModel->getAllJobTypes();
-                foreach ($data as $jobtype) {
-                    echo '<option value="' . $jobtype->jobType_id . '">' . $jobtype->jobType . '</option>';
-                } ?>
-            </select>
-        </div>
-        <div class="col">
-        <select class="form-select" name="location">
-                <?php
-                $data = $helperModel->getAllIndustries();
-                foreach ($data as $industry) {
-                    echo '<option value="' . $industry->industry_id . '">' . $industry->industry_name . '</option>';
-                } ?>
-            </select>
-        </div>
-        <div class="col">
-            <select class="form-select" name="location">
-                <?php
-                $data = $helperModel->getAllLocations();
-                foreach ($data as $location) {
-                    echo '<option value="' . $location->location_id . '">' . $location->location_name . '</option>';
-                } ?>
-            </select>
         </div>
         <div class="col">
             <button type="submit" class="search-button">Søk</button>
@@ -53,22 +23,59 @@ $helperModel = new Helper();
             </div>
             <div class="col-3">
                 <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                    <option selected>Filtrer</option>
-                    <option value="1">Kristiansand</option>
-                    <option value="2">Oslo</option>
-                    <option value="3">Trondheim</option>
+                    <option selected>Filtrer sted</option>
+                    <?php
+                    $jobListingView = new JobListingView();
+                    $locations = $jobListingView->fetchAllLocations();
+                    foreach ($locations as $location) {
+                        echo '<option value="' . $location->location_id . '">' . $location->location_name . '</option>';
+                    }
+                    ?>
                 </select>
             </div>
         </div>
-        <?php
-        $model = new JobListingModel();
-        $amountOfJobs = $model->getNumberOfJobListingsInDB();
-        for ($i = 1; $i <= $amountOfJobs; $i++) {
-            $jobListingView = new JobListingViewModel($i);
-            require "components/joblist.php";
-            echo "<br>";
-        }
-        ?>
     </div>
-    <?php include "components/footer.php" ?>
 </div>
+<div class="jobListing">
+    <?php
+    $jobAds = $jobListingView->fetchAllJobAds();
+    if (!empty($jobAds)) {
+        foreach ($jobAds as $jobAd) {
+            echo '<div class="card cardhover">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-5">' . '<b>' . $jobAd->company_name . '</b> </div>
+                    <div class="col-6">Bransje: ' . '<b>' . $jobAd->industry_name . '</b> </div>
+                    <div class="col">
+                        <i class="fa-regular fa-heart"></i>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 mt-1">
+                        <b style="font-size: 20px;">' . $jobAd->job_title . '</b>
+                    </div>
+                    <div class="col-6 mt-1">Stillingtittel: ' . '<b>' . $jobAd->position_name . '</b> </div>
+                    <div class="col-6 mt-1">Ansettelsesform: ' . '<b>' . $jobAd->jobType . '</b> </div>
+                    <div class="col-6 mt-1">Sted: ' . '<b>' . $jobAd->location_name . '</b> </div>
+                </div>
+                <div class="flex-container mt-1">
+                    <div>Publiseringdato: ' . '<b>' . $jobAd->published_time . '</b> </div>
+                    <div style="color: red;">Søknadsfrist: ' . '<b>' . $jobAd->application_deadline . '</b> </div>
+                    <div>
+                        <a class="btn btn-primary" data-toggle="collapse" href="#joblist" role="button" aria-expanded="false">Se
+                            detaljer...</a>
+                    </div>
+                </div>
+            </div>
+        </div>';
+        }
+    }
+    ?>
+    <!-- <div class="row">
+        <div class="overflow-auto collapse" id="joblist" style="height: 200px">
+            <p class="card-text">Lorem ipsum osv</p>
+            <button class="btn btn-primary">Søk Jobb</button>
+        </div>
+    </div> -->
+</div>
+<?php include "components/footer.php" ?>

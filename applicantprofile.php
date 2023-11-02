@@ -1,21 +1,25 @@
-<?php include "components/header.php";
-include "models/jobApplicant/jobApplicant.model.php";
-include "models/jobApplicant/jobApplicant.viewModel.php";
+<?php
+// include "components/header.php";
+// include "models/jobApplicant/jobApplicant.model.php";
+// include "models/jobApplicant/jobApplicant.viewModel.php";
+require_once "/xampp/htdocs/jobbsokesystem/components/header.php";
+require_once "/xampp/htdocs/jobbsokesystem/models/jobApplicant/jobApplicant.model.php";
+require_once "/xampp/htdocs/jobbsokesystem/models/jobApplicant/jobApplicant.viewModel.php";
 $applicantToGet = isset($_GET["id"]) ? $_GET["id"] : 11;
 $jobApplicantView = new JobApplicantViewModel($applicantToGet);
 ?>
 <div class="container">
     <p class="errormessage">
-    <?php
-    if (isset($_GET["error"])) {
-        $error = $_GET["error"];
-        switch ($error) {
-            case "updateSuccess":
-                echo "Profilen din ble oppdatert!";
-                break;
-        }
-    };
-    ?></p>
+        <?php
+        if (isset($_GET["error"])) {
+            $error = $_GET["error"];
+            switch ($error) {
+                case "updateSuccess":
+                    echo "Profilen din ble oppdatert!";
+                    break;
+            }
+        };
+        ?></p>
     <div class="flex-container">
         <div>
             <div class="goBackLink mb-3">

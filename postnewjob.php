@@ -13,11 +13,12 @@ $joblisting = new JobListingView();
         <div class="row d-flex justify-content-center align-items-center">
             <div class="col-sm-8 form-group">
                 <h1>Lag en ny jobbannonse!</h1>
-                <?php $joblisting->check_input_errors(); ?>
+                <?php
+                $joblisting->check_input_errors();
+                // $joblisting->postNewJob_inputs();
+                ?>
                 <label for="jobtitle">Jobbtittel</label>
                 <input type="text" class="form-control" name="jobtitle" placeholder="Jobbtittel">
-                <!-- <label for="companyname">Firmanavn</label>
-                <input type="text" class="form-control" name="companyname" placeholder="Skriv inn ditt firmanavn"> -->
             </div>
 
             <div class="col-sm-8 form-group">
@@ -68,8 +69,7 @@ $joblisting = new JobListingView();
             </div>
             <div class="col-sm-8 form-group">
                 <label for="jobdescription">Jobbbeskrivelse</label>
-                <textarea class="form-control" rows="5" name="jobdescription" name="jobdescription"
-                    aria-describedby="jobdescription" placeholder="Skriv om jobbstilling her..."></textarea>
+                <textarea class="form-control" rows="5" name="jobdescription" name="jobdescription" aria-describedby="jobdescription" placeholder="Skriv om jobbstilling her..."></textarea>
             </div>
 
         </div>
