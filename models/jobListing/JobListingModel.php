@@ -8,7 +8,7 @@ class JobListingModel {
     {
         $this->db = new DB_Handler;
     }
-
+    
     public function insertNewJobAd ($employerId, $jobTitle, $jobDescription, $jobType, $location, $industry, $applicationDeadline, $positionName) {
         $this->db->query("INSERT INTO joblisting(employer_id, job_title, description, jobType_id, location_id, industry_id, application_deadline, position_name) 
                         VALUES (:employerId, :jobTitle, :jobDescription, :jobType, :location, :industry, :applicationDeadline, :positionName);");
@@ -27,7 +27,27 @@ class JobListingModel {
         } else {
             return false;
         }  
+    }
 
+    public function getAllJobListingsByEmployer($employerId)
+    {
+        $this->db->query("SELECT jl.jobListing_id, jl.job_title, jl.description, jl.published_time, e.company_name, l.location_name, i.industry_name, jt.jobType, jl.position_name, jl.application_deadline
+                     FROM joblisting AS jl
+                     INNER JOIN employer AS e ON jl.employer_id = e.employer_id
+                     INNER JOIN location AS l ON jl.location_id = l.location_id
+                     INNER JOIN industry AS i ON jl.industry_id = i.industry_id
+                     INNER JOIN jobtype AS jt ON jl.jobType_id = jt.jobType_id
+                     WHERE jl.employer_id = :employerId");
+
+        $this->db->bind(":employerId", $employerId);
+
+        $row = $this->db->fetchMultiRow();
+
+        if ($this->db->rowCount() > 0) {
+            return $row;
+        } else {
+            return false;
+        }
     }
 
 }

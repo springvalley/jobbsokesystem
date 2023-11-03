@@ -96,4 +96,28 @@ class Helper
             return false;
         }
     }
+
+    
+     /**
+     * This function is used to retrieve a list of job ads from database.     
+     * The function queries the database to fetch all education records.  
+     * @return array|false An array of job ads records if found, or false if no records exist in the database.
+     */
+    public function getAllJobListings()
+    {
+        $this->db->query("SELECT jl.jobListing_id, jl.job_title, jl.description, jl.published_time, jl.position_name, jl.application_deadline, e.company_name, e.email, l.location_name, jt.jobType, i.industry_name
+        FROM joblisting as jl 
+        INNER JOIN location as l on jl.location_id = l.location_id 
+        INNER JOIN employer as e ON jl.employer_id = e.employer_id 
+        INNER JOIN jobtype as jt on jl.jobType_id = jt.jobType_id
+        INNER JOIN industry as i on jl.industry_id = i.industry_id");
+
+        $row = $this->db->fetchMultiRow();
+
+        if ($this->db->rowCount() > 0) {
+            return $row;
+        } else {
+            return false;
+        }
+    }
 }
