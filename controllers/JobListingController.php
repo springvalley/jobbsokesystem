@@ -1,5 +1,6 @@
 <?php
 require_once "/xampp/htdocs/jobbsokesystem/models/jobListing/JobListingModel.php";
+// require_once "../models/jobListing/JobListingModel.php";
 /**
  * JobListingController is a class responsible for controlling and managing all operations that related to job advertisements, 
  * including validating inputs and interacting with 'JobListingModel' for creating/updating/deleting the job advertisements.
