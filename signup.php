@@ -37,6 +37,9 @@ require_once "/xampp/htdocs/jobbsokesystem/library/database_handler.php";
                                                     case "userExists":
                                                         echo "En bruker med denne epost adressen/telefonnummeret eksisterer allerede.";
                                                         break;
+                                                    case "invalidPhone":
+                                                        echo "Telefonnummeret ditt er ikke riktig formatert, det skal være 8 siffer.";
+                                                        break;
                                                     default:
                                                         echo "En uventet feil skjedde, kontakt systemadministrator";
                                                 }
@@ -79,7 +82,6 @@ require_once "/xampp/htdocs/jobbsokesystem/library/database_handler.php";
                                     <label for="formFile" class="form-label">Last opp din CV</label>
                                     <input class="form-control" type="file" id="formFile">
                                 </div>
-                                <!--Denne må endres til en button når vi får forms-->
                                 <div class="row">
                                     <div class="col-md-12 text-center mt-3">
                                         <a href="login.php" id="cancelButton" class="btn btn-danger" style="margin-right: 10px">Avbryt</a>

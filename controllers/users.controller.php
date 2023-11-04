@@ -44,6 +44,13 @@ class UserController
             header("location: ../signup.php?error=invalidName");
             exit();
         }
+        /*
+        //Validate a valid phone number
+         //Valider telefonnummer
+         if (preg_match("/^[0-9]{8}$/", $data["userPhone"])) {
+            header("location: ../signup.php?error=invalidPhone");
+            exit();
+        }*/
 
         //Validate a valid email
         if (!filter_var($data["userEmail"], FILTER_VALIDATE_EMAIL)) {
@@ -118,6 +125,7 @@ class UserController
      */
 
     public function createUserSession($user, $jobApplicant){
+        session_start();
         if($jobApplicant == 1){
             $_SESSION["name"] = $user->name;
             $_SESSION["id"] = $user->jobApplicant_id;

@@ -46,7 +46,7 @@
           <li class="nav-item">
             <?php 
               if(isset($_SESSION["name"])){
-                echo "<li class=nav-item> <a class=nav-link href=applicantprofile.php?id=".$_SESSION["jobApplicant_id"].">Min Side</a></li>";
+                echo "<li class=nav-item> <a class=nav-link href=applicantprofile.php?id=".$_SESSION["id"].">Min Side</a></li>";
               }
             ?>
           </li>

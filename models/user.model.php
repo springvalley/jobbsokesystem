@@ -34,13 +34,13 @@ class UserModel{
 
     public function registerUser($data){
         if($data["jobApplicant"] == 1){
-           $this->db->query("INSERT INTO jobapplicant(name, email, phone_number, password) VALUES (:name,:email,:phone,:password);");
+           $this->db->query("INSERT INTO jobapplicant(name, email, phone_number, password, location_id) VALUES (:name,:email,:phone,:password, 1);");
            $this->db->bind(":name", $data["userName"]);
             $this->db->bind(":email", $data["userEmail"]);
             $this->db->bind(":phone", $data["userPhone"]);
             $this->db->bind(":password", $data["userPassword"]);
         }else{
-            $this->db->query("INSERT INTO employer(company_name, email, phone_number, password, orgNumber) VALUES (:name,:email,:phone,:password,:orgNumber);");
+            $this->db->query("INSERT INTO employer(company_name, email, phone_number, password, orgNumber, location_id) VALUES (:name,:email,:phone,:password,:orgNumber, 1);");
             $this->db->bind(":name", $data["userName"]);
              $this->db->bind(":email", $data["userEmail"]);
              $this->db->bind(":phone", $data["userPhone"]);
