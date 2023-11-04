@@ -1,6 +1,7 @@
 <?php
 
 require_once "../models/user.Model.php";
+require_once "/xampp/htdocs/jobbsokesystem/library/validator.php";
 class UserController
 {
 
@@ -13,7 +14,7 @@ class UserController
     }
 
 
-      /**
+    /**
      * This function is used to process the form input from a new user and register them into the database
      * @param
      * @return
@@ -30,42 +31,69 @@ class UserController
             "userPhone" => htmlspecialchars(trim($_POST["phone"])),
             "userPassword" => htmlspecialchars(trim($_POST["password"])),
             "userPasswordRepeat" => htmlspecialchars(trim($_POST["repeatPassword"])),
-            "userOrgNumber" => htmlspecialchars(trim($_POST["orgNumber"]))
+            "userOrgNumber" => htmlspecialchars(trim($_POST["orgNumber"])),
+            "location" => htmlspecialchars(trim($_POST["location"])),
+            "education" => htmlspecialchars(trim($_POST["education"])),
+            "industry" => htmlspecialchars(trim($_POST["industry"]))
         ];
 
+
         //Validate empty inputs
-        if (empty($data["userName"]) || empty($data["userEmail"]) || empty($data["userPhone"]) || empty($data["userPassword"]) || empty($data["userPasswordRepeat"]) || empty($data["userOrgNumber"])) {
+        if (Validator::areInputsEmpty($data["userName"], $data["userEmail"], $data["userPhone"], $data["userPassword"], $data["userPasswordRepeat"], $data["userOrgNumber"])) {
             header("location: ../signup.php?error=emptyInputs");
             exit();
         }
 
         //Validate a valid name
-        if (!preg_match("/^([a-åA-å' ]+)$/", $data["userName"])) {
+        if (!Validator::isNameValid($data["userName"])) {
             header("location: ../signup.php?error=invalidName");
             exit();
         }
+
         /*
         //Validate a valid phone number
-         //Valider telefonnummer
-         if (preg_match("/^[0-9]{8}$/", $data["userPhone"])) {
+        if (!Validator::isPhoneNumberValid($data["userPhone"])) {
             header("location: ../signup.php?error=invalidPhone");
             exit();
-        }*/
+        }
+        */
 
         //Validate a valid email
-        if (!filter_var($data["userEmail"], FILTER_VALIDATE_EMAIL)) {
+        if (!Validator::isEmailValid($data["userEmail"])) {
             header("location: ../signup.php?error=invalidEmail");
             exit();
         }
 
-        //Validate if the passwords match
-        if ($data["userPassword"] !== $data["userPasswordRepeat"]) {
-            header("location: ../signup.php?error=invalidPassword");
+        //Validate if passwords match
+        if (!Validator::doPasswordsMatch($data["userPassword"], $data["userPasswordRepeat"])) {
+            header("location: ../signup.php?error=invalidPasswords");
             exit();
         }
 
-        //Check if user already exists
+        if ($data["jobApplicant"] == 1) {
+            //Validate if education is valid
+            if (!Validator::isLocationValid($data["education"])) {
+                header("location: ../signup.php?error=invalidEducation");
+                exit();
+            }
+        } else {
+            //Validate if industry is valid
+            if (!Validator::isLocationValid($data["industry"])) {
+                header("location: ../signup.php?error=invalidIndustry");
+                exit();
+            }
+        }
 
+        //Validate if location is valid
+        if (!Validator::isLocationValid($data["location"])) {
+            header("location: ../signup.php?error=invalidLocation");
+            exit();
+        }
+
+
+
+
+        //Check if user already exists
         if ($this->userModel->findUserByMatch($data["userEmail"], $data["userPhone"], $data["userOrgNumber"], $data["jobApplicant"])) {
             header("location: ../signup.php?error=userExists");
             exit();
@@ -85,13 +113,14 @@ class UserController
         }
     }
 
-      /**
+    /**
      * This function is used to process the form input and log in a user.
      * @param
      * @return
      */
 
-    public function login(){
+    public function login()
+    {
 
         $data = [
             "jobApplicant" => htmlspecialchars(trim($_POST["jobapplicant"])),
@@ -99,52 +128,57 @@ class UserController
             "userPassword" => htmlspecialchars(trim($_POST["password"])),
         ];
 
-        if (empty($data["userEmail"]) || empty($data["userPassword"])) {
+        //Check if inputs are empty
+        if (Validator::areInputsEmpty($data["userEmail"]) || empty($data["userPassword"])) {
             header("location: ../login.php?error=emptyInputs");
             exit();
         }
 
-        if ($this->userModel->findUserByMatch($data["userEmail"], $data["userPhone"], 0 , $data["jobApplicant"])) {
+        if ($this->userModel->findUserByMatch($data["userEmail"], $data["userPhone"], 0, $data["jobApplicant"])) {
             $loggedInUser = $this->userModel->login($data["userEmail"], $data["userPassword"], $data["jobApplicant"]);
-            if($loggedInUser){
+            if ($loggedInUser) {
                 $this->createUserSession($loggedInUser, $data["jobApplicant"]);
-            }else{
+            } else {
                 header("location: ../login.php?error=wrongPassword");
                 exit();
             }
-        }else{
+        } else {
             header("location: ../login.php?error=userNotFound");
             exit();
         }
     }
 
-     /**
+    /**
      * This function is used to create a new session and store variables about the user in the $_SESSION superglobal.
      * @param 
      * @return
      */
 
-    public function createUserSession($user, $jobApplicant){
+    public function createUserSession($user, $jobApplicant)
+    {
         session_start();
-        if($jobApplicant == 1){
+        if ($jobApplicant == 1) {
             $_SESSION["name"] = $user->name;
             $_SESSION["id"] = $user->jobApplicant_id;
             $_SESSION["email"] = $user->email;
-        }else{
+            $_SESSION["phone"] = $user->phone_number;
+        } else {
             $_SESSION["name"] = $user->company_name;
             $_SESSION["id"] = $user->employer_id;
             $_SESSION["email"] = $user->email;
+            $_SESSION["phone"] = $user->phone_number;
         }
         header("location: ../index.php");
     }
 
-     /**
+    /**
      * This function is used to logout a user i.e remove the session variables and destroy the session.
      * @param
      * @return
      */
 
-    public function logout(){
+    public function logout()
+    {
         unset($_SESSION["name"]);
         unset($_SESSION["id"]);
         unset($_SESSION["email"]);
@@ -169,14 +203,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $init->login();
             break;
     }
-}else{
-    switch($_GET["q"]){
+} else {
+    switch ($_GET["q"]) {
         case "logout":
             $init->logout();
             break;
-        default: 
-        header("location: ../jobapplicant.php");
-        exit();
-        break;
+        default:
+            header("location: ../jobapplicant.php");
+            exit();
+            break;
     }
 }
