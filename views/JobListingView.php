@@ -30,6 +30,11 @@ class JobListingView {
         return $jobAds;
     }
 
+    public function fetchJobAdByJobListingId($jobListingId) {
+        $jobAdDetail = $this->jobListingModel->getJobAdByJobListingId($jobListingId);
+        return $jobAdDetail;
+    }
+
     public function fetchAllJobAdsByEmployerId($employerId)
     {
         $jobAdsByEmployer = $this->jobListingModel->getAllJobListingsByEmployer($employerId);
