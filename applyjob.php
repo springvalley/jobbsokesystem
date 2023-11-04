@@ -93,6 +93,7 @@ $jobListingViewModel = new JobListingViewModel($jobToGet);
             </div>
     </div>
     </form>
+
 </div>
 
 

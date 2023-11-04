@@ -159,11 +159,13 @@ class UserController
         session_start();
         if ($jobApplicant == 1) {
             $_SESSION["name"] = $user->name;
+            $_SESSION["userType"] = "jobapplicant";
             $_SESSION["id"] = $user->jobApplicant_id;
             $_SESSION["email"] = $user->email;
             $_SESSION["phone"] = $user->phone_number;
         } else {
             $_SESSION["name"] = $user->company_name;
+            $_SESSION["userType"] = "employer";
             $_SESSION["id"] = $user->employer_id;
             $_SESSION["email"] = $user->email;
             $_SESSION["phone"] = $user->phone_number;
