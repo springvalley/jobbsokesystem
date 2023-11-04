@@ -1,6 +1,9 @@
-<?php 
+<?php
 include "components/header.php";
 require_once "/xampp/htdocs/jobbsokesystem/library/database_handler.php";
+require_once "/xampp/htdocs/jobbsokesystem/models/helpers.php";
+
+$helperModel = new Helper();
 ?>
 
 <div class="container">
@@ -56,6 +59,7 @@ require_once "/xampp/htdocs/jobbsokesystem/library/database_handler.php";
                         <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                             <form action="./controllers/users.controller.php" method="POST">
                                 <input name="jobapplicant" value=1 hidden />
+                                <input name="industry" value=1 hidden />
                                 <input name="orgNumber" value=9999999 hidden />
                                 <input name="type" value="register" hidden />
                                 <div class="form-group">
@@ -79,6 +83,28 @@ require_once "/xampp/htdocs/jobbsokesystem/library/database_handler.php";
                                     <input type="password" class="form-control" name="repeatPassword" id="repeatPassword" placeholder="Skriv inn ditt passord igjen">
                                 </div>
                                 <div class="form-group">
+                                    <label for="location">Hvor bor du?</label>
+                                    <select class="form-select" name="location">
+                                        <option selected value="0">Velg Sted</option>
+                                        <?php
+                                        $data = $helperModel->getAllLocations();
+                                        foreach ($data as $location) {
+                                            echo '<option value="' . $location->location_id . '">' . $location->location_name . '</option>';
+                                        } ?>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="location">Hva er din høyeste utdanning?</label>
+                                    <select class="form-select" name="education">
+                                        <option selected value="0">Velg Utdanningsnivå</option>
+                                        <?php
+                                        $data = $helperModel->getAllEducations();
+                                        foreach ($data as $education) {
+                                            echo '<option value="' . $education->educationlevel_id . '">' . $education->educationlevel_name . '</option>';
+                                        } ?>
+                                    </select>
+                                </div>
+                                <div class="form-group">
                                     <label for="formFile" class="form-label">Last opp din CV</label>
                                     <input class="form-control" type="file" id="formFile">
                                 </div>
@@ -93,6 +119,7 @@ require_once "/xampp/htdocs/jobbsokesystem/library/database_handler.php";
                         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                             <form action="./controllers/users.controller.php" method="POST">
                                 <input name="jobapplicant" value=0 hidden />
+                                <input name="education" value=1 hidden />
                                 <input name="type" value="register" hidden />
                                 <div class="form-group">
                                     <label for="name">Bedriftsnavn</label>
@@ -117,6 +144,28 @@ require_once "/xampp/htdocs/jobbsokesystem/library/database_handler.php";
                                 <div class="form-group">
                                     <label for="repeatPassword">Bekreft passord</label>
                                     <input type="password" class="form-control" name="repeatPassword" id="repeatPassword" placeholder="Skriv inn ditt passord igjen">
+                                </div>
+                                <div class="form-group">
+                                    <label for="location">Hvor bor du?</label>
+                                    <select class="form-select" name="location">
+                                        <option selected value="0">Velg Sted</option>
+                                        <?php
+                                        $data = $helperModel->getAllLocations();
+                                        foreach ($data as $location) {
+                                            echo '<option value="' . $location->location_id . '">' . $location->location_name . '</option>';
+                                        } ?>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="industry">Hvilken industri jobber dere i?</label>
+                                    <select class="form-select" name="industry">
+                                        <option selected value="0">Velg Industi</option>
+                                        <?php
+                                        $data = $helperModel->getAllIndustries();
+                                        foreach ($data as $industry) {
+                                            echo '<option value="' . $industry->industry_id . '">' . $industry->industry_name . '</option>';
+                                        } ?>
+                                    </select>
                                 </div>
                                 <!--Denne må endres til en button når vi får forms-->
                                 <div class="row">

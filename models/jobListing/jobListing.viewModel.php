@@ -32,7 +32,6 @@ class JobListingViewModel extends JobListingModel
         return $this->jobListing_id;
     }
 
-
     public function getIndustry()
     {
         return $this->industry;

@@ -2,26 +2,28 @@
 include_once "models\jobListing/tempJobListing.model.php";
 include_once "models\jobListing\jobListing.viewModel.php";
 
+/*
 $jobToGet = $_GET["id"];
 if(!isset($_GET["id"])){
     header("location: index.php");
     exit();
 }
-
+*/
 //You have to be signed in to apply for a job
 
-if(!isset($_SESSION["jobApplicant_id"])){
+if(!isset($_SESSION["id"])){
     header("location: index.php");
     exit();
 }
-
+//TEMP
+$jobToGet = 5;
 $jobListingViewModel = new JobListingViewModel($jobToGet);
 
 ?>
 <div class="container">
     <div class="goBackLink">
         <i class="fa-solid fa-angle-left"></i>
-        <a href="jobadvertisementdetail.php">Tilbake annonsen</a>
+        <a href="jobadvertisementdetail.php">Tilbake til annonsen</a>
     </div>
     <div class="row justify-content-center">
         <form>

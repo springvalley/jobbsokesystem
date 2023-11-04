@@ -34,17 +34,21 @@ class UserModel{
 
     public function registerUser($data){
         if($data["jobApplicant"] == 1){
-           $this->db->query("INSERT INTO jobapplicant(name, email, phone_number, password, location_id) VALUES (:name,:email,:phone,:password, 1);");
+           $this->db->query("INSERT INTO jobapplicant(name, email, phone_number, password, location_id, educationlevel_id) VALUES (:name,:email,:phone,:password, :location_id, :educationlevel_id);");
            $this->db->bind(":name", $data["userName"]);
             $this->db->bind(":email", $data["userEmail"]);
             $this->db->bind(":phone", $data["userPhone"]);
             $this->db->bind(":password", $data["userPassword"]);
+            $this->db->bind(":location_id", $data["location"]);
+            $this->db->bind(":educationlevel_id", $data["education"]);
         }else{
-            $this->db->query("INSERT INTO employer(company_name, email, phone_number, password, orgNumber, location_id) VALUES (:name,:email,:phone,:password,:orgNumber, 1);");
+            $this->db->query("INSERT INTO employer(company_name, email, phone_number, password, orgNumber, location_id, industry_id) VALUES (:name,:email,:phone,:password,:orgNumber, :location_id, :industry_id);");
             $this->db->bind(":name", $data["userName"]);
              $this->db->bind(":email", $data["userEmail"]);
              $this->db->bind(":phone", $data["userPhone"]);
              $this->db->bind(":password", $data["userPassword"]);
+             $this->db->bind(":location_id", $data["location"]);
+             $this->db->bind(":industry_id", $data["industry"]);
              $this->db->bind(":orgNumber", $data["userOrgNumber"]);
         }
         if($this->db->execute()){
