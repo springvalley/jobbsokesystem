@@ -1,21 +1,24 @@
 <?php include "components/header.php";
 include "models/jobApplicant/jobApplicant.model.php";
 include "models/jobApplicant/jobApplicant.viewModel.php";
-$applicantToGet = isset($_GET["id"]) ? $_GET["id"] : 11;
+if(!isset($_GET["id"])){
+    header("location: index.php");
+}
+$applicantToGet = isset($_GET["id"]) ? $_GET["id"] : 1;
 $jobApplicantView = new JobApplicantViewModel($applicantToGet);
 ?>
 <div class="container">
     <p class="errormessage">
-    <?php
-    if (isset($_GET["error"])) {
-        $error = $_GET["error"];
-        switch ($error) {
-            case "updateSuccess":
-                echo "Profilen din ble oppdatert!";
-                break;
-        }
-    };
-    ?></p>
+        <?php
+        if (isset($_GET["error"])) {
+            $error = $_GET["error"];
+            switch ($error) {
+                case "updateSuccess":
+                    echo "Profilen din ble oppdatert!";
+                    break;
+            }
+        };
+        ?></p>
     <div class="flex-container">
         <div>
             <div class="goBackLink mb-3">
@@ -25,7 +28,7 @@ $jobApplicantView = new JobApplicantViewModel($applicantToGet);
         </div>
         <div>
             <button type="button" class="editProfileButton">Send melding</button>
-            <?php if ($_SESSION["jobApplicant_id"] == $jobApplicantView->getApplicantID()) { ?>
+            <?php if ($_SESSION["id"] == $jobApplicantView->getApplicantID()) { ?>
                 <form action="editapplicantprofile.php" method="post">
                     <input type="hidden" name="applicant_id" value=<?php echo $jobApplicantView->getApplicantID() ?>>
                     <button type="submit" class="editProfileButton">Rediger Profil</button>
@@ -48,7 +51,14 @@ $jobApplicantView = new JobApplicantViewModel($applicantToGet);
             <div class="CV-header">
                 <p>Sammendrag:</p>
             </div>
-            <p> <?php echo $jobApplicantView->getSummary() ?></p>
+            <p> <?php
+                $data = $jobApplicantView->getSummary();
+                if ($data) {
+                    echo $data;
+                } else {
+                    echo "Det er ikke et sammendrag om deg registrert i vår database.";
+                }
+                echo $jobApplicantView->getSummary() ?></p>
             <div class="CV-header">
                 <p>Kompetanse:</p>
             </div>
@@ -61,7 +71,7 @@ $jobApplicantView = new JobApplicantViewModel($applicantToGet);
                         echo "<li><span style='font-weight:bold'>" . $row->skill_name . "</span></li>";
                     }
                 } else {
-                    echo "Ingen kompetanse er registrert i vår database";
+                    echo "Ingen kompetanse er registrert i vår database.";
                 }
                 ?>
             </ul>
@@ -72,7 +82,12 @@ $jobApplicantView = new JobApplicantViewModel($applicantToGet);
             <p>
                 <?php
                 $data = $jobApplicantView->getEducation();
-                echo $data->educationlevel_name;
+                if ($data) {
+
+                    echo $data->educationlevel_name;
+                } else {
+                    echo "Ingen utdanning er registrert i vår database.";
+                }
                 ?>
             </p>
             <div class="CV-header">

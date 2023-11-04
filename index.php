@@ -36,6 +36,7 @@ $helperModel = new Helper();
         </div>
         <div class="col">
             <select class="form-select" name="location">
+                <option selected value="velg sted">Velg Sted</option>
                 <?php
                 $data = $helperModel->getAllLocations();
                 foreach ($data as $location) {

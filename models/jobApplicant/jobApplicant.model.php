@@ -108,9 +108,8 @@ class JobApplicantModel
     protected function getJobApplicantProfile($jobApplicantID)
     {
         $this->db->query("SELECT ja.jobApplicant_id, ja.name, ja.email, ja.phone_number, ja.summary, l.location_name FROM jobapplicant as ja INNER JOIN location as l on ja.location_id = l.location_id WHERE ja.jobApplicant_id = :jobapplicant_id");
-        $this->db->bind(":jobapplicant_id", $jobApplicantID);
+        $this->db->bind(":jobapplicant_id",$jobApplicantID);
         $row = $this->db->fetchSingleRow();
-
         if($this->db->rowCount() > 0){
             return $row;
         }else{
