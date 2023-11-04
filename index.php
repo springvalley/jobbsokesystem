@@ -102,8 +102,7 @@ $helperModel = new Helper();
                             Søknadsfrist: ' . '<b>' . date('d-m-Y', strtotime($jobAd->application_deadline)) . '</b>
                         </div>
                        <div>
-                           <a class="btn btn-primary" data-toggle="collapse" href="#joblist" role="button" aria-expanded="false">Se
-                               jobbannonse</a>
+                       <a class="btn btn-primary" href="jobadvertisementdetail.php?jobListing_id=<?= $jobAd->jobListing_id ?> " role="button">Se jobbannonse</a>
                        </div>
                    </div>   
                    

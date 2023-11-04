@@ -50,4 +50,23 @@ class JobListingModel {
         }
     }
 
+    public function getJobAdByJobListingId($jobListingId) {
+        $this->db->query("SELECT jl.jobListing_id, jl.job_title, jl.description, jl.published_time, e.company_name, l.location_name, i.industry_name, jt.jobType, jl.position_name, jl.application_deadline
+                     FROM joblisting AS jl
+                     INNER JOIN employer AS e ON jl.employer_id = e.employer_id
+                     INNER JOIN location AS l ON jl.location_id = l.location_id
+                     INNER JOIN industry AS i ON jl.industry_id = i.industry_id
+                     INNER JOIN jobtype AS jt ON jl.jobType_id = jt.jobType_id
+                     WHERE jl.jobListing_id = :jobListingId");
+
+        $this->db->bind(":jobListingId", $jobListingId);
+        $row = $this->db->fetchSingleRow();
+        
+        if ($this->db->rowCount() > 0) {
+            return $row;
+        } else {
+            return false;
+        }
+    }
+
 }
