@@ -3,6 +3,7 @@ require_once "/xampp/htdocs/jobbsokesystem/library/database_handler.php";
 require_once "./models/jobListing/JobListingModel.php";
 require_once "./controllers/JobListingController.php";
 require_once "./views/JobListingView.php";
+require_once "./library/errorhandler.php";
 ?>
 <br>
 <br>
@@ -16,7 +17,8 @@ require_once "./views/JobListingView.php";
                 if (isset($_SESSION["id"]) && $_SESSION["userType"] === "employer") {
                     $employerId = $_SESSION["id"];
                 }
-                $joblisting->check_input_errors();
+                ErrorHandler::displayError();
+                ErrorHandler::displaySuccess();
                 ?>
                 <label for="jobtitle">Jobbtittel</label>
                 <input type="text" class="form-control" name="jobtitle" placeholder="Jobbtittel">
@@ -32,7 +34,7 @@ require_once "./views/JobListingView.php";
             <div class="col-sm-4 form-group">
                 <label for="location">Sted</label>
                 <select class="form-select" name="location" aria-label="Default select example">
-                    <option selected>Velg sted</option>
+                    <option selected value="0">Velg sted</option>
                     <?php
                     $locations = $joblisting->fetchAllLocations(); // Fetch locations
                     foreach ($locations as $location) {
@@ -44,7 +46,7 @@ require_once "./views/JobListingView.php";
             <div class="col-sm-4 form-group">
                 <label for="industry">Bransje</label>
                 <select class="form-select" name="industry" aria-label="Default select example">
-                    <option selected>Velg bransje</option>
+                    <option selected value="0">Velg bransje</option>
                     <?php
                     $industries = $joblisting->fetchAllIndustries(); // Fetch industries
                     foreach ($industries as $industry) {
@@ -57,7 +59,7 @@ require_once "./views/JobListingView.php";
             <div class="col-sm-4 form-group">
                 <label for="jobtype">Ansettelesform</label>
                 <select class="form-select" name="jobtype" aria-label="Default select example">
-                    <option selected>Velg ansettelesform</option>
+                    <option selected value="0">Velg ansettelesform</option>
                     <?php
                     $jobtypes = $joblisting->fetchAllJobTypes(); // Fetch jobtypes
                     foreach ($jobtypes as $jobtype) {

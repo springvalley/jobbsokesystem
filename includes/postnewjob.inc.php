@@ -6,6 +6,8 @@
 require_once "../library/database_handler.php";
 require_once "../models/jobListing/JobListingModel.php";
 require_once "../controllers/JobListingController.php";
+require_once "../library/validator.php";
+require_once "../library/errorhandler.php";
 
 session_start();
 
@@ -21,60 +23,52 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $jobDescription = htmlspecialchars($_POST["jobdescription"], ENT_QUOTES, "UTF-8");
 
 
-    try {
-        //Error handlers
-        $errors = [];
-        $jobListingController = new JobListingController();
-
-        if ($jobListingController->is_employer_loggedIn($employerId)) {
-            $errors["not_login"] = "Vennligst, logg inn i din konto for å lage en ny jobbannonse. " . "<a href='login.php'>Login her.</a>";
-            // echo "Debug: Employer ID: " . $employerId;   
-            // var_dump($employerId);
-        } else {
-            switch (true) {
-                case $jobListingController->is_empty_input_form($jobTitle, $positionName, $jobDescription);
-                    $errors["empty_form"] = "Vennsligst, fyll ut alle feltene!";
-                    break;
-
-                case $jobListingController->is_empty_select_location($location);
-                    $errors["empty_select_location"] = "Vennsligst, velg et sted!";
-                    break;
-
-                case $jobListingController->is_empty_select_industry($industry);
-                    $errors["empty_select_industry"] = "Vennsligst, velg en bransje!";
-                    break;
-
-                case $jobListingController->is_empty_select_jobType($jobType);
-                    $errors["empty_select_jobType"] = "Vennsligst, velg en ansettelseform!";
-                    break;
-
-                case $jobListingController->is_empty_applicationDeadline($applicationDeadline);
-                    $errors["empty_applicationDeadline"] = "Vennsligst, velg en gyldig søknadsfrist dato!";
-                    break;
-
-                case $jobListingController->is_invalid_applicationDeadline($applicationDeadline);
-                    $errors["invalid_applicationDeadline"] = "Dato til søknadsfrist er ugyldig! Vennligst, velg en ny dato!";
-                    break;
-
-                default:
-                    echo "Det oppstår uventet feil. Vennligst, prøv igjen!";
-                    break;
-            }
-        }
-
-        //Check if there are any errors related to the form data validation during the creation of a new job advertisement.
-        if ($errors) {
-            $_SESSION["errors_postnewjob"] = $errors;
-            header("Location: ../postnewjob.php");
-            die();
-        }
-        $jobListingController->createNewJobAd($employerId, $jobTitle, $jobDescription, $jobType, $location, $industry, $applicationDeadline, $positionName);
-        header("Location: ../postnewjob.php?postnewjob=success");
-        die();
-    } catch (PDOException $e) {
-        die("Query failed: " . $e->getMessage());
+    // try {
+    //Error handlers
+    if (Validator::areInputsEmpty($jobTitle, $positionName, $jobDescription)) {
+        ErrorHandler::setError(ErrorHandler::$emptyInputError);
+        header("Location: ../postnewjob.php");
+        exit();
     }
-} else {
-    header("Location: ../postnewjob.php");
-    die();
+
+    if (!Validator::isLocationValid($location)) {
+        ErrorHandler::setError(ErrorHandler::$invalidLocationError);
+        header("Location: ../postnewjob.php");
+    }
+
+    if (!Validator::isIndustryValid($industry)) {
+        ErrorHandler::setError(ErrorHandler::$invalidIndustryError);
+        header("Location: ../postnewjob.php");
+    }
+
+    if (!Validator::isJobTypeValid($jobType)) {
+        ErrorHandler::setError(ErrorHandler::$emptyInputJobTypeError);
+        header("Location: ../postnewjob.php");
+    }
+
+    if (Validator::isEmptyInputApplicationDeadline($applicationDeadline)) {
+        ErrorHandler::setError(ErrorHandler::$emptyInputApplicationDeadlineError);
+        header("Location: ../postnewjob.php");
+    }
+    if (Validator::isOldApplicationDeadlineDate($applicationDeadline)) {
+        ErrorHandler::setError(ErrorHandler::$isOldApplicationDeadlineDateError);
+        header("Location: ../postnewjob.php");
+    }
+
+    // $jobListingController = new JobListingController();
+    $jobListingModel = new JobListingModel();
+    if ($jobListingModel->insertNewJobAd($employerId, $jobTitle, $jobDescription, $jobType, $location, $industry, $applicationDeadline, $positionName)) {
+        ErrorHandler::setSuccess("Din jobbannonse har publisert!");
+        // header("Location: ../companyjobads.php");
+        exit();
+    } else {
+        ErrorHandler::setError(ErrorHandler::$unknownError);
+        header("Location: ../postnewjob.php");
+        exit();
+    }
+
+    // } catch (PDOException $e) {
+    //     ErrorHandler::setError(ErrorHandler::$unknownError);
+    //     header("Location: ../postnewjob.php");
+    // }
 }

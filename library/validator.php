@@ -102,9 +102,9 @@ class Validator
      * @param string $jobtype
      * @return bool true if the input is valid, false otherwise. 
      */
-    public static function isJobTypeValid($jobtype)
+    public static function isJobTypeValid($jobType)
     {
-        return !$jobtype == 0;
+        return !$jobType == 0;
     }
 
 
@@ -118,7 +118,7 @@ class Validator
         return !$education == 0;
     }
 
-     /**
+    /**
      * This function is used to check if a industry is valid.
      * @param string $industry
      * @return bool true if the input is valid, false otherwise. 
@@ -126,5 +126,24 @@ class Validator
     public static function isIndustryValid($industry)
     {
         return !$industry == 0;
+    }
+
+    public static function isEmptyInputApplicationDeadline($applicationDeadline)
+    {
+        if (empty($applicationDeadline)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static function isOldApplicationDeadlineDate($applicationDeadline)
+    {
+        $today = date("d-m-Y");
+        if (strtotime($applicationDeadline) < strtotime($today)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

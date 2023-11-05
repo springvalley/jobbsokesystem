@@ -60,7 +60,7 @@ if ($jobAd) {
                             Søknadsfrist: ' . '<b>' . date('d-m-Y', strtotime($jobAd->application_deadline)) . '</b>
                         </div>
                         <div>
-                            <a class="btn btn-primary" data-toggle="collapse" href="applyjob.php?id='. $jobAd->jobListing_id .'" role="button" aria-expanded="false">Søk Stilling</a>
+                            <a class="btn btn-primary" data-toggle="collapse" href="applyjob.php?id=' . $jobAd->jobListing_id . '" role="button" aria-expanded="false">Søk Stilling</a>
                         </div>
                     </div>
                 </div>
