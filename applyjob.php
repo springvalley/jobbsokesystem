@@ -6,13 +6,13 @@ require_once "/xampp/htdocs/jobbsokesystem/library/errorhandler.php";
 
 $helperModel = new Helper();
 
-/*
+
 $jobToGet = $_GET["id"];
 if(!isset($_GET["id"])){
     header("location: index.php");
     exit();
 }
-*/
+
 //You have to be signed in to apply for a job
 
 if (!isset($_SESSION["id"])) {
@@ -20,7 +20,6 @@ if (!isset($_SESSION["id"])) {
     exit();
 }
 //TEMP
-$jobToGet = 1;
 $jobListingViewModel = new JobListingViewModel($jobToGet);
 
 ?>
@@ -34,6 +33,7 @@ $jobListingViewModel = new JobListingViewModel($jobToGet);
         <form action="./controllers/jobApplicant.controller.php" method="POST">
             <input name="type" value="apply" hidden />
             <input name="applicantid" value=<?php echo $_SESSION["id"] ?> hidden>
+            <input name="joblisting_id" value=<?php echo $jobListingViewModel->getListingID() ?> hidden>
             <div class="row">
                 <div class="job-title">
                     <p> Søk på stilling som: <?php echo $jobListingViewModel->getJobTitle() ?></p>
