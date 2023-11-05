@@ -2,6 +2,7 @@
 include "components/header.php";
 require_once "/xampp/htdocs/jobbsokesystem/library/database_handler.php";
 require_once "/xampp/htdocs/jobbsokesystem/models/helpers.php";
+require_once "/xampp/htdocs/jobbsokesystem/library/errorhandler.php";
 
 $helperModel = new Helper();
 ?>
@@ -12,43 +13,8 @@ $helperModel = new Helper();
             <div class="card" style="border-radius: 1rem;">
                 <div class="card-body p-3">
                     <h1>Registrer bruker</h1>
-                    <p class="errormessage"><?php
-                                            if (isset($_GET["error"])) {
-                                                $error = $_GET["error"];
-                                                switch ($error) {
-                                                    case "stmtFailed":
-                                                        echo "En uventet feil skjedde, kontakt systemadministrator";
-                                                        break;
-                                                    case "emptyInputs":
-                                                        echo "Vennligst fyll ut alle feltene";
-                                                        break;
-                                                    case "userNotFound":
-                                                        echo "Brukeren ble ikke funnet";
-                                                        break;
-                                                    case "wrongPassword":
-                                                        echo "Passordet er feil, vennligst prøv igjen";
-                                                        break;
-                                                    case "none":
-                                                        echo "Brukeren ble opprettet!";
-                                                        break;
-                                                    case "invalidEmail":
-                                                        echo "E-post addressen du har prøvd å bruke er ikke gyldig";
-                                                        break;
-                                                    case "invalidPassword":
-                                                        echo "Passordet er ikke gyldig.";
-                                                        break;
-                                                    case "userExists":
-                                                        echo "En bruker med denne epost adressen/telefonnummeret eksisterer allerede.";
-                                                        break;
-                                                    case "invalidPhone":
-                                                        echo "Telefonnummeret ditt er ikke riktig formatert, det skal være 8 siffer.";
-                                                        break;
-                                                    default:
-                                                        echo "En uventet feil skjedde, kontakt systemadministrator";
-                                                }
-                                            };
-                                            ?></p>
-
+                    <?php ErrorHandler::displayError() ?>
+                    <?php ErrorHandler::displaySuccess() ?>
                     <nav style="margin-bottom: 1rem">
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
                             <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Jobbsøker</button>

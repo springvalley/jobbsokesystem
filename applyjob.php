@@ -1,6 +1,10 @@
-<?php include "components/header.php" ;
+<?php include "components/header.php";
 include_once "models\jobListing/tempJobListing.model.php";
 include_once "models\jobListing\jobListing.viewModel.php";
+require_once "/xampp/htdocs/jobbsokesystem/models/helpers.php";
+require_once "/xampp/htdocs/jobbsokesystem/library/errorhandler.php";
+
+$helperModel = new Helper();
 
 /*
 $jobToGet = $_GET["id"];
@@ -11,12 +15,12 @@ if(!isset($_GET["id"])){
 */
 //You have to be signed in to apply for a job
 
-if(!isset($_SESSION["id"])){
+if (!isset($_SESSION["id"])) {
     header("location: index.php");
     exit();
 }
 //TEMP
-$jobToGet = 5;
+$jobToGet = 1;
 $jobListingViewModel = new JobListingViewModel($jobToGet);
 
 ?>
@@ -26,12 +30,16 @@ $jobListingViewModel = new JobListingViewModel($jobToGet);
         <a href="jobadvertisementdetail.php">Tilbake til annonsen</a>
     </div>
     <div class="row justify-content-center">
-        <form>
+        <button onclick=autofill()>Autofyll min informasjon</button>
+        <form action="./controllers/jobApplicant.controller.php" method="POST">
+            <input name="type" value="apply" hidden />
+            <input name="applicantid" value=<?php echo $_SESSION["id"] ?> hidden>
             <div class="row">
                 <div class="job-title">
-                    <p> Søk på stilling som: <?php echo $jobListingViewModel->getJobTitle()?></p>
+                    <p> Søk på stilling som: <?php echo $jobListingViewModel->getJobTitle() ?></p>
                 </div>
-
+                <?php ErrorHandler::displayError() ?>
+                <?php ErrorHandler::displaySuccess() ?>
                 <div class="col-md-6">
                     <div class="form-row">
                         <div class="form-group col-md-8">
@@ -50,25 +58,22 @@ $jobListingViewModel = new JobListingViewModel($jobToGet);
                             <label for="lastjob">Nåværende eller siste stilling</label>
                             <input type="text" class="form-control" name="lastjob" id="lastjob" aria-describedby="lastjob" placeholder="Nåværende eller siste stilling">
                         </div>
-                        <div class="form-group col-md-8">
-                            <label for="lastjob">Utdanningsnivå</label>
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected>Utdanningsnivå</option>
-                                <option value="1">Grunnskole</option>
-                                <option value="2">Videregående/Yrkesskole</option>
-                                <option value="3">Fagskole</option>
-                                <option value="4">Folkehøyskole</option>
-                                <option value="5">Høyere utdanning, 1-4 år</option>
-                                <option value="6">Høyere utdanning, 4+ år</option>
-                                <option value="7">PhD</option>
+                        <div class="form-group">
+                            <label for="location">Hva er din høyeste utdanning?</label>
+                            <select class="form-select" name="education">
+                                <option selected value="0">Velg Utdanningsnivå</option>
+                                <?php
+                                $data = $helperModel->getAllEducations();
+                                foreach ($data as $education) {
+                                    echo '<option value="' . $education->educationlevel_id . '">' . $education->educationlevel_name . '</option>';
+                                } ?>
                             </select>
                         </div>
-
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group col-md-8">
-                        <label for="lastjob">Søknadstekst</label>
+                        <label for="coverletter">Søknadstekst</label>
                         <textarea class="form-control" rows="5" id="coverletter" name="coverletter" aria-describedby="coverletter" placeholder="Du kan skrive inn søknadstekst her..."></textarea>
 
                     </div>
@@ -96,5 +101,11 @@ $jobListingViewModel = new JobListingViewModel($jobToGet);
 
 </div>
 
-
+<script>
+    function autofill() {
+        document.getElementById("name").value = "<?php echo $_SESSION["name"]; ?>";
+        document.getElementById("email").value = "<?php echo $_SESSION["email"]; ?>";
+        document.getElementById("phone").value = "<?php echo $_SESSION["phone"]; ?>";
+    }
+</script>
 <?php include "components/footer.php" ?>
