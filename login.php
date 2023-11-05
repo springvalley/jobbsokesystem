@@ -1,34 +1,13 @@
 <?php include "components/header.php" ?>
+<?php require_once "/xampp/htdocs/jobbsokesystem/library/errorhandler.php"; ?>
 <div class="container">
     <div class="row d-flex justify-content-center align-items-center">
         <div class="col-12 col-md-8 col-lg-6 col-xl-5">
             <div class="card" style="border-radius: 1rem;">
                 <div class="card-body p-5">
                     <h1>Logg Inn</h1>
-                    <p class="errormessage"><?php
-                                            if (isset($_GET["error"])) {
-                                                $error = $_GET["error"];
-                                                switch ($error) {
-                                                    case "stmtFailed":
-                                                        echo "En uventet feil skjedde, kontakt systemadministrator";
-                                                        break;
-                                                    case "emptyInputs":
-                                                        echo "Vennligst fyll ut alle feltene";
-                                                        break;
-                                                    case "userNotFound":
-                                                        echo "Brukeren ble ikke funnet";
-                                                        break;
-                                                    case "wrongPassword":
-                                                        echo "Passordet er feil, vennligst prøv igjen";
-                                                        break;
-                                                    case "userCreated":
-                                                        echo "Brukeren ble opprettet!";
-                                                        break;
-                                                    default:
-                                                        echo "En uventet feil skjedde, kontakt systemadministrator";
-                                                }
-                                            };
-                                            ?></p>
+                    <?php ErrorHandler::displayError() ?>
+                    <?php ErrorHandler::displaySuccess() ?>
                     <nav style="margin-bottom: 1rem">
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
                             <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Jobbsøker</button>

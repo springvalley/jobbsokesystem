@@ -1,7 +1,8 @@
 <?php include "components/header.php";
 include "models/jobApplicant/jobApplicant.model.php";
 include "models/jobApplicant/jobApplicant.viewModel.php";
-if(!isset($_GET["id"])){
+require_once "/xampp/htdocs/jobbsokesystem/library/errorhandler.php"; 
+if (!isset($_GET["id"])) {
     header("location: index.php");
 }
 $applicantToGet = isset($_GET["id"]) ? $_GET["id"] : 1;
@@ -36,7 +37,8 @@ $jobApplicantView = new JobApplicantViewModel($applicantToGet);
             <?php  } ?>
         </div>
     </div>
-
+    <?php ErrorHandler::displayError() ?>
+    <?php ErrorHandler::displaySuccess() ?>
     <div class="row">
         <div class="col-md-3 applicantProfile">
             <img src="img\test.jpg">

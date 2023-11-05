@@ -180,4 +180,45 @@ class JobApplicantModel
             return array();
         }
     }
+
+    /**
+     * This function is used to make a new jobapplication.
+     * @param mixed $data the data for the jobapplication that is to  be made.
+     * @return bool true if the application was made, false otherwise.
+     */
+
+     public function applyToJob($data){
+        $this->db->query("INSERT INTO jobapplication(jobApplicant_id, jobListing_id, application_text, cover_letter, application_status_id) VALUES (:jobApplicant_id, :jobListing_id, :application_text, :cover_letter, 1)");
+        $this->db->bind(":jobApplicant_id", $data["jobApplicant_id"]);
+        $this->db->bind(":jobListing_id", $data["jobListing_id"]);
+        $this->db->bind(":application_text", $data["coverletter"]);
+        $this->db->bind(":cover_letter", $data["coverletter"]);
+
+
+        if($this->db->execute()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    /**
+     * This function is used to check if an applicant has already applied to a job.
+     * @param int $jobApplicantID  The ID of a job applicant in the database.
+     * @param int $jobListingID  The ID of a job listing in the database.
+     * @return bool true if they have already applied, false otherwise 
+     */
+
+     public function applicantHasAppliedToJob($jobListingID, $jobApplicantID){
+        $this->db->query("SELECT * FROM jobapplication WHERE jobApplicant_id = :jobapplicant_id AND joblisting_id = :joblisting_id");
+        $this->db->bind(":jobapplicant_id", $jobApplicantID);
+        $this->db->bind(":joblisting_id", $jobListingID);
+        $this->db->execute();
+        if($this->db->rowCount() > 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
 }
