@@ -16,12 +16,9 @@ if ($jobAd) {
             <div>
                 <div class="goBackLink mb-3">
                     <i class="fa-solid fa-angle-left"></i>
-                    <a href="index.php">Tilbake</a>
+                    <a href="">Tilbake</a>
                 </div>
-            </div>
-            <div>
-                <button type="button" class="editProfileButton">Send melding</button>
-            </div>
+            </div>            
         </div>
         <div class="job-listing-small">
             <div class="card">
@@ -32,10 +29,7 @@ if ($jobAd) {
                         </div>
                         <div class="col-6">
                         Bransje: ' . '<b>' . $jobAd->industry_name . '</b>                        
-                        </div>
-                        <div class="col">
-                            <i class="fa-regular fa-heart"></i>
-                        </div>
+                        </div>                      
                     </div>
                     <div class="row">
                         <div class="col-12 mt-2">
@@ -50,18 +44,16 @@ if ($jobAd) {
                         <div class="col-6 mt-2">
                             Sted: ' . '<b>' . $jobAd->location_name . '</b>
                         </div>
-    
+                       
                     </div>
                     <div class="flex-container mt-2">
                         <div>
                             Publiseringsdato: ' . '<b>' . date('d-m-Y', strtotime($jobAd->published_time)) . '</b>
                         </div>
-                        <div style="color: red;  padding-right: 7rem;">
+                        <div style="color: red;  padding-right: 14rem;">
                             Søknadsfrist: ' . '<b>' . date('d-m-Y', strtotime($jobAd->application_deadline)) . '</b>
-                        </div>
-                        <div>
-                            <a class="btn btn-primary" data-toggle="collapse" href="applyjob.php?id='. $jobAd->jobListing_id .'" role="button" aria-expanded="false">Søk Stilling</a>
-                        </div>
+                        </div>    
+                        <div></div>                   
                     </div>
                 </div>
             </div>
@@ -70,6 +62,10 @@ if ($jobAd) {
                 <p>
                     ' . $jobAd->description . ' 
                 </p>
+                <div style="text-align: center; margin-top: 5rem;">
+                <button type="submit" name="cancel" class="btn btn-danger m-2">Avbryt</button>
+                <a class="btn btn-primary" data-toggle="collapse" href="jobAdDetailForEmployer.php" role="button" aria-expanded="false">Lagre Endringer</a>
+            </div>
     
             </div>
         </div>

@@ -3,8 +3,6 @@ require_once "/xampp/htdocs/jobbsokesystem/library/database_handler.php";
 require_once "./models/jobListing/JobListingModel.php";
 require_once "./controllers/JobListingController.php";
 require_once "./views/JobListingView.php";
-
-$joblisting = new JobListingView();
 ?>
 <br>
 <br>
@@ -13,7 +11,13 @@ $joblisting = new JobListingView();
         <div class="row d-flex justify-content-center align-items-center">
             <div class="col-sm-8 form-group">
                 <h1>Lag en ny jobbannonse!</h1>
-                <?php $joblisting->check_input_errors(); ?>
+                <?php
+                $joblisting = new JobListingView();
+                if (isset($_SESSION["id"]) && $_SESSION["userType"] === "employer") {
+                    $employerId = $_SESSION["id"];
+                }
+                $joblisting->check_input_errors();
+                ?>
                 <label for="jobtitle">Jobbtittel</label>
                 <input type="text" class="form-control" name="jobtitle" placeholder="Jobbtittel">
                 <!-- <label for="companyname">Firmanavn</label>
@@ -68,8 +72,7 @@ $joblisting = new JobListingView();
             </div>
             <div class="col-sm-8 form-group">
                 <label for="jobdescription">Jobbbeskrivelse</label>
-                <textarea class="form-control" rows="5" name="jobdescription" name="jobdescription"
-                    aria-describedby="jobdescription" placeholder="Skriv om jobbstilling her..."></textarea>
+                <textarea class="form-control" rows="5" name="jobdescription" name="jobdescription" aria-describedby="jobdescription" placeholder="Skriv om jobbstilling her..."></textarea>
             </div>
 
         </div>
