@@ -33,7 +33,6 @@ require_once "./library/errorhandler.php";
                 //     $employerId = $_SESSION["id"];
                 // }
                 ErrorHandler::displayError();
-                // ErrorHandler::displaySuccess();   
                 $jobAdDetail = $jobListingView->fetchJobAdByJobListingId($_GET["jobListing_id"]);
                 if ($jobAdDetail) {
                     echo '
@@ -64,7 +63,6 @@ require_once "./library/errorhandler.php";
                     <select class="form-select" name="industry">';
                     $currentIndustryId = $jobAdDetail->industry_id;
                     $currentIndustryName = $jobAdDetail->industry_name;
-
                     // Set the current industry as the default selected
                     echo '<option value="' . htmlspecialchars($currentIndustryId) . '" selected>' . htmlspecialchars($currentIndustryName) . '</option>';
 
