@@ -20,11 +20,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $positionName = htmlspecialchars($_POST["positionname"], ENT_QUOTES, "UTF-8");
     $jobType = htmlspecialchars($_POST["jobtype"], ENT_QUOTES, "UTF-8");
     $applicationDeadline = htmlspecialchars($_POST["applicationdeadline"], ENT_QUOTES, "UTF-8");
-    $jobDescription = htmlspecialchars($_POST["jobdescription"], ENT_QUOTES, "UTF-8");
+    $jobDescription = htmlspecialchars($_POST["jobDescription"], ENT_QUOTES, "UTF-8");
 
 
     // try {
     //Error handlers
+    if (Validator::isEmployerLoggedIn($employerId)) {
+        ErrorHandler::setError(ErrorHandler::$employerIsNotLoggedIn);
+        header("Location: ../postnewjob.php");
+        exit();
+    }
+
     if (Validator::areInputsEmpty($jobTitle, $positionName, $jobDescription)) {
         ErrorHandler::setError(ErrorHandler::$emptyInputError);
         header("Location: ../postnewjob.php");
@@ -34,32 +40,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (!Validator::isLocationValid($location)) {
         ErrorHandler::setError(ErrorHandler::$invalidLocationError);
         header("Location: ../postnewjob.php");
+        exit();
     }
 
     if (!Validator::isIndustryValid($industry)) {
         ErrorHandler::setError(ErrorHandler::$invalidIndustryError);
         header("Location: ../postnewjob.php");
+        exit();
     }
 
     if (!Validator::isJobTypeValid($jobType)) {
         ErrorHandler::setError(ErrorHandler::$emptyInputJobTypeError);
         header("Location: ../postnewjob.php");
+        exit();
     }
 
     if (Validator::isEmptyInputApplicationDeadline($applicationDeadline)) {
         ErrorHandler::setError(ErrorHandler::$emptyInputApplicationDeadlineError);
         header("Location: ../postnewjob.php");
+        exit();
     }
     if (Validator::isOldApplicationDeadlineDate($applicationDeadline)) {
         ErrorHandler::setError(ErrorHandler::$isOldApplicationDeadlineDateError);
         header("Location: ../postnewjob.php");
+        exit();
     }
 
     // $jobListingController = new JobListingController();
     $jobListingModel = new JobListingModel();
     if ($jobListingModel->insertNewJobAd($employerId, $jobTitle, $jobDescription, $jobType, $location, $industry, $applicationDeadline, $positionName)) {
         ErrorHandler::setSuccess("Din jobbannonse har publisert!");
-        // header("Location: ../companyjobads.php");
+        header("Location: ../companyjobads.php");
         exit();
     } else {
         ErrorHandler::setError(ErrorHandler::$unknownError);

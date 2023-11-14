@@ -8,7 +8,7 @@ $helperModel = new Helper();
 
 
 $jobToGet = $_GET["id"];
-if(!isset($_GET["id"])){
+if (!isset($_GET["id"])) {
     header("location: index.php");
     exit();
 }
@@ -29,7 +29,9 @@ $jobListingViewModel = new JobListingViewModel($jobToGet);
         <a href="jobadvertisementdetail.php">Tilbake til annonsen</a>
     </div>
     <div class="row justify-content-center">
-        <button onclick=autofill()>Autofyll min informasjon</button>
+        <div class="flex-container justify-content-center">
+            <button class="btn btn-primary m-3" onclick=autofill()>Autofyll min informasjon</button>
+        </div>
         <form action="./controllers/jobApplicant.controller.php" method="POST">
             <input name="type" value="apply" hidden />
             <input name="applicantid" value=<?php echo $_SESSION["id"] ?> hidden>
@@ -58,7 +60,7 @@ $jobListingViewModel = new JobListingViewModel($jobToGet);
                             <label for="lastjob">Nåværende eller siste stilling</label>
                             <input type="text" class="form-control" name="lastjob" id="lastjob" aria-describedby="lastjob" placeholder="Nåværende eller siste stilling">
                         </div>
-                        <div class="form-group">
+                        <div class="form-group col-md-8">
                             <label for="location">Hva er din høyeste utdanning?</label>
                             <select class="form-select" name="education">
                                 <option selected value="0">Velg Utdanningsnivå</option>
@@ -91,7 +93,7 @@ $jobListingViewModel = new JobListingViewModel($jobToGet);
                     </div>
 
                 </div>
-                <div class="form-group text-center mt-5">
+                <div class="form-group text-center mt-3">
                     <!--Må lage en script som viser til jobbsøker at søknaden har sendt etter å ha trykke på "Send Søknad"-->
                     <button id="applyjobb-button" type="submit" class="btn btn-primary">Send søknad</button>
                 </div>

@@ -14,12 +14,32 @@ class JobListingView
 
     private $helper;
     private $jobListingModel;
+    // private $jobListingId;
+    // private $companyName;
+    // private $industry;
+    // private $jobTitle;
+    // private $positionName;
+    // private $jobType;
+    // private $location;
+    // private $publishDate;
+    // private $applicationDeadline;
+
+
 
     //Constructor
     public function __construct()
     {
         $this->helper = new Helper();
         $this->jobListingModel = new JobListingModel();
+        // $jobAdDetail = $this->jobListingModel->getJobAdByJobListingId($jobListingId);
+        // $this->companyName = $jobAdDetail->company_name;
+        // $this->industry = $jobAdDetail->industry_name;
+        // $this->jobTitle = $jobAdDetail->job_title;
+        // $this->positionName = $jobAdDetail->position_name;
+        // $this->jobType = $jobAdDetail->jobType;
+        // $this->location = $jobAdDetail->location_name;
+        // $this->publishDate = $jobAdDetail->published_time;
+        // $this->applicationDeadline = $jobAdDetail->application_deadline;
     }
 
     /**
@@ -32,9 +52,9 @@ class JobListingView
         return $jobAds;
     }
 
-    public function fetchJobAdByJobListingId($jobListingId)
+    public function fetchJobAdByJobListingId($jobListing_id)
     {
-        $jobAdDetail = $this->jobListingModel->getJobAdByJobListingId($jobListingId);
+        $jobAdDetail = $this->jobListingModel->getJobAdByJobListingId($jobListing_id);
         return $jobAdDetail;
     }
 
@@ -50,16 +70,13 @@ class JobListingView
         // var_dump($jobAdsByEmployer); // Debugging output
     }
 
-
     /**
      * This function is used to get all locations.     
      * @return array A list of locations.
      */
     public function fetchAllLocations()
     {
-
         $locations = $this->helper->getAllLocations();
-
         return $locations;
     }
 
@@ -81,54 +98,5 @@ class JobListingView
     {
         $industries = $this->helper->getAllIndustries();
         return $industries;
-    }
-
-    /**
-     * This function is used to check for and displays errors messages related to posting a new job advertisement.  
-     * This function retrieves errors messages from the session and displays them as alerts.
-     * It also displays a success message if a new job advertisement was successfully created.
-     */
-    public function check_input_errors()
-    {
-        if (isset($_SESSION["errors_postnewjob"])) {
-            $errors = $_SESSION["errors_postnewjob"];
-            echo "<br>";
-
-            switch (true) {
-                case isset($errors["not_login"]):
-                    echo "<div class= 'alert alert-danger'>" . $errors["not_login"] . "</div>";
-                    break;
-
-                case isset($errors["empty_form"]):
-                    echo "<div class= 'alert alert-danger'>" . $errors["empty_form"] . "</div>";
-                    break;
-
-                case isset($errors["empty_select_location"]):
-                    echo "<div class= 'alert alert-danger'>" . $errors["empty_select_location"] . "</div>";
-                    break;
-
-                case isset($errors["empty_select_industry"]):
-                    echo "<div class= 'alert alert-danger'>" . $errors["empty_select_industry"] . "</div>";
-                    break;
-
-                case isset($errors["empty_select_jobType"]):
-                    echo "<div class= 'alert alert-danger'>" . $errors["empty_select_jobType"] . "</div>";
-                    break;
-
-                case isset($errors["empty_applicationDeadline"]):
-                    echo "<div class= 'alert alert-danger'>" . $errors["empty_applicationDeadline"] . "</div>";
-                    break;
-
-                case isset($errors["invalid_applicationDeadline"]):
-                    echo "<div class= 'alert alert-danger'>" . $errors["invalid_applicationDeadline"] . "</div>";
-                    break;
-            }
-
-            //Reason to unset SESSION variable because as soon as we have data inside our assessing variable, we do not want to have them anymore, so just make sure that we delete them.                  
-            unset($_SESSION["errors_postnewjob"]);
-        } //else if (isset($_GET["postnewjob"]) && $_GET["postnewjob"] === "success") {
-        //     echo "<br>";
-        //     echo "<div class= 'alert alert-success'>" . "Din jobbannonse har publisert! Du kan se din jobbannonse " . "<a href='jobAdDetailForEmployer.php?jobListing_id=' . $jobAd->jobListing_id >her.</a>" . "</div>";
-        // }
     }
 }

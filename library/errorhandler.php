@@ -21,6 +21,7 @@ class ErrorHandler
     public static $unknownError = "En ukjent feil oppsto, vennligst kontakt en systemadministrator";
     public static $unknownUserError = "Brukeren finnes ikke, vennligst prøv igjen";
     public static $wrongPasswordError = "Passordet er feil, vennligst prøv igjen";
+    public static $employerIsNotLoggedIn = "Vennligst, logg inn i din konto for å lage en ny jobbannose. " . "<a href='login.php'>Login her.</a>";
 
 
 

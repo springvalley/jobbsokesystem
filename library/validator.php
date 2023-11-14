@@ -140,7 +140,16 @@ class Validator
     public static function isOldApplicationDeadlineDate($applicationDeadline)
     {
         $today = date("d-m-Y");
-        if (strtotime($applicationDeadline) < strtotime($today)) {
+        if (strtotime($applicationDeadline) <= strtotime($today)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static function isEmployerLoggedIn($employerId)
+    {
+        if (empty($employerId)) {
             return true;
         } else {
             return false;

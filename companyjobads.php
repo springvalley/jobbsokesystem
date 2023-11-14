@@ -4,8 +4,7 @@ require_once "/xampp/htdocs/jobbsokesystem/library/database_handler.php";
 require_once "./models/jobListing/JobListingModel.php";
 require_once "./controllers/JobListingController.php";
 require_once "./views/JobListingView.php";
-
-// session_start();
+// require_once "./library/errorhandler.php";
 ?>
 <div class="container">
     <div class="flex-container">
@@ -16,14 +15,15 @@ require_once "./views/JobListingView.php";
             </div>
         </div>
         <div>
-            <a type="submit" id="createJobAdsButton" class="btn btn-primary" href="postnewjob.php">Lag ny
+            <a type="submit" id="createJobAdsButton" class="btn btn-primary" href="postnewjob.php"> + Legg til en ny
                 jobbannonse</a>
         </div>
     </div>
-    <h1>Alle Jobbannonser</h1>
+    <h1>Mine jobbannonser</h1>
 
     <?php
     echo "<br>";
+    // ErrorHandler::displaySuccess();
 
     if (isset($_SESSION["id"]) && $_SESSION["userType"] === "employer") {
         $employerId = $_SESSION["id"];
@@ -42,9 +42,12 @@ require_once "./views/JobListingView.php";
                     <div class="col-5"> 
                          <b>' . $jobAd->company_name . '</b>
                     </div>
-                    <div class="col-6">
+                    <div class="col-5">
                          Bransje: ' . '<b>' . $jobAd->industry_name . '</b>                       
-                    </div>                   
+                    </div>     
+                    <div class="col">                    
+                    <a href="editJobAd.php?jobListing_id=' . $jobAd->jobListing_id . '" style="margin-left: 5rem;"> <i class="fa-regular fa-pen-to-square"> </i> Redigere</a>
+                    </div>              
                 </div>
                 <div class="row">
                     <div class="col-12 mt-2">
@@ -64,11 +67,11 @@ require_once "./views/JobListingView.php";
                     <div>                          
                          Publiseringsdato: ' . '<b>' . date('d-m-Y', strtotime($jobAd->published_time)) . '</b>
                      </div>
-                    <div style="color: red; padding-right: 2rem;">
+                    <div style="color: red; padding-right: 5rem;">
                          Søknadsfrist: ' . '<b>' . date('d-m-Y', strtotime($jobAd->application_deadline)) . '</b>
                      </div>
                      <div>
-                     <a class="btn btn-primary" href="editJobAd.php?jobListing_id=' . $jobAd->jobListing_id . '" role="button">Redigerer jobbannonse</a>
+                     <a class="btn btn-primary" href="jobadvertisementdetail.php?jobListing_id=' . $jobAd->jobListing_id . '" role="button">Se jobbannonse</a>
                      </div>
 
 
