@@ -31,7 +31,7 @@ class JobApplicantController
 
         //Validate empty inputs
         if (Validator::areInputsEmpty($data["userName"], $data["userEmail"], $data["userPhone"], $data["userSummary"])) {
-            ErrorHandler::setError(ErrorHandler::$emptyInputError); 
+            ErrorHandler::setError(ErrorHandler::$emptyInputError);
             header("location: ../editapplicantprofile.php?id=" . (int)$data["jobApplicant_id"]);
             exit();
         }
@@ -39,13 +39,13 @@ class JobApplicantController
 
         //Validate a valid name
         if (!Validator::isNameValid($data["userName"])) {
-            ErrorHandler::setError(ErrorHandler::$invalidNameError); 
+            ErrorHandler::setError(ErrorHandler::$invalidNameError);
             header("location: ../editapplicantprofile.php?id=" . (int)$data["jobApplicant_id"]);
             exit();
         }
         //Validate a valid summary
         if (!Validator::isNameValid($data["userSummary"])) {
-            ErrorHandler::setError("Oppsumeringen du har skrevet er ikke gyldig"); 
+            ErrorHandler::setError("Oppsumeringen du har skrevet er ikke gyldig");
             header("location: ../editapplicantprofile.php?id=" . (int)$data["jobApplicant_id"]);
             exit();
         }
@@ -53,7 +53,7 @@ class JobApplicantController
 
         //Validate a valid email
         if (!Validator::isEmailValid($data["userEmail"])) {
-            ErrorHandler::setError(ErrorHandler::$invalidEmailError); 
+            ErrorHandler::setError(ErrorHandler::$invalidEmailError);
             header("location: ../editapplicantprofile.php?id=" . (int)$data["jobApplicant_id"]);
             exit();
         }
@@ -61,11 +61,11 @@ class JobApplicantController
         //Update db using model
         //Redirect user to profile if successful, if else redirect to other page with errormessages
         if ($model->updateJobApplicantProfile($data)) {
-            ErrorHandler::setSuccess("Brukeren ble oppdatert!"); 
+            ErrorHandler::setSuccess("Brukeren ble oppdatert!");
             header("location: ../applicantprofile.php?id=" . (int)$data["jobApplicant_id"]);
             exit();
         } else {
-            ErrorHandler::setError(ErrorHandler::$unknownError); 
+            ErrorHandler::setError(ErrorHandler::$unknownError);
             header("location: ../editapplicantprofile.php?id=" . (int)$data["jobApplicant_id"]);
             exit();
         }
@@ -93,59 +93,57 @@ class JobApplicantController
             "userEducationLevel" => htmlspecialchars(trim($_POST["education"]))
         ];
 
-            //Validate empty inputs
-            if (Validator::areInputsEmpty($data["userName"], $data["userEmail"], $data["userPhone"], $data["coverletter"])) {
-                ErrorHandler::setError(ErrorHandler::$emptyInputError); 
-                header("location: ../applyjob.php?id=" . (int)$data["jobListing_id"]);
-                exit();
-            }
-    
-    
-            //Validate a valid name
-            if (!Validator::isNameValid($data["userName"])) {
-                ErrorHandler::setError(ErrorHandler::$invalidNameError); 
-                header("location: ../applyjob.php?id=" . (int)$data["jobListing_id"]);
-                exit();
-            }
-            //Validate a valid summary
-            if (!Validator::isNameValid($data["coverletter"])) {
-                ErrorHandler::setError("Motivasjonsbrevet du har skrevet er ikke gyldig"); 
-                header("location: ../applyjob.php?id=" . (int)$data["jobListing_id"]);
-                exit();
-            }
-    
-            //Validate a valid email
-            if (!Validator::isEmailValid($data["userEmail"])) {
-                ErrorHandler::setError(ErrorHandler::$invalidEmailError); 
-                header("location: ../applyjob.php?id=" . (int)$data["jobListing_id"]);
-                exit();
-            }
-
-             //Validate a valid education
-             if (!Validator::isEducationValid($data["userEducationLevel"])) {
-                ErrorHandler::setError(ErrorHandler::$invalidEducationError); 
-                header("location: ../applyjob.php?id=" . (int)$data["jobListing_id"]);
-                exit();
-            }
-
-            if($model->applicantHasAppliedToJob($data["jobListing_id"], $data["jobApplicant_id"])){
-                ErrorHandler::setError("Du har allerede søkt på denne jobben."); 
-                header("location: ../applyjob.php?id=" . (int)$data["jobListing_id"]);
-                exit();
-            }
-            
-            
-            if($model->applyToJob($data)){
-                ErrorHandler::setSuccess("Søknaden din ble opprettet!");
-                header("location: ../applyjob.php?id=" . (int)$data["jobListing_id"]);
-                exit();
-            }else{
-                ErrorHandler::setError("Noe gikk galt, prøv igjen!");
-                header("location: ../applyjob.php?id=" . (int)$data["jobListing_id"]);
-                exit();
-            }
+        //Validate empty inputs
+        if (Validator::areInputsEmpty($data["userName"], $data["userEmail"], $data["userPhone"], $data["coverletter"])) {
+            ErrorHandler::setError(ErrorHandler::$emptyInputError);
+            header("location: ../applyjob.php?id=" . (int)$data["jobListing_id"]);
+            exit();
+        }
 
 
+        //Validate a valid name
+        if (!Validator::isNameValid($data["userName"])) {
+            ErrorHandler::setError(ErrorHandler::$invalidNameError);
+            header("location: ../applyjob.php?id=" . (int)$data["jobListing_id"]);
+            exit();
+        }
+        //Validate a valid summary
+        if (!Validator::isNameValid($data["coverletter"])) {
+            ErrorHandler::setError("Motivasjonsbrevet du har skrevet er ikke gyldig");
+            header("location: ../applyjob.php?id=" . (int)$data["jobListing_id"]);
+            exit();
+        }
+
+        //Validate a valid email
+        if (!Validator::isEmailValid($data["userEmail"])) {
+            ErrorHandler::setError(ErrorHandler::$invalidEmailError);
+            header("location: ../applyjob.php?id=" . (int)$data["jobListing_id"]);
+            exit();
+        }
+
+        //Validate a valid education
+        if (!Validator::isEducationValid($data["userEducationLevel"])) {
+            ErrorHandler::setError(ErrorHandler::$invalidEducationError);
+            header("location: ../applyjob.php?id=" . (int)$data["jobListing_id"]);
+            exit();
+        }
+
+        if ($model->applicantHasAppliedToJob($data["jobListing_id"], $data["jobApplicant_id"])) {
+            ErrorHandler::setError("Du har allerede søkt på denne jobben.");
+            header("location: ../applyjob.php?id=" . (int)$data["jobListing_id"]);
+            exit();
+        }
+
+
+        if ($model->applyToJob($data)) {
+            ErrorHandler::setSuccess("Søknaden din ble opprettet!");
+            header("location: ../applyjob.php?id=" . (int)$data["jobListing_id"]);
+            exit();
+        } else {
+            ErrorHandler::setError("Noe gikk galt, prøv igjen!");
+            header("location: ../applyjob.php?id=" . (int)$data["jobListing_id"]);
+            exit();
+        }
     }
 }
 

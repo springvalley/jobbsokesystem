@@ -15,8 +15,7 @@ $helperModel = new Helper();
     <h1>Finn din nye jobb</h1>
     <div class="row mt-3">
         <div class="col">
-            <input type="text" class="form-control" id="searchText" aria-describedby="searchText"
-                placeholder="Søk i fritekst (eks: 1,2,3)">
+            <input type="text" class="form-control" id="searchText" aria-describedby="searchText" placeholder="Søk i fritekst (eks: 1,2,3)">
         </div>
         <div class="col">
             <select class="form-select" name="location">
@@ -64,18 +63,18 @@ $helperModel = new Helper();
             </div>
         </div>
         <?php
-       $jobListingView = new JobListingView();
-       $jobAds = $jobListingView->fetchAllJobAds();
-       if (!empty($jobAds)) {
-           foreach ($jobAds as $jobAd) {
-               echo '<div class="card cardhover" style="margin-top: 1.2rem;" >
+        $jobListingView = new JobListingView();
+        $jobAds = $jobListingView->fetchAllJobAds();
+        if (!empty($jobAds)) {
+            foreach ($jobAds as $jobAd) {
+                echo '<div class="card cardhover" style="margin-top: 1.2rem;" >
                <div class="card-body">
                    <div class="row">
                        <div class="col-5"> 
                             <b>' . $jobAd->company_name . '</b>
                        </div>
                        <div class="col-6">
-                            Bransje: ' . '<b>'. $jobAd->industry_name . '</b>                       
+                            Bransje: ' . '<b>' . $jobAd->industry_name . '</b>                       
                        </div>
                        <div class="col">
                            <i class="fa-regular fa-heart"></i>
@@ -86,24 +85,24 @@ $helperModel = new Helper();
                            <b style="font-size: 20px;">' . $jobAd->job_title . '</b>
                        </div>
                        <div class="col-5 mt-2">
-                            Stillingtittel: ' . '<b>'. $jobAd->position_name . '</b>
+                            Stillingtittel: ' . '<b>' . $jobAd->position_name . '</b>
                         </div>
                        <div class="col-6 mt-2">
                             Ansettelsesform: ' . '<b>' . $jobAd->jobType . '</b>
                        </div>
                        <div class="col-6 mt-2">
-                            Sted: ' . '<b>'. $jobAd->location_name . '</b>
+                            Sted: ' . '<b>' . $jobAd->location_name . '</b>
                         </div>
                    </div>
                    <div class="flex-container mt-2">
                        <div>                          
-                            Publiseringsdato: '. '<b>' . date('d-m-Y', strtotime($jobAd->published_time)) . '</b>
+                            Publiseringsdato: ' . '<b>' . date('d-m-Y', strtotime($jobAd->published_time)) . '</b>
                         </div>
                        <div style="color: red; padding-right: 5rem;">
                             Søknadsfrist: ' . '<b>' . date('d-m-Y', strtotime($jobAd->application_deadline)) . '</b>
                         </div>
                        <div>
-                       <a class="btn btn-primary" href="jobadvertisementdetail.php?jobListing_id='. $jobAd->jobListing_id . '"role="button">Se jobbannonse</a>
+                       <a class="btn btn-primary" href="jobadvertisementdetail.php?jobListing_id=' . $jobAd->jobListing_id . '"role="button">Se jobbannonse</a>
                        </div>
                    </div>   
                    
@@ -115,8 +114,8 @@ $helperModel = new Helper();
                    <button class="btn btn-primary">Søk Jobb</button>
                </div>
            </div>';
-           }
-       }
+            }
+        }
         ?>
     </div>
     <?php include "components/footer.php" ?>

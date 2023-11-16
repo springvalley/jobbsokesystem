@@ -1,6 +1,10 @@
 <?php
+require_once "/xampp/htdocs/jobbsokesystem/components/header.php";
+require_once "/xampp/htdocs/jobbsokesystem/library/database_handler.php";
 require_once "/xampp/htdocs/jobbsokesystem/models/jobListing/JobListingModel.php";
-// require_once "../models/jobListing/JobListingModel.php";
+require_once "/xampp/htdocs/jobbsokesystem/library/validator.php";
+require_once "/xampp/htdocs/jobbsokesystem/library/errorhandler.php";
+
 /**
  * JobListingController is a class responsible for controlling and managing all operations that related to job advertisements, 
  * including validating inputs and interacting with 'JobListingModel' for creating/updating/deleting the job advertisements.
@@ -8,125 +12,163 @@ require_once "/xampp/htdocs/jobbsokesystem/models/jobListing/JobListingModel.php
  * @see JobListingModel which is the class that JobListingController associates with. 
  */
 
-class JobListingController {
-
-    private $jobListingModel;
-
-    //Constructor
-    public function __construct()
-    {
-        $this->jobListingModel = new JobListingModel;
-    }
+class JobListingController
+{
 
     /**
-     * This function is used to check if employer users have been login into system. 
-     * @param int $employerId The id of employer user.      
-     * @return boolean True if employer user has not login into the system, otherwise false.
-     */
-    public function is_employer_loggedIn($employerId) {
-        if(empty($employerId)) {
-            return true;
-        } else {
-            return false;
-        }        
-    }
-
-   /**
-     * This function is used to check if any of the input fields 'Job title', 'Position', 'Job description' are empty. 
-     * @param string $jobTitle The job title input.  
-     * @param string $positionName The job position name input.
-     * @param string $jobDescription The description input for job advertisement.
-     * @return boolean true if any of input fields are empty, otherwise false.
-     */
-    public function is_empty_input_form($jobTitle, $positionName, $jobDescription) {
-        if (empty($jobTitle) || empty($positionName) || empty($jobDescription)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-    
-    /**
-     * This function is used to check if the location is empty or set to the default "Velg sted".
-     * @param string $location The selected location.  
-     * @return boolean true if location is empty or set to "Velg sted", otherwise false.
-     */
-    public function is_empty_select_location($location) {
-        if (empty($location) || $location === "Velg sted") {       
-            return true;
-        } else {
-            return false;
-        }
-    }
-    
-    /**
-     * This function is used to check if the industry is empty or set to the default "Velg bransje".
-     * @param string $industry The selected industry.  
-     * @return boolean true if industry is empty or set to "Velg bransje", otherwise false.
-     */
-    public function is_empty_select_industry($industry) {
-        if (empty($industry) ||$industry === "Velg bransje") {      
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-     /**
-     * This function is used to check if the job type is empty or set to the default "Velg ansettelsesform".
-     * @param string $industry The selected jobtype.  
-     * @return boolean true if job type is empty or set to "Velg ansettelsesform", otherwise false.
-     */
-    public function is_empty_select_jobType($jobType) {
-        if (empty($jobType) ||$jobType === "Velg ansettelesform") {       
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    /**
-     * This function is used to check if application deadline is empty.
-     * @param string $applicationDeadline The application deadline to be checked.  
-     * @return boolean true if application deadline is empty, otherwise false.
-     */
-    public function is_empty_applicationDeadline($applicationDeadline) {
-        if (empty($applicationDeadline)) {
-            return true;
-        } else {
-            return false;
-        }
-    }   
-    
-    /**
-     * This function is used to check if the provided application deadline is earlier than the current date.
-     * @param string $applicationDeadline The application deadline to be checked.
-     * @return boolean true if application deadline is earlier than the current date, otherwise false.
-     */
-    public function is_invalid_applicationDeadline($applicationDeadline) {
-        $today = date("d-m-Y");
-        if(strtotime($applicationDeadline) < strtotime($today)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-     /**
      * This function is used to create a new job advertisement.
-     * @param int $employerId The ID of employer who creates the job advertisement.
-     * @param string $jobTitle The title of job advertisement.
-     * @param string $jobDescription The description for the job advertisement.
-     * @param int $jobType The ID of job type.
-     * @param int $location The ID of location.
-     * @param int $industry The ID of industry.
-     * @param string $applicationDeadline The application deadline date.
-     * @param string $positionName The job position name.
-     * @see JobListingModel The class associates with JobListingController. 
-     * @return void 
+     * 
      */
-    public function createNewJobAd($employerId, $jobTitle, $jobDescription, $jobType, $location, $industry, $applicationDeadline, $positionName) : void
+    public function createNewJobAd()
     {
-        $this->jobListingModel->insertNewJobAd($employerId, $jobTitle, $jobDescription, $jobType, $location, $industry, $applicationDeadline, $positionName);
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            // Get input data from the form  
+            $data = [
+                "employerId" => htmlspecialchars(($_SESSION["id"])),
+                "jobTitle" => htmlspecialchars($_POST["jobTitle"], ENT_QUOTES, "UTF-8"),
+                "location" => htmlspecialchars($_POST["location"], ENT_QUOTES, "UTF-8"),
+                "industry" => htmlspecialchars($_POST["industry"], ENT_QUOTES, "UTF-8"),
+                "positionName" => htmlspecialchars($_POST["positionName"], ENT_QUOTES, "UTF-8"),
+                "jobType" => htmlspecialchars($_POST["jobType"], ENT_QUOTES, "UTF-8"),
+                "applicationDeadline" => htmlspecialchars($_POST["applicationDeadline"], ENT_QUOTES, "UTF-8"),
+                "jobDescription" => htmlspecialchars($_POST["jobDescription"], ENT_QUOTES, "UTF-8")
+            ];
+            $_SESSION["dataInputForPostNewJob"] = $data;
+
+            //Call 'validateJobAdInputForm' function
+            $this->validateJobAdInputForm($data, "../postnewjob.php");
+            $jobListingModel = new JobListingModel();
+            if ($jobListingModel->insertNewJobAd($data)) {
+                ErrorHandler::setSuccess("Din jobbannonse har publisert!");
+                header("Location: ../companyjobads.php");
+                unset($_SESSION["dataInputForPostNewJob"]);
+                exit();
+            } else {
+                ErrorHandler::setError(ErrorHandler::$unknownError);
+                header("Location: ../postnewjob.php");
+                exit();
+            }
+        }
+    }
+
+    /**
+     * This function is used to update a job ad.
+     * 
+     */
+    public function editJobAd()
+    {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            // Get input data from the form  
+            $data = [
+                "jobListing_id" => htmlspecialchars(($_POST["jobListing_id"])),
+                "employerId" => htmlspecialchars(($_SESSION["id"])),
+                "jobTitle" => htmlspecialchars($_POST["jobTitle"], ENT_QUOTES, "UTF-8"),
+                "location" => htmlspecialchars($_POST["location"], ENT_QUOTES, "UTF-8"),
+                "industry" => htmlspecialchars($_POST["industry"], ENT_QUOTES, "UTF-8"),
+                "positionName" => htmlspecialchars($_POST["positionName"], ENT_QUOTES, "UTF-8"),
+                "jobType" => htmlspecialchars($_POST["jobType"], ENT_QUOTES, "UTF-8"),
+                "applicationDeadline" => htmlspecialchars($_POST["applicationDeadline"], ENT_QUOTES, "UTF-8"),
+                "jobDescription" => htmlspecialchars($_POST["jobDescription"], ENT_QUOTES, "UTF-8")
+            ];
+
+            $this->validateJobAdInputForm($data, "../editJobAd.php?jobListing_id=" . (int)$data["jobListing_id"]);
+            $jobListingModel = new JobListingModel();
+            if ($jobListingModel->updateJobAd($data)) {
+                ErrorHandler::setSuccess("Din jobbannonse har blitt oppdatert!");
+                header("Location: ../jobadvertisementdetail.php?jobListing_id=" . (int)$data["jobListing_id"]);
+
+                exit();
+            } else {
+                ErrorHandler::setError(ErrorHandler::$unknownError);
+                header("Location: ../editJobAd.php?jobListing_id=" . (int)$data["jobListing_id"]);
+                exit();
+            }
+        }
+    }
+
+    public function deleteJobAd()
+    {
+        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["jobListing_id"])) {
+            $jobListingId = htmlspecialchars($_POST["jobListing_id"]);
+
+            // Perform any necessary validation here
+            // For example, check if the user has the permission to delete the job ad
+
+            $jobListingModel = new JobListingModel();
+            if ($jobListingModel->deleteJobAd($jobListingId)) {
+                ErrorHandler::setSuccess("Din jobbannonse har blitt slettet!");
+                header("Location: ../companyjobads.php");
+                exit();
+            } else {
+                ErrorHandler::setError(ErrorHandler::$unknownError);
+                header("Location: ../companyjobads.php");
+                exit();
+            }
+        }
+    }
+
+    /**
+     * This private function is used to validate data input to the form for both "createNewJobAd" and "editJobAd".
+     * @param $data The data input to the form.
+     * @param $redirection The redirectURL.
+     */
+    private function validateJobAdInputForm($data, $redirection)
+    {
+        if (Validator::isEmployerLoggedIn($data["employerId"])) {
+            ErrorHandler::setError(ErrorHandler::$employerIsNotLoggedIn);
+            header("Location: $redirection");
+            exit();
+        }
+
+        if (Validator::areInputsEmpty($data["jobTitle"], $data["positionName"], $data["jobDescription"])) {
+            ErrorHandler::setError(ErrorHandler::$emptyInputError);
+            header("Location: $redirection");
+            exit();
+        }
+
+        if (!Validator::isLocationValid($data["location"])) {
+            ErrorHandler::setError(ErrorHandler::$invalidLocationError);
+            header("Location: $redirection");
+            exit();
+        }
+
+        if (!Validator::isIndustryValid($data["industry"])) {
+            ErrorHandler::setError(ErrorHandler::$invalidIndustryError);
+            header("Location: $redirection");
+            exit();
+        }
+
+        if (!Validator::isJobTypeValid($data["jobType"])) {
+            ErrorHandler::setError(ErrorHandler::$emptyInputJobTypeError);
+            header("Location: $redirection");
+            exit();
+        }
+
+        if (Validator::isEmptyInputApplicationDeadline($data["applicationDeadline"])) {
+            ErrorHandler::setError(ErrorHandler::$emptyInputApplicationDeadlineError);
+            header("Location: $redirection");
+            exit();
+        }
+        if (Validator::isOldApplicationDeadlineDate($data["applicationDeadline"])) {
+            ErrorHandler::setError(ErrorHandler::$isOldApplicationDeadlineDateError);
+            header("Location: $redirection");
+            exit();
+        }
+    }
+}
+
+
+$init = new JobListingController();
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    switch ($_POST["type"]) {
+        case "createANewJobAd":
+            $init->createNewJobAd();
+            break;
+        case "editJobAd":
+            $init->editJobAd();
+            break;
+        case "deleteJobAd":
+            $init->deleteJobAd();
+            break;
     }
 }

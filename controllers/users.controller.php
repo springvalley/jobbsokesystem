@@ -41,14 +41,14 @@ class UserController
 
         //Validate empty inputs
         if (Validator::areInputsEmpty($data["userName"], $data["userEmail"], $data["userPhone"], $data["userPassword"], $data["userPasswordRepeat"], $data["userOrgNumber"])) {
-            ErrorHandler::setError(ErrorHandler::$emptyInputError); 
+            ErrorHandler::setError(ErrorHandler::$emptyInputError);
             header("location: ../signup.php");
             exit();
         }
 
         //Validate a valid name
         if (!Validator::isNameValid($data["userName"])) {
-            ErrorHandler::setError(ErrorHandler::$invalidNameError);  
+            ErrorHandler::setError(ErrorHandler::$invalidNameError);
             header("location: ../signup.php");
             exit();
         }
@@ -64,29 +64,29 @@ class UserController
 
         //Validate a valid email
         if (!Validator::isEmailValid($data["userEmail"])) {
-            ErrorHandler::setError(ErrorHandler::$invalidEmailError);  
+            ErrorHandler::setError(ErrorHandler::$invalidEmailError);
             header("location: ../signup.php");
             exit();
         }
-        
+
         //Validate if passwords match
         if (!Validator::doPasswordsMatch($data["userPassword"], $data["userPasswordRepeat"])) {
-            ErrorHandler::setError(ErrorHandler::$invalidPasswordMatchError);  
+            ErrorHandler::setError(ErrorHandler::$invalidPasswordMatchError);
             header("location: ../signup.php");
             exit();
         }
-        
+
         if ($data["jobApplicant"] == 1) {
             //Validate if education is valid
             if (!Validator::isLocationValid($data["education"])) {
-                ErrorHandler::setError(ErrorHandler::$invalidEducationError);  
+                ErrorHandler::setError(ErrorHandler::$invalidEducationError);
                 header("location: ../signup.php");
                 exit();
             }
         } else {
             //Validate if industry is valid
             if (!Validator::isLocationValid($data["industry"])) {
-                ErrorHandler::setError(ErrorHandler::$invalidIndustryError);  
+                ErrorHandler::setError(ErrorHandler::$invalidIndustryError);
                 header("location: ../signup.php");
                 exit();
             }
@@ -94,17 +94,16 @@ class UserController
 
         //Validate if location is valid
         if (!Validator::isLocationValid($data["location"])) {
-            ErrorHandler::setError(ErrorHandler::$invalidLocationError);  
+            ErrorHandler::setError(ErrorHandler::$invalidLocationError);
             header("location: ../signup.php");
             exit();
         }
-        
-        
-        
-        
+
+
+
         //Check if user already exists
         if ($this->userModel->findUserByMatch($data["userEmail"], $data["userPhone"], $data["userOrgNumber"], $data["jobApplicant"])) {
-            ErrorHandler::setError("Brukeren du har prødv å opprette eksisterer allerede");  
+            ErrorHandler::setError("Brukeren du har prødv å opprette eksisterer allerede");
             header("location: ../signup.php");
             exit();
         }
@@ -115,11 +114,11 @@ class UserController
         //Register the user in the database using the model. If the registration is successful send them
         //To the login page otherwise return to the singup page with an error. 
         if ($this->userModel->registerUser($data)) {
-            ErrorHandler::setSuccess("Brukeren ble opprettet");  
+            ErrorHandler::setSuccess("Brukeren ble opprettet");
             header("location: ../login.php");
             exit();
         } else {
-            ErrorHandler::setError(ErrorHandler::$unknownError);  
+            ErrorHandler::setError(ErrorHandler::$unknownError);
             header("location: ../signup.php?");
             exit();
         }
@@ -142,7 +141,7 @@ class UserController
 
         //Check if inputs are empty
         if (Validator::areInputsEmpty($data["userEmail"]) || empty($data["userPassword"])) {
-            ErrorHandler::setError(ErrorHandler::$emptyInputError);  
+            ErrorHandler::setError(ErrorHandler::$emptyInputError);
             header("location: ../login.php");
             exit();
         }
@@ -152,12 +151,12 @@ class UserController
             if ($loggedInUser) {
                 $this->createUserSession($loggedInUser, $data["jobApplicant"]);
             } else {
-                ErrorHandler::setError(ErrorHandler::$wrongPasswordError);  
+                ErrorHandler::setError(ErrorHandler::$wrongPasswordError);
                 header("location: ../login.php");
                 exit();
             }
         } else {
-            ErrorHandler::setError(ErrorHandler::$unknownUserError);  
+            ErrorHandler::setError(ErrorHandler::$unknownUserError);
             header("location: ../login.php");
             exit();
         }
@@ -204,8 +203,6 @@ class UserController
         exit();
     }
 }
-
-
 
 //This handles routing for the controller.
 $init = new UserController();
