@@ -1,6 +1,5 @@
 <?php
 include "components/header.php";
-// require_once "/xampp/htdocs/jobbsokesystem/library/database_handler.php";
 require_once "/xampp/htdocs/jobbsokesystem/library/database_handler.php";
 require_once "./models/jobListing/JobListingModel.php";
 require_once "./controllers/JobListingController.php";
@@ -13,7 +12,6 @@ require_once "./library/errorhandler.php";
     <form action="./controllers/JobListingController.php" method="post">
         <input type="hidden" name="type" value="editJobAd">
         <?php
-
         $jobListingView = new JobListingView();
 
         if (isset($_GET["jobListing_id"])) {
@@ -29,9 +27,6 @@ require_once "./library/errorhandler.php";
             <div class="col-sm-8 form-group">
                 <h1>Redigere jobbannonse!</h1>
                 <?php
-                // if (isset($_SESSION["id"]) && $_SESSION["userType"] === "employer") {
-                //     $employerId = $_SESSION["id"];
-                // }
                 ErrorHandler::displayError();
                 $jobAdDetail = $jobListingView->fetchJobAdByJobListingId($_GET["jobListing_id"]);
                 if ($jobAdDetail) {
@@ -47,31 +42,29 @@ require_once "./library/errorhandler.php";
         <div class="col-sm-4 form-group">
             <label for="location">Sted</label>
             <select class="form-select" name="location">';
-                    $currentLocationId = $jobAdDetail->location_id; // Store the current location ID
-                    $locations = $jobListingView->fetchAllLocations(); // Fetch locations                 
-                    echo '<option value="' . $currentLocationId . '" selected>' . $currentLocation = $jobAdDetail->location_name . '</option>';
+                    $currentLocation = $jobAdDetail->location_name;
+                    $locations = $jobListingView->fetchAllLocations();
                     foreach ($locations as $location) {
-                        if ($location->location_id != $currentLocationId) {
+                        if ($location->location_name == $currentLocation) {
+                            echo '<option value="' . $location->location_id . '" selected>' . $location->location_name . '</option>';
+                        } else {
                             echo '<option value="' . $location->location_id . '">' . htmlspecialchars($location->location_name) . '</option>';
                         }
                     }
-
                     echo '</select>
             </div> 
             <div class="col-sm-4 form-group">
                     <label for="industry">Bransje</label>
                     <select class="form-select" name="industry">';
-                    $currentIndustryId = $jobAdDetail->industry_id;
-                    $currentIndustryName = $jobAdDetail->industry_name;
                     // Set the current industry as the default selected
-                    echo '<option value="' . htmlspecialchars($currentIndustryId) . '" selected>' . htmlspecialchars($currentIndustryName) . '</option>';
-
+                    $currentIndustryName = $jobAdDetail->industry_name;
                     // Fetch all industries
                     $industries = $jobListingView->fetchAllIndustries();
                     foreach ($industries as $industry) {
-                        if ($industry->industry_id != $currentIndustryId) {
-                            // List other industries as options
-                            echo '<option value="' . htmlspecialchars($industry->industry_id) . '">' . htmlspecialchars($industry->industry_name) . '</option>';
+                        if ($industry->industry_name == $currentIndustryName) {
+                            echo '<option value="' . $industry->industry_id . '" selected>' . $industry->industry_name . '</option>';
+                        } else {
+                            echo '<option value="' . $industry->industry_id . '">' . htmlspecialchars($industry->industry_name) . '</option>';
                         }
                     }
                     echo '        
@@ -80,13 +73,14 @@ require_once "./library/errorhandler.php";
             <div class="col-sm-12"></div>
                 <div class="col-sm-4 form-group">
                     <label for="jobType">Ansettelesform</label>
-                    <select class="form-select" name="jobType" aria-label="Default select example">';
-                    $currentJobTypeId = $jobAdDetail->jobType_id;
-                    echo '<option value="' . $currentJobTypeId . '" selected>' . $currentJobType = $jobAdDetail->jobType . '</option>';
-                    $jobTypes = $jobListingView->fetchAllJobTypes(); // Fetch jobtypes
-                    foreach ($jobTypes as $jobType) {
-                        if ($jobType !== $currentJobTypeId) {
-                            echo '<option value="' . $jobType->jobType_id . '">' . $jobType->jobType . '</option>';
+                    <select class="form-select" name="jobType"';
+                    $currentJobType = $jobAdDetail->jobType;
+                    $jobTypes = $jobListingView->fetchAllJobTypes(); // Fetch all jobTypes.
+                    foreach ($jobTypes as $jobTypeName) {
+                        if ($jobTypeName->jobType == $currentJobType) {
+                            echo '<option value="' . $jobTypeName->jobType_id . '" selected>' .  $jobTypeName->jobType . '</option>';
+                        } else {
+                            echo '<option value="' . $jobTypeName->jobType_id . '">' . htmlspecialchars($jobTypeName->jobType)  . '</option>';
                         }
                     }
                     echo '
@@ -104,8 +98,6 @@ require_once "./library/errorhandler.php";
             ';
                 }
                 ?>
-
-
                 <div class="form-group text-center">
                     <button type="submit" name="cancel" class="btn btn-danger">Avbryt</button>
                     <button type="submit" name="save" class="btn btn-primary">Lagre

@@ -56,6 +56,17 @@ class JobListingModel
         }
     }
 
+    public function deleteJobAd($jobListing_id)
+    {
+        $this->db->query("DELETE FROM joblisting WHERE jobListing_id = :jobListing_id");
+        $this->db->bind(":jobListing_id", $jobListing_id);
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function getAllJobListingsByEmployer($employerId)
     {
         $this->db->query("SELECT jl.jobListing_id, jl.job_title, jl.description, jl.published_time, e.company_name, l.location_name, i.industry_name, jt.jobType, jl.position_name, jl.application_deadline

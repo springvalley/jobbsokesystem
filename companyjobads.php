@@ -4,7 +4,7 @@ require_once "/xampp/htdocs/jobbsokesystem/library/database_handler.php";
 require_once "./models/jobListing/JobListingModel.php";
 require_once "./controllers/JobListingController.php";
 require_once "./views/JobListingView.php";
-// require_once "./library/errorhandler.php";
+require_once "./library/errorhandler.php";
 ?>
 <div class="container">
     <div class="flex-container">
@@ -23,31 +23,27 @@ require_once "./views/JobListingView.php";
 
     <?php
     echo "<br>";
-    // ErrorHandler::displaySuccess();
+    ErrorHandler::displaySuccess();
 
     if (isset($_SESSION["id"]) && $_SESSION["userType"] === "employer") {
         $employerId = $_SESSION["id"];
-    } else {
-        echo "Du har ingen jobbannonse.";
     }
+    ErrorHandler::displayError();
     $jobListingView = new JobListingView();
     $jobAdsByEmployer = $jobListingView->fetchAllJobAdsByEmployerId($employerId);
-
-    if (!empty($jobAdsByEmployer)) {
+    if ($jobAdsByEmployer === null) {
+        echo "Du har ingen jobbannonser.";
+    } else {
         foreach ($jobAdsByEmployer as $jobAd) {
             echo '<div class="card cardhover" style="margin-top: 1.2rem;" >
             <div class="card-body">
-                <div class="row">
-                
+                <div class="row">                
                     <div class="col-5"> 
                          <b>' . $jobAd->company_name . '</b>
                     </div>
                     <div class="col-5">
                          Bransje: ' . '<b>' . $jobAd->industry_name . '</b>                       
-                    </div>     
-                    <div class="col">                    
-                    <a href="editJobAd.php?jobListing_id=' . $jobAd->jobListing_id . '" style="margin-left: 5rem;"> <i class="fa-regular fa-pen-to-square"> </i> Redigere</a>
-                    </div>              
+                    </div>                                     
                 </div>
                 <div class="row">
                     <div class="col-12 mt-2">
@@ -73,10 +69,7 @@ require_once "./views/JobListingView.php";
                      <div>
                      <a class="btn btn-primary" href="jobadvertisementdetail.php?jobListing_id=' . $jobAd->jobListing_id . '" role="button">Se jobbannonse</a>
                      </div>
-
-
-                </div>   
-                
+                </div>                   
             </div>
         </div>';
         }

@@ -4,7 +4,7 @@ require_once "/xampp/htdocs/jobbsokesystem/library/database_handler.php";
 require_once "/xampp/htdocs/jobbsokesystem/models/jobListing/JobListingModel.php";
 require_once "/xampp/htdocs/jobbsokesystem/library/validator.php";
 require_once "/xampp/htdocs/jobbsokesystem/library/errorhandler.php";
-// require_once "../models/jobListing/JobListingModel.php";
+
 /**
  * JobListingController is a class responsible for controlling and managing all operations that related to job advertisements, 
  * including validating inputs and interacting with 'JobListingModel' for creating/updating/deleting the job advertisements.
@@ -33,56 +33,15 @@ class JobListingController
                 "applicationDeadline" => htmlspecialchars($_POST["applicationDeadline"], ENT_QUOTES, "UTF-8"),
                 "jobDescription" => htmlspecialchars($_POST["jobDescription"], ENT_QUOTES, "UTF-8")
             ];
-            $_SESSION["inputDataForPostNewJob"] = $data;
+            $_SESSION["dataInputForPostNewJob"] = $data;
 
-            if (Validator::isEmployerLoggedIn($data["employerId"])) {
-                ErrorHandler::setError(ErrorHandler::$employerIsNotLoggedIn);
-                header("Location: ../postnewjob.php");
-                exit();
-            }
-
-            if (Validator::areInputsEmpty($data["jobTitle"], $data["positionName"], $data["jobDescription"])) {
-                ErrorHandler::setError(ErrorHandler::$emptyInputError);
-                header("Location: ../postnewjob.php");
-                exit();
-            }
-
-            if (!Validator::isLocationValid($data["location"])) {
-                ErrorHandler::setError(ErrorHandler::$invalidLocationError);
-                header("Location: ../postnewjob.php");
-                exit();
-            }
-
-            if (!Validator::isIndustryValid($data["industry"])) {
-                ErrorHandler::setError(ErrorHandler::$invalidIndustryError);
-                header("Location: ../postnewjob.php");
-                exit();
-            }
-
-            if (!Validator::isJobTypeValid($data["jobType"])) {
-                ErrorHandler::setError(ErrorHandler::$emptyInputJobTypeError);
-                header("Location: ../postnewjob.php");
-                exit();
-            }
-
-            if (Validator::isEmptyInputApplicationDeadline($data["applicationDeadline"])) {
-                ErrorHandler::setError(ErrorHandler::$emptyInputApplicationDeadlineError);
-                header("Location: ../postnewjob.php");
-                exit();
-            }
-            if (Validator::isOldApplicationDeadlineDate($data["applicationDeadline"])) {
-                ErrorHandler::setError(ErrorHandler::$isOldApplicationDeadlineDateError);
-                header("Location: ../postnewjob.php");
-                exit();
-            }
-
-            //Call 'validateInputForm' function
-            // $this->validateInputForm($data, "../postnewjob.php");
+            //Call 'validateJobAdInputForm' function
+            $this->validateJobAdInputForm($data, "../postnewjob.php");
             $jobListingModel = new JobListingModel();
             if ($jobListingModel->insertNewJobAd($data)) {
                 ErrorHandler::setSuccess("Din jobbannonse har publisert!");
                 header("Location: ../companyjobads.php");
-                unset($_SESSION["inputDataForPostNewJob"]);
+                unset($_SESSION["dataInputForPostNewJob"]);
                 exit();
             } else {
                 ErrorHandler::setError(ErrorHandler::$unknownError);
@@ -94,8 +53,7 @@ class JobListingController
 
     /**
      * This function is used to update a job ad.
-     * @param
-     * @param
+     * 
      */
     public function editJobAd()
     {
@@ -105,7 +63,6 @@ class JobListingController
                 "jobListing_id" => htmlspecialchars(($_POST["jobListing_id"])),
                 "employerId" => htmlspecialchars(($_SESSION["id"])),
                 "jobTitle" => htmlspecialchars($_POST["jobTitle"], ENT_QUOTES, "UTF-8"),
-                // "location" => intval($_POST["location"]),
                 "location" => htmlspecialchars($_POST["location"], ENT_QUOTES, "UTF-8"),
                 "industry" => htmlspecialchars($_POST["industry"], ENT_QUOTES, "UTF-8"),
                 "positionName" => htmlspecialchars($_POST["positionName"], ENT_QUOTES, "UTF-8"),
@@ -114,52 +71,10 @@ class JobListingController
                 "jobDescription" => htmlspecialchars($_POST["jobDescription"], ENT_QUOTES, "UTF-8")
             ];
 
-            if (Validator::isEmployerLoggedIn($data["employerId"])) {
-                ErrorHandler::setError(ErrorHandler::$employerIsNotLoggedIn);
-                header("Location: ../editJobAd.php?jobListing_id=" . (int)$data["jobListing_id"]);
-                exit();
-            }
-
-            if (Validator::areInputsEmpty($data["jobTitle"], $data["positionName"], $data["jobDescription"])) {
-                ErrorHandler::setError(ErrorHandler::$emptyInputError);
-                header("Location: ../editJobAd.php?jobListing_id=" . (int)$data["jobListing_id"]);
-                exit();
-            }
-
-            if (!Validator::isLocationValid($data["location"])) {
-                ErrorHandler::setError(ErrorHandler::$invalidLocationError);
-                header("Location: ../editJobAd.php?jobListing_id=" . (int)$data["jobListing_id"]);
-                exit();
-            }
-
-            if (!Validator::isIndustryValid($data["industry"])) {
-                ErrorHandler::setError(ErrorHandler::$invalidIndustryError);
-                header("Location: ../editJobAd.php?jobListing_id=" . (int)$data["jobListing_id"]);
-                exit();
-            }
-
-            if (!Validator::isJobTypeValid($data["jobType"])) {
-                ErrorHandler::setError(ErrorHandler::$emptyInputJobTypeError);
-                header("Location: ../editJobAd.php?jobListing_id=" . (int)$data["jobListing_id"]);
-                exit();
-            }
-
-            if (Validator::isEmptyInputApplicationDeadline($data["applicationDeadline"])) {
-                ErrorHandler::setError(ErrorHandler::$emptyInputApplicationDeadlineError);
-                header("Location: ../editJobAd.php?jobListing_id=" . (int)$data["jobListing_id"]);
-                exit();
-            }
-            if (Validator::isOldApplicationDeadlineDate($data["applicationDeadline"])) {
-                ErrorHandler::setError(ErrorHandler::$isOldApplicationDeadlineDateError);
-                header("Location: ../editJobAd.php?jobListing_id=" . (int)$data["jobListing_id"]);
-                exit();
-            }
-
+            $this->validateJobAdInputForm($data, "../editJobAd.php?jobListing_id=" . (int)$data["jobListing_id"]);
             $jobListingModel = new JobListingModel();
             if ($jobListingModel->updateJobAd($data)) {
                 ErrorHandler::setSuccess("Din jobbannonse har blitt oppdatert!");
-                // unset($_SESSION["editJobAdData"]);
-                // header("Location: ./jobadvertisementdetail.php");
                 header("Location: ../jobadvertisementdetail.php?jobListing_id=" . (int)$data["jobListing_id"]);
 
                 exit();
@@ -170,7 +85,78 @@ class JobListingController
             }
         }
     }
+
+    public function deleteJobAd()
+    {
+        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["jobListing_id"])) {
+            $jobListingId = htmlspecialchars($_POST["jobListing_id"]);
+
+            // Perform any necessary validation here
+            // For example, check if the user has the permission to delete the job ad
+
+            $jobListingModel = new JobListingModel();
+            if ($jobListingModel->deleteJobAd($jobListingId)) {
+                ErrorHandler::setSuccess("Din jobbannonse har blitt slettet!");
+                header("Location: ../companyjobads.php");
+                exit();
+            } else {
+                ErrorHandler::setError(ErrorHandler::$unknownError);
+                header("Location: ../companyjobads.php");
+                exit();
+            }
+        }
+    }
+
+    /**
+     * This private function is used to validate data input to the form for both "createNewJobAd" and "editJobAd".
+     * @param $data The data input to the form.
+     * @param $redirection The redirectURL.
+     */
+    private function validateJobAdInputForm($data, $redirection)
+    {
+        if (Validator::isEmployerLoggedIn($data["employerId"])) {
+            ErrorHandler::setError(ErrorHandler::$employerIsNotLoggedIn);
+            header("Location: $redirection");
+            exit();
+        }
+
+        if (Validator::areInputsEmpty($data["jobTitle"], $data["positionName"], $data["jobDescription"])) {
+            ErrorHandler::setError(ErrorHandler::$emptyInputError);
+            header("Location: $redirection");
+            exit();
+        }
+
+        if (!Validator::isLocationValid($data["location"])) {
+            ErrorHandler::setError(ErrorHandler::$invalidLocationError);
+            header("Location: $redirection");
+            exit();
+        }
+
+        if (!Validator::isIndustryValid($data["industry"])) {
+            ErrorHandler::setError(ErrorHandler::$invalidIndustryError);
+            header("Location: $redirection");
+            exit();
+        }
+
+        if (!Validator::isJobTypeValid($data["jobType"])) {
+            ErrorHandler::setError(ErrorHandler::$emptyInputJobTypeError);
+            header("Location: $redirection");
+            exit();
+        }
+
+        if (Validator::isEmptyInputApplicationDeadline($data["applicationDeadline"])) {
+            ErrorHandler::setError(ErrorHandler::$emptyInputApplicationDeadlineError);
+            header("Location: $redirection");
+            exit();
+        }
+        if (Validator::isOldApplicationDeadlineDate($data["applicationDeadline"])) {
+            ErrorHandler::setError(ErrorHandler::$isOldApplicationDeadlineDateError);
+            header("Location: $redirection");
+            exit();
+        }
+    }
 }
+
 
 $init = new JobListingController();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -180,6 +166,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             break;
         case "editJobAd":
             $init->editJobAd();
+            break;
+        case "deleteJobAd":
+            $init->deleteJobAd();
             break;
     }
 }

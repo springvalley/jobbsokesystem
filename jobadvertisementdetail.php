@@ -35,20 +35,29 @@ if (isset($_SESSION["id"]) && $_SESSION["userType"] == "employer") {
 if ($jobAd) {
     echo '<div class="container">
         <div class="flex-container">
-            <div>
+            <div class="col">
                 <div class="goBackLink mb-3">
                     <i class="fa-solid fa-angle-left"></i>
-                    <a ' . ($isLoggedInAsEmployer ? 'href="companyjobads.php"' : 'href="index.php"') . '>Tilbake</a>
+                    <a ' . ($isLoggedInAsEmployer && $isJobAdOwner ? 'href="companyjobads.php"' : 'href="index.php"') . '>Tilbake</a>
                 </div>
             </div>
             <div>
-                <button type="button" class="btn btn-primary" ' . ($isLoggedInAsEmployer ? 'hidden' : '') . '>Send melding</button>';
+                <button type="button" class="btn btn-primary" ' . ($isLoggedInAsEmployer ? 'hidden' : '') . '>Send melding</button></div>';
 
     if ($isJobAdOwner) {
-        echo '<a class="btn btn-primary" href="editJobAd.php?jobListing_id=' . $jobAd->jobListing_id . '">Redigere jobbannonse</a>';
+        echo '
+        <div>
+            <a class="btn btn-primary" href="editJobAd.php?jobListing_id=' . $jobAd->jobListing_id . '" style="margin-right:10px";>Redigere jobbannonse</a>
+        </div>';
+        //Delete job advertisement
+        echo '        
+            <form action="./controllers/JobListingController.php" method="post" onsubmit="return confirmDeletion();">                  
+                <input type="hidden" name="type" value="deleteJobAd">  
+                <input type="hidden" name="jobListing_id" value="' . $jobAd->jobListing_id . '">                  
+                <button type="submit" class="btn btn-danger"> <i class="fa-regular fa-trash-can"></i> Slett</button>
+            </form>';
     }
-
-    echo '</div>
+    echo '    
     </div>';
     ErrorHandler::displaySuccess();
     echo '
@@ -61,10 +70,10 @@ if ($jobAd) {
                     </div>
                     <div class="col-6">
                         Bransje: ' . '<b>' . $jobAd->industry_name . '</b>                        
-                    </div>
+                    </div>                                        
                     <div class="col">
-                        <i class="fa-regular fa-heart"></i>
-                    </div>
+
+                </div>
                 </div>
                 <div class="row">
                     <div class="col-12 mt-2">
@@ -101,8 +110,12 @@ if ($jobAd) {
         </div>
     </div>
 </div>';
-} // else {
-//     echo "Cannot find";
-// }
+}
+?>
+<?php include "components/footer.php" ?>
 
-include "components/footer.php";
+<script>
+function confirmDeletion() {
+    return confirm("Er du sikker på at du vil slette denne jobbannonsen?");
+}
+</script>
