@@ -85,7 +85,6 @@ $jobApplicantView = new JobApplicantViewModel($applicantToGet);
                 <?php
                 $data = $jobApplicantView->getEducation();
                 if ($data) {
-
                     echo $data->educationlevel_name;
                 } else {
                     echo "Ingen utdanning er registrert i vår database.";

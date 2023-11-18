@@ -1,5 +1,13 @@
-<?php include "components/header.php" ?>
-
+<?php include "components/header.php";
+include "models/employer/employer.model.php";
+include "models/employer/employer.viewModel.php";
+require_once "/xampp/htdocs/jobbsokesystem/library/errorhandler.php";
+if (!isset($_GET["id"])) {
+    header("location: index.php");
+}
+$employerToGet = isset($_GET["id"]) ? $_GET["id"] : 1;
+$employerView = new EmployerViewModel($employerToGet);
+?>
 <div class="container">
     <!--Denne linken må endres for at det ikke vises seg til jobbsøker-->
     <div class="flex-container">
@@ -12,7 +20,7 @@
     </div>
 
     <div class="row d-flex align-items-center justify-content-center company-profile">
-        <div class="col-md-7 col-lg-5 col-xl-5">           
+        <div class="col-md-7 col-lg-5 col-xl-5">
             <img src="img/img_company.jpg" class="company-image">
         </div>
         <div class="col-md-8 col-lg-7 col-xl-6 offset-xl-1 profile-tab">
@@ -25,42 +33,40 @@
                 </div>
 
             </nav>
+            <?php ErrorHandler::displayError() ?>
+            <?php ErrorHandler::displaySuccess() ?>
             <div class="tab-content" id="nav-tabContent">
                 <div class="tab-pane fade show active" id="nav-profile" role="tabpanel" aria-labelledby="nav-home-tab">
                     <!--Må fikse knappen senere-->
                     <div>
-                        <button type="button" class="editProfileButton mt-3"> Redigere Profil
-                        </button>
+                        <?php if ($_SESSION["userType"] == "employer" && $_SESSION["id"] == $employerView->getEmployer_id()) {
+                        ?>
+                            <a class=" btn editProfileButton" href='editcompanyprofile.php?id=<?php echo $employerView->getEmployer_id(); ?>'>Rediger Profil</a>
+                        <?php } else {
+                            echo " <button type='button' class='editProfileButton mt-3's> Send mail</button>";
+                        }
+                        ?>
                     </div>
-                    <div class="profile-header">
-                        <p>Bedriftsnavn</p>
-                    </div>
-                    <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum rutrum lectus nulla, nec
-                        placerat urna aliquam vitae. Integer luctus egestas efficitur. Aliquam pellentesque vel magna at
-                        tincidunt. In feugiat malesuada venenatis. Etiam massa ipsum, finibus ut posuere et, eleifend
-                        sit
-                        amet nisl. Suspendisse scelerisque molestie dolor, at vulputate diam dapibus sed. Donec aliquet
-                        bibendum mi a interdum. Duis id tempor odio.
 
-                        Aenean quis dolor eleifend, scelerisque diam sed, convallis sapien. Praesent mollis nec ipsum
-                        quis
-                        consectetur. Pellentesque sed ante in justo venenatis elementum. Proin congue scelerisque leo,
-                        vel
-                        auctor augue lobortis eget. Pellentesque habitant morbi tristique senectus et netus et malesuada
-                        fames ac turpis egestas. Vivamus nec turpis placerat, suscipit nulla nec, euismod orci. Donec
-                        consectetur varius risus in viverra. Sed ut faucibus purus. Nunc augue tortor, malesuada non
-                        sagittis mattis, imperdiet et magna. Interdum et malesuada fames ac ante ipsum primis in
-                        faucibus.
-                        Sed dignissim elementum nunc eget tincidunt. </p>
+                    <div class="profile-header">
+                        <p><?php echo $employerView->getCompanyName() ?></p>
+                    </div>
+                    <p> <?php
+                        $data = $employerView->getSummary();
+                        if ($data) {
+                            echo $data;
+                        } else {
+                            echo "Ingen oppsummering er registrert om deg i vår database";
+                        }
+                        ?> </p>
                     <div class="profile-header">
                         <p>Kontakt oss</p>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item"><b>Bedriftsnavn:</b> </li>
-                            <li class="list-group-item"><b>Organisasjon nr.:</b> 0123456789</li>
-                            <li class="list-group-item"><b>Bedriftstelefon nr.:</b> +47 1345678</li>
-                            <li class="list-group-item"><b>Kontaktperson:</b> ABC</li>
-                            <li class="list-group-item"><b>Telefon nr.:</b></li>
-                            <li class="list-group-item"><b>E-post:</b> abc@xyz.no</li>
+                            <li class="list-group-item"><b>Bedriftsnavn: </b> <?php echo $employerView->getCompanyName(); ?></li>
+                            <li class="list-group-item"><b>Organisasjon nr.:</b> <?php echo $employerView->getOrganizationNumber(); ?></li>
+                            <li class="list-group-item"><b>Bedriftstelefon nr.:</b> <?php echo $employerView->getPhonenumber(); ?></li>
+                            <li class="list-group-item"><b>E-post:</b> <?php echo $employerView->getEmail(); ?></li>
+                            <li class="list-group-item"><b>Sted:</b> <?php echo $employerView->getLocationName(); ?></li>
                             <li class="list-group-item"><a href="#">Besøk vår hjemmesider her</a></li>
                         </ul>
                     </div>
@@ -85,7 +91,7 @@
                     <?php include "components/joblist.php" ?>
                     <?php include "components/joblist.php" ?>
                     <?php include "components/joblist.php" ?>
-                    <?php include "components/joblist.php" ?>                    
+                    <?php include "components/joblist.php" ?>
                 </div>
 
 
