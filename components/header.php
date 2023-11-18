@@ -59,9 +59,9 @@
   <a href="forgotPassword.php">forgot password || </a>
   <a class="done" href="login.php">login || </a>
   <a class="done" href="signup.php">signup || </a>
-  <a class="done" href="applicantprofile.php">applicantprofile || </a>
+  <a class="done" href="applicantprofile.php?id=1">applicantprofile || </a>
   <a href="postnewjob.php">postnewjob ||</a>
-  <a href="companyprofile.php">companyprofile ||</a>
+  <a href="companyprofile.php?id=1">companyprofile ||</a>
   <a href="companydashboard.php">companydashboard ||</a>
   <a href="companyjobapplication.php">companyjobapplication ||</a>
   <a href="companyjobads.php">companyjobads ||</a>

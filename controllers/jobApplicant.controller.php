@@ -8,7 +8,11 @@ require_once "/xampp/htdocs/jobbsokesystem/library/errorhandler.php";
 class JobApplicantController
 {
 
-
+ /**
+     * This function is used to edit an jobapplicant in the database.
+     * @param  
+     * @return
+     */
     public function edit()
     {
 

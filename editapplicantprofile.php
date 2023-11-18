@@ -38,7 +38,7 @@ $jobApplicantView = new JobApplicantEditModel($applicantToGet);
                             $data = $jobApplicantView->getLocations();
                             $currentLocation = $jobApplicantView->getLocation_name();
                             foreach ($data as $location) {
-                                if ($location === $currentLocation) {
+                                if ($location->location_name == $currentLocation) {
                                     echo '<option selected value="' . $location->location_id . '">' . $location->location_name . '</option>';
                                 } else {
                                     echo '<option value="' . $location->location_id . '">' . $location->location_name . '</option>';
@@ -88,7 +88,7 @@ $jobApplicantView = new JobApplicantEditModel($applicantToGet);
                         $data = $jobApplicantView->getPossibleEducations();
                         $currentEducation = $jobApplicantView->getEducation();
                         foreach ($data as $educationelevel) {
-                            if ($educationelevel === $currentEducation) {
+                            if ($educationelevel->educationlevel_name === $currentEducation) {
                                 echo '<option selected value="' . $educationelevel->educationlevel_id . '">' . $educationelevel->educationlevel_name . '</option>';
                             } else {
                                 echo '<option value="' . $educationelevel->educationlevel_id . '">' . $educationelevel->educationlevel_name . '</option>';
