@@ -1,2 +1,2 @@
 # jobbsokesystem
-IS-115
+Job application system for IS-115
