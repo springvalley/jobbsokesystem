@@ -75,7 +75,8 @@ class JobListingModel
                      INNER JOIN location AS l ON jl.location_id = l.location_id
                      INNER JOIN industry AS i ON jl.industry_id = i.industry_id
                      INNER JOIN jobtype AS jt ON jl.jobType_id = jt.jobType_id
-                     WHERE jl.employer_id = :employerId");
+                     WHERE jl.employer_id = :employerId
+                     ORDER BY jl.published_time DESC");
 
         $this->db->bind(":employerId", $employerId);
 

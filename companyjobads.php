@@ -67,7 +67,7 @@ require_once "./library/errorhandler.php";
                          Søknadsfrist: ' . '<b>' . date('d-m-Y', strtotime($jobAd->application_deadline)) . '</b>
                      </div>
                      <div>
-                     <a class="btn btn-primary" href="jobadvertisementdetail.php?jobListing_id=' . $jobAd->jobListing_id . '" role="button">Se jobbannonse</a>
+                     <a class="btn btn-primary" href="jobadvertisementdetail.php?id=' . $jobAd->jobListing_id . '" role="button">Se jobbannonse</a>
                      </div>
                 </div>                   
             </div>

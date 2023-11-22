@@ -25,6 +25,7 @@ class JobListingController
             // Get input data from the form  
             $data = [
                 "employerId" => htmlspecialchars(($_SESSION["id"])),
+                "jobListing_id" => htmlspecialchars(($_POST["jobListing_id"])),
                 "jobTitle" => htmlspecialchars($_POST["jobTitle"], ENT_QUOTES, "UTF-8"),
                 "location" => htmlspecialchars($_POST["location"], ENT_QUOTES, "UTF-8"),
                 "industry" => htmlspecialchars($_POST["industry"], ENT_QUOTES, "UTF-8"),
@@ -75,12 +76,11 @@ class JobListingController
             $jobListingModel = new JobListingModel();
             if ($jobListingModel->updateJobAd($data)) {
                 ErrorHandler::setSuccess("Din jobbannonse har blitt oppdatert!");
-                header("Location: ../jobadvertisementdetail.php?jobListing_id=" . (int)$data["jobListing_id"]);
-
+                header("Location: ../jobadvertisementdetail.php?id=" . (int)$data["jobListing_id"]);
                 exit();
             } else {
                 ErrorHandler::setError(ErrorHandler::$unknownError);
-                header("Location: ../editJobAd.php?jobListing_id=" . (int)$data["jobListing_id"]);
+                header("Location: ../editJobAd.php?id=" . (int)$data["jobListing_id"]);
                 exit();
             }
         }

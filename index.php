@@ -15,7 +15,8 @@ $helperModel = new Helper();
     <h1>Finn din nye jobb</h1>
     <div class="row mt-3">
         <div class="col">
-            <input type="text" class="form-control" id="searchText" aria-describedby="searchText" placeholder="Søk i fritekst (eks: 1,2,3)">
+            <input type="text" class="form-control" id="searchText" aria-describedby="searchText"
+                placeholder="Søk i fritekst (eks: 1,2,3)">
         </div>
         <div class="col">
             <select class="form-select" name="location">
@@ -102,7 +103,7 @@ $helperModel = new Helper();
                             Søknadsfrist: ' . '<b>' . date('d-m-Y', strtotime($jobAd->application_deadline)) . '</b>
                         </div>
                        <div>
-                       <a class="btn btn-primary" href="jobadvertisementdetail.php?jobListing_id=' . $jobAd->jobListing_id . '"role="button">Se jobbannonse</a>
+                       <a class="btn btn-primary" href="jobadvertisementdetail.php?id=' . $jobAd->jobListing_id . '"role="button">Se jobbannonse</a>
                        </div>
                    </div>   
                    
