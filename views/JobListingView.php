@@ -11,35 +11,14 @@ require_once "/xampp/htdocs/jobbsokesystem/models/helpers.php";
 
 class JobListingView
 {
-
     private $helper;
     private $jobListingModel;
-    // private $jobListingId;
-    // private $companyName;
-    // private $industry;
-    // private $jobTitle;
-    // private $positionName;
-    // private $jobType;
-    // private $location;
-    // private $publishDate;
-    // private $applicationDeadline;
-
-
 
     //Constructor
     public function __construct()
     {
         $this->helper = new Helper();
         $this->jobListingModel = new JobListingModel();
-        // $jobAdDetail = $this->jobListingModel->getJobAdByJobListingId($jobListingId);
-        // $this->companyName = $jobAdDetail->company_name;
-        // $this->industry = $jobAdDetail->industry_name;
-        // $this->jobTitle = $jobAdDetail->job_title;
-        // $this->positionName = $jobAdDetail->position_name;
-        // $this->jobType = $jobAdDetail->jobType;
-        // $this->location = $jobAdDetail->location_name;
-        // $this->publishDate = $jobAdDetail->published_time;
-        // $this->applicationDeadline = $jobAdDetail->application_deadline;
     }
 
     /**
@@ -48,7 +27,7 @@ class JobListingView
      */
     public function fetchAllJobAds()
     {
-        $jobAds = $this->helper->getAllJobListings();
+        $jobAds = $this->helper->getJobListing();
         return $jobAds;
     }
 
@@ -61,13 +40,11 @@ class JobListingView
     public function fetchAllJobAdsByEmployerId($employerId)
     {
         $jobAdsByEmployer = $this->jobListingModel->getAllJobListingsByEmployer($employerId);
-        // return $jobAdsByEmployer;
         if (empty($jobAdsByEmployer)) {
-            return null; //Need to fix this one!!!!!
+            return null;
         } else {
             return $jobAdsByEmployer;
         }
-        // var_dump($jobAdsByEmployer); // Debugging output
     }
 
     /**

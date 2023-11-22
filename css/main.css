@@ -38,10 +38,79 @@
     font-size: 34px;
     font-weight: 600;   
 }
-.searchButtonIcon {
-    width: 80px;
+
+.applicationStatusBadge {
+    width: 60px;
+    height: 25px;
+    color: #1A4314;
+    background-color: #94C973;   
+    border-radius: 15px;
+    margin-left: 6rem;
+    font-weight: 600;
+}
+
+.applicationDeadlineDateBadge {
+    width: 100px;
+    height: 25px;
+    padding-top: 2px;
+    color: #BD1C44;
+    background-color: #FFAEBC;   
+    border-radius: 20px;    
+    font-weight: 600;  
+    font-size: 15px;    
+}
+
+.autoFillInfoButton {
+    width: 15%;
     height: 30px;
     margin-top: 16px;
+    color: white;
+    background-color: #145DA0;
+    border: none;
+    border-radius: 5px;
+}
+
+.autoFillInfoButton:hover {
+    box-shadow: inset 0 0 0 50px #0d47a1;  
+    color: white;
+}
+
+.editButton {
+    width: 100px;
+    height: 30px;   
+    color: white;
+    background-color: #1273E2;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;  
+    box-shadow: inset 0 0 0 0 #1273E2;  
+    margin-right: 7px;
+}
+.editButton:hover {
+    box-shadow: inset 0 0 0 50px #0d47a1;  
+    color: white;
+}
+
+.deleteButton {
+    width: 70px;
+    height: 30px;   
+    color: white;
+    background-color: #bd091c;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-right: 5px;
+    
+}
+.deleteButton:hover {
+    box-shadow: inset 0 0 0 50px #970C10;
+    color: white;
+}
+
+.searchButtonIcon {
+    width: auto;
+    height: 30px;
+    /* margin-top: 16px; */
     color: white;
     background-color: #1273E2;
     border: none;
@@ -63,8 +132,7 @@
     color: white;
     background-color: #1273E2;
     border: none;
-    border-radius: 5px;
-  
+    border-radius: 5px;  
 }
 .editProfileButton:hover {
     box-shadow: inset 0 0 0 50px #0d47a1;  
@@ -93,7 +161,15 @@
 
 .cardhover:hover {
     border-color:#0d47a1; 
-    
+    background-color: #E3EFF9;
+}
+
+.listJobApplicationCard {
+    margin: 1rem 5rem 1rem 5rem;
+}
+.listJobApplicationCard:hover {
+    border-color:#0d47a1; 
+    background-color: #E3EFF9;
 }
 
 .card-body h1{
