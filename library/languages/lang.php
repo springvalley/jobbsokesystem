@@ -7,6 +7,10 @@ function get_language_file()
 {
     if(isset($_SESSION["lang"])){
         return $_SESSION["lang"] .".php";
+    }else{
+        session_start();
+        $_SESSION["lang"] = "english";
+        return $_SESSION["lang"]. ".php";
     }
 }
 
