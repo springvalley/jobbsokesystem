@@ -1,11 +1,12 @@
 <?php     session_start(); ?>
+<?php require_once "/xampp/htdocs/jobbsokesystem/library/languages/lang.php"; ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jobbsøkesystem</title>
+  <title><?php echo translate("title")?></title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
   <link rel="stylesheet" href="css/main.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -29,24 +30,24 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="index.php">Home</a>
+            <a class="nav-link" href="index.php"><?php echo translate("home_nav")?></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="index.php">Finn Jobber</a>
+            <a class="nav-link" href="index.php"><?php echo translate("find_job_nav")?></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="foremployer.php">For Arbeidsgiver</a>
+            <a class="nav-link" href="foremployer.php"><?php echo translate("for_employer_nav")?></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="login.php">Logg inn/Registrer</a>
+            <a class="nav-link" href="login.php"><?php echo translate("login/register_nav")?></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">EN/NO</a>
+            <a class="nav-link" href="./library/languages/changelanguage.php">EN/NO</a>
           </li>
           <li class="nav-item">
             <?php 
               if(isset($_SESSION["name"])){
-                echo "<li class=nav-item> <a class=nav-link href=applicantprofile.php?id=".$_SESSION["id"].">Min Side</a></li>";
+                echo "<li class=nav-item> <a class=nav-link href=applicantprofile.php?id=".$_SESSION["id"].">". translate("my_account_nav") ."</a></li>";
               }
             ?>
           </li>
