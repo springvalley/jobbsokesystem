@@ -85,7 +85,7 @@ class JobApplicantController
 
         $data = [
             "jobApplicant_id" => htmlspecialchars(trim($_POST["applicantid"])),
-            "jobListing_id" => htmlspecialchars(trim($_POST["joblisting_id"])),
+            "jobListing_id" => htmlspecialchars(trim($_POST["jobListing_id"])),
             "userName" => htmlspecialchars(trim($_POST["name"])),
             "userPhone" => htmlspecialchars(trim($_POST["phone"])),
             "userEmail" => htmlspecialchars(trim($_POST["email"])),
@@ -137,7 +137,8 @@ class JobApplicantController
 
         if ($model->applyToJob($data)) {
             ErrorHandler::setSuccess("Søknaden din ble opprettet!");
-            header("location: ../applyjob.php?id=" . (int)$data["jobListing_id"]);
+            // header("location: ../applyjob.php?id=" . (int)$data["jobListing_id"]);
+            header("Location: ../myJobApplications.php");
             exit();
         } else {
             ErrorHandler::setError("Noe gikk galt, prøv igjen!");
