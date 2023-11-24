@@ -11,7 +11,13 @@ $lang = array(
     //Index
     "find_job_title" => "Finn en ny jobb",
     "search_button" => "Søk",
-    "see_details_button" => "Se detaljer",
+    "see_details_button" => "Se detaljer",    
+    "industry" => "Industri",
+    "form_of_employment" => "Ansettelsesform",
+    "job_title" => "Jobtittel",
+    "location" => "Sted",
+    "published_date" => "Publisert dato",
+    "deadline" => "Frist",
 
     //Reset password
     "reset_password_title" => "Tilbakestill ditt passord", 
@@ -32,6 +38,42 @@ $lang = array(
     "new_account_title" => "Registrer ny bruker",
     "signup_button" => "Registrer ny bruker",
 
+    //Applicantprofile
+    "summary" => "Oppsummering", 
+    "skills" => "Ferdigheter", 
+    "education" => "Utdanning",
+    "edit_profile_button" => "Rediger profil", 
+    "send_message_button" => "Send melding",
+    "download_resume_button" => "Last ned CV",
+
+      //Applyjob
+      "apply_for" => "Søk på stilling som:",
+      "motivational_text_label" => "Motivasjonsbrev",
+      "motivational_text_placeholder" => "Hvorfor vil du jobbe for oss?",
+      "autofill" => "Autofyll",
+      "last_position_label" => "Nåværende eller siste stilling",
+      "upload_motivation_label" => "Last opp motivasjonsbrev", 
+      "apply_button" => "Søk på jobben!",
+
+          //companydashboard
+    "company_profile_label" => "Bedriftsprofil", 
+    "jobad_label" => "Jobannonser", 
+    "applications_label" => "Søknader",
+    "candidates_label" => "Kandidater",
+    "messages_label" => "Meldinger",
+
+        //companyprofile
+        "about_subtitle" => "Om bedriften",
+        "contact_button" => "Kontakt oss", 
+
+            //editprofile
+
+    "save_button" => "Lagre endringer",
+
+        //Jobdetails
+        "edit_jobad_button" => "Rediger annonse",
+        "delte_button" => "Slett",
+
 
     //Labels
     "email_label" => "E-post",
@@ -45,6 +87,10 @@ $lang = array(
     "employer_name_label" => "Bedriftsnavn",
     "orgnumber_label" => "Organisasjonsnummer",
     "industry_label" => "Hvilken industri jobber dere i?",
+    "jobdescription_label" => "Beskrivelse av jobben",
+    "jobdescription_placeholder" => "Skriv litt om jobben",
+    "publish_button" => "Publiser",
+    "new_job_ad_title" => "Lag en ny jobbannonse",
 
 
     //Placeholder texts
@@ -58,6 +104,8 @@ $lang = array(
     "repeat_password_placeholder" => "Gjenta passord",
     "location_placeholder" => "Velg sted",
     "education_placeholder" => "Velg utdannelse",
+    "jobtype_placeholder" => "Velg ansettelsesform",
+    "filter_placeholder" => "Filtrer"
 
     
 );

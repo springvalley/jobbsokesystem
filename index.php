@@ -5,14 +5,14 @@ include_once "models\jobListing\jobListing.viewModel.php";
 require_once "/xampp/htdocs/jobbsokesystem/models/helpers.php";
 require_once "/xampp/htdocs/jobbsokesystem/library/database_handler.php";
 require_once "/xampp/htdocs/jobbsokesystem/views/JobListingView.php";
+require_once "/xampp/htdocs/jobbsokesystem/library/languages/lang.php";
 
 $helperModel = new Helper();
 ?>
 
 
 <div class="container">
-    <a href="applicantprofile.php?id=10">TEST</a>
-    <h1>Finn din nye jobb</h1>
+    <h1><?php echo translate("find_job_title") ?></h1>
     <div class="row mt-3">
         <div class="col">
             <input type="text" class="form-control" id="searchText" aria-describedby="searchText"
@@ -22,6 +22,7 @@ $helperModel = new Helper();
             <select class="form-select" name="location">
                 <?php
                 $data = $helperModel->getAllJobTypes();
+                echo '<option value="0">' . translate("jobtype_placeholder") . '</option>';
                 foreach ($data as $jobtype) {
                     echo '<option value="' . $jobtype->jobType_id . '">' . $jobtype->jobType . '</option>';
                 } ?>
@@ -31,6 +32,7 @@ $helperModel = new Helper();
             <select class="form-select" name="location">
                 <?php
                 $data = $helperModel->getAllIndustries();
+                echo '<option value="0">' . translate("industry_placeholder") . '</option>';
                 foreach ($data as $industry) {
                     echo '<option value="' . $industry->industry_id . '">' . $industry->industry_name . '</option>';
                 } ?>
@@ -38,16 +40,16 @@ $helperModel = new Helper();
         </div>
         <div class="col">
             <select class="form-select" name="location">
-                <option selected value="velg sted">Velg Sted</option>
                 <?php
                 $data = $helperModel->getAllLocations();
+                echo '<option value="0">' . translate("location_placeholder") . '</option>';
                 foreach ($data as $location) {
                     echo '<option value="' . $location->location_id . '">' . $location->location_name . '</option>';
                 } ?>
             </select>
         </div>
         <div class="col">
-            <button type="submit" class="search-button">Søk</button>
+            <button type="submit" class="search-button"><?php echo translate("search_button") ?></button>
         </div>
         <hr class="my-4">
         <div class="row">
@@ -75,7 +77,7 @@ $helperModel = new Helper();
                             <b>' . $jobAd->company_name . '</b>
                        </div>
                        <div class="col-6">
-                            Bransje: ' . '<b>' . $jobAd->industry_name . '</b>                       
+                            '. translate("industry") .': ' . '<b>' . $jobAd->industry_name . '</b>                       
                        </div>
                        <div class="col">
                            <i class="fa-regular fa-heart"></i>
@@ -86,33 +88,27 @@ $helperModel = new Helper();
                            <b style="font-size: 20px;">' . $jobAd->job_title . '</b>
                        </div>
                        <div class="col-5 mt-2">
-                            Stillingtittel: ' . '<b>' . $jobAd->position_name . '</b>
+                            '. translate("job_title").': ' . '<b>' . $jobAd->position_name . '</b>
                         </div>
                        <div class="col-6 mt-2">
-                            Ansettelsesform: ' . '<b>' . $jobAd->jobType . '</b>
+                            '.translate("form_of_employment").': ' . '<b>' . $jobAd->jobType . '</b>
                        </div>
                        <div class="col-6 mt-2">
-                            Sted: ' . '<b>' . $jobAd->location_name . '</b>
+                            '.translate("location").': ' . '<b>' . $jobAd->location_name . '</b>
                         </div>
                    </div>
                    <div class="flex-container mt-2">
                        <div>                          
-                            Publiseringsdato: ' . '<b>' . date('d-m-Y', strtotime($jobAd->published_time)) . '</b>
+                            '.translate("published_date").': ' . '<b>' . date('d-m-Y', strtotime($jobAd->published_time)) . '</b>
                         </div>
                        <div style="color: red; padding-right: 5rem;">
-                            Søknadsfrist: ' . '<b>' . date('d-m-Y', strtotime($jobAd->application_deadline)) . '</b>
+                            '.translate("deadline").': ' . '<b>' . date('d-m-Y', strtotime($jobAd->application_deadline)) . '</b>
                         </div>
                        <div>
-                       <a class="btn btn-primary" href="jobadvertisementdetail.php?id=' . $jobAd->jobListing_id . '"role="button">Se jobbannonse</a>
+                       <a class="btn btn-primary" href="jobadvertisementdetail.php?id=' . $jobAd->jobListing_id . '"role="button">'.translate("see_details_button").'</a>
                        </div>
                    </div>   
                    
-               </div>
-           </div>
-           <div class="row">
-               <div class="overflow-auto collapse" id="joblist" style="height: 200px">
-                   <p class="card-text">Lorem ipsum osv</p>
-                   <button class="btn btn-primary">Søk Jobb</button>
                </div>
            </div>';
             }

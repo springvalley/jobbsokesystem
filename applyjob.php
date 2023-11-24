@@ -3,6 +3,7 @@ require_once "/xampp/htdocs/jobbsokesystem/models/helpers.php";
 require_once "/xampp/htdocs/jobbsokesystem/library/errorhandler.php";
 require_once "/xampp/htdocs/jobbsokesystem/views/JobListingView.php";
 require_once "/xampp/htdocs/jobbsokesystem/models/jobListing/JobListingModel.php";
+require_once "/xampp/htdocs/jobbsokesystem/library/languages/lang.php";
 
 $helperModel = new Helper();
 
@@ -27,8 +28,7 @@ $jobAdDetail = $jobListingView->fetchJobAdByJobListingId($jobListingId);
         <a href="<?php echo 'jobadvertisementdetail.php?id=' . $jobAdDetail->jobListing_id ?>">Tilbake jobbannonsen</a>
     </div>
     <div class="flex-container justify-content-start">
-        <button class="autoFillInfoButton" style="margin-bottom: 10px;" onclick=autofill()>Autofyll min
-            informasjon</button>
+        <button class="autoFillInfoButton" style="margin-bottom: 10px;" onclick=autofill()><?php echo translate("autofill")?></button>
     </div>
     <div class="row justify-content-center">
         <form action="./controllers/jobApplicant.controller.php" method="POST">
@@ -36,7 +36,7 @@ $jobAdDetail = $jobListingView->fetchJobAdByJobListingId($jobListingId);
             <input name="applicantid" value=<?php echo $_SESSION["id"] ?> hidden>
             <input name="jobListing_id" value=<?php echo $jobAdDetail->jobListing_id; ?> hidden>
             <div class="job-title">
-                Søk på stilling som:
+            <?php echo translate("apply_for")?>
                 <p style="color: #082E90;"><?php echo $jobAdDetail->position_name; ?></p>
             </div>
             <div class="row">
@@ -44,29 +44,29 @@ $jobAdDetail = $jobListingView->fetchJobAdByJobListingId($jobListingId);
                 <div class="col-md-6">
                     <div class="form-row">
                         <div class="form-group col-md-8">
-                            <label for="name">Navn</label>
+                            <label for="name"><?php echo translate("name_label")?></label>
                             <input type="text" class="form-control" name="name" id="name"
-                                placeholder="Skriv inn ditt navn">
+                                placeholder="<?php echo translate("name_placeholder")?>">
                         </div>
                         <div class="form-group col-md-8">
-                            <label for="email">E-post</label>
+                            <label for="email"><?php echo translate("email_label")?></label>
                             <input type="text" class="form-control" name="email" id="email"
-                                placeholder="Skriv inn din email">
+                                placeholder="<?php echo translate("email_placeholder")?>">
                         </div>
                         <div class="form-group col-md-8">
-                            <label for="phone">Telefonnummer</label>
+                            <label for="phone"><?php echo translate("phone_label")?></label>
                             <input type="number" class="form-control" name="phone" id="phone"
-                                placeholder="Skriv inn ditt telefonnummer">
+                                placeholder="<?php echo translate("phone_placeholder")?>">
                         </div>
                         <div class="form-group col-md-8">
-                            <label for="lastjob">Nåværende eller siste stilling</label>
+                            <label for="lastjob"><?php echo translate("last_position_label")?></label>
                             <input type="text" class="form-control" name="lastjob" id="lastjob"
-                                aria-describedby="lastjob" placeholder="Nåværende eller siste stilling">
+                                aria-describedby="lastjob" placeholder="<?php echo translate("last_position_label")?>">
                         </div>
                         <div class="form-group col-md-8">
-                            <label for="location">Hva er din høyeste utdanning?</label>
+                            <label for="location"><?php echo translate("education_label")?></label>
                             <select class="form-select" name="education">
-                                <option selected value="0">Velg Utdanningsnivå</option>
+                                <option selected value="0"><?php echo translate("education_placeholder")?></option>
                                 <?php
                                 $data = $helperModel->getAllEducations();
                                 foreach ($data as $education) {
@@ -78,29 +78,24 @@ $jobAdDetail = $jobListingView->fetchJobAdByJobListingId($jobListingId);
                 </div>
                 <div class="col-md-6">
                     <div class="form-group col-md-8">
-                        <label for="coverletter">Søknadstekst</label>
+                        <label for="coverletter"><?php echo translate("motivational_text_label")?></label>
                         <textarea class="form-control" rows="5" id="coverletter" name="coverletter"
                             aria-describedby="coverletter"
-                            placeholder="Du kan skrive inn søknadstekst her..."></textarea>
+                            placeholder="<?php echo translate("motivational_text_placeholder")?>"></textarea>
 
                     </div>
                     <div class="form-group col-md-8">
-                        <label for="formFile" class="form-label">Last opp CV her</label>
+                        <label for="formFile" class="form-label"><?php echo translate("cv_label")?></label>
                         <input class="form-control" type="file" id="cvUpload">
                     </div>
                     <div class="form-group col-md-8">
-                        <label for="formFile" class="form-label">Last opp motivasjonsbrev</label>
+                        <label for="formFile" class="form-label"><?php echo translate("upload_motivation_label")?></label>
                         <input class="form-control" type="file" id="coverLetterUpload">
                     </div>
-                    <div class="form-group col-md-8">
-                        <label for="formFile" class="form-label">Andre dokumenter</label>
-                        <input class="form-control" type="file" id="otherDocumentsUpload">
-                    </div>
-
                 </div>
                 <div class="form-group text-center mt-3">
                     <!--Må lage en script som viser til jobbsøker at søknaden har sendt etter å ha trykke på "Send Søknad"-->
-                    <button id="applyjobb-button" type="submit" class="btn btn-primary">Send søknad</button>
+                    <button id="applyjobb-button" type="submit" class="btn btn-primary"><?php echo translate("apply_button")?></button>
                 </div>
             </div>
     </div>

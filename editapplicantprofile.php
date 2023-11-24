@@ -2,6 +2,7 @@
 include ".\models\jobApplicant\jobApplicant.model.php";
 include ".\models\jobApplicant\jobApplicanteditModel.php";
 require_once "/xampp/htdocs/jobbsokesystem/library/errorhandler.php";
+require_once "/xampp/htdocs/jobbsokesystem/library/languages/lang.php";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $applicantToGet = (int)$_POST["applicant_id"];
 } else {
@@ -29,10 +30,10 @@ $jobApplicantView = new JobApplicantEditModel($applicantToGet);
             <div class="col-md-3 applicantProfile">
                 <img src="img\test.jpg">
                 <div class="contactInfo">
-                    <p>Navn: <input type="text" name="name" value=<?php echo $jobApplicantView->getName(); ?>></p>
-                    <p>Telefon: <input type="text" name="phone" value=<?php echo $jobApplicantView->getPhoneNumber(); ?>></p>
-                    <p>E-post: <input type="text" name="email" value=<?php echo $jobApplicantView->getEmail(); ?>></p>
-                    <p>Sted:
+                    <p><?php echo translate("name_label")?>: <input type="text" name="name" value=<?php echo $jobApplicantView->getName(); ?>></p>
+                    <p><?php echo translate("phone_label")?>: <input type="text" name="phone" value=<?php echo $jobApplicantView->getPhoneNumber(); ?>></p>
+                    <p><?php echo translate("email_label")?>: <input type="text" name="email" value=<?php echo $jobApplicantView->getEmail(); ?>></p>
+                    <p><?php echo translate("location_placeholder")?>:
                         <select class="form-select" name="location">
                             <?php
                             $data = $jobApplicantView->getLocations();
@@ -51,11 +52,11 @@ $jobApplicantView = new JobApplicantEditModel($applicantToGet);
             </div>
             <div class="col-md-9 profile-info">
                 <div class="CV-header">
-                    <p>Sammendrag:</p>
+                    <p><?php echo translate("summary")?>:</p>
                 </div>
-                <textarea rows=4 cols=60 type="text" name="summary" value=<?php echo $jobApplicantView->getSummary(); ?>></textarea>
+                <textarea rows=4 cols=60 type="text" name="summary" value='<?php echo $jobApplicantView->getSummary(); ?>'></textarea>
                 <div class="CV-header">
-                    <p>Kompetanse:</p>
+                    <p><?php echo translate("skills")?>:</p>
                 </div>
                 <p>
                 <div class="possibleskills">
@@ -80,7 +81,7 @@ $jobApplicantView = new JobApplicantEditModel($applicantToGet);
                 </p>
                 <div style="clear:both"></div>
                 <div class="CV-header">
-                    <p>Utdanning:</p>
+                    <p><?php echo translate("education")?>:</p>
                 </div>
                 <p>
                     <select class="form-select" name="educationlevel">
@@ -98,10 +99,9 @@ $jobApplicantView = new JobApplicantEditModel($applicantToGet);
                 </p>
                 <div class="CV-header">
                     <p>CV</p>
-                    <button type="submit" class="btn btn-success">Last opp ny CV</button>
-                    <p class="text-danger">OBS: Hvis du laster opp en ny CV vil din gamle bli slettet!</p>
+                    <button type="submit" class="btn btn-success"><?php echo translate("cv_label")?></button>
                 </div>
-                <button type="submit" name="submit" class="btn btn-success">Lagre endringer</button>
+                <button type="submit" name="submit" class="btn btn-success"><?php echo translate("save_button")?></button>
     </form>
 </div>
 </div>
