@@ -2,6 +2,8 @@
 include "models/jobApplicant/jobApplicant.model.php";
 include "models/jobApplicant/jobApplicant.viewModel.php";
 require_once "/xampp/htdocs/jobbsokesystem/library/errorhandler.php"; 
+require_once "/xampp/htdocs/jobbsokesystem/library/languages/lang.php";
+
 if (!isset($_GET["id"])) {
     header("location: index.php");
 }
@@ -28,11 +30,10 @@ $jobApplicantView = new JobApplicantViewModel($applicantToGet);
             </div>
         </div>
         <div>
-            <button type="button" class="editProfileButton">Send melding</button>
             <?php if ($_SESSION["id"] == $jobApplicantView->getApplicantID()) { ?>
                 <form action="editapplicantprofile.php" method="post">
                     <input type="hidden" name="applicant_id" value=<?php echo $jobApplicantView->getApplicantID() ?>>
-                    <button type="submit" class="editProfileButton">Rediger Profil</button>
+                    <button type="submit" class="editProfileButton"><?php echo translate("edit_profile_button")?></button>
                 </form>
             <?php  } ?>
         </div>
@@ -43,15 +44,15 @@ $jobApplicantView = new JobApplicantViewModel($applicantToGet);
         <div class="col-md-3 applicantProfile">
             <img src="img\test.jpg">
             <div class="contactInfo">
-                <p>Navn: <?php echo $jobApplicantView->getName() ?></p>
-                <p>Telefon: <?php echo $jobApplicantView->getPhoneNumber() ?></p>
-                <p>E-Post: <?php echo $jobApplicantView->getEmail() ?></p>
-                <p>Sted: <?php echo $jobApplicantView->getLocation_name() ?></p>
+                <p><?php echo translate("name_label")?>: <?php echo $jobApplicantView->getName() ?></p>
+                <p><?php echo translate("phone_label")?>: <?php echo $jobApplicantView->getPhoneNumber() ?></p>
+                <p><?php echo translate("email_label")?>: <?php echo $jobApplicantView->getEmail() ?></p>
+                <p><?php echo translate("location")?>: <?php echo $jobApplicantView->getLocation_name() ?></p>
             </div>
         </div>
         <div class="col-md-9 profile-info">
             <div class="CV-header">
-                <p>Sammendrag:</p>
+                <p><?php echo translate("summary")?>:</p>
             </div>
             <p> <?php
                 $data = $jobApplicantView->getSummary();
@@ -62,7 +63,7 @@ $jobApplicantView = new JobApplicantViewModel($applicantToGet);
                 }
                 echo $jobApplicantView->getSummary() ?></p>
             <div class="CV-header">
-                <p>Kompetanse:</p>
+                <p><?php echo translate("skills")?>:</p>
             </div>
             <p>
             <ul>
@@ -79,7 +80,7 @@ $jobApplicantView = new JobApplicantViewModel($applicantToGet);
             </ul>
             </p>
             <div class="CV-header">
-                <p>Høyeste utdanning:</p>
+                <p><?php echo translate("education")?>:</p>
             </div>
             <p>
                 <?php
@@ -94,7 +95,7 @@ $jobApplicantView = new JobApplicantViewModel($applicantToGet);
             <div class="CV-header">
                 <p>CV</p>
                 <form>
-                    <button type="submit" class="btn btn-success">Last ned CV</button>
+                    <button type="submit" class="btn btn-success"><?php echo translate("download_resume_button")?>:</button>
                 </form>
             </div>
 

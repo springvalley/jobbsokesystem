@@ -12,6 +12,13 @@ $lang = array(
     "find_job_title" => "Find a new job",
     "search_button" => "Search",
     "see_details_button" => "See Details",
+    "industry" => "Industry",
+    "form_of_employment" => "Form of employment",
+    "job_title" => "Job title",
+    "location" => "Location",
+    "published_date" => "Published date",
+    "deadline" => "Deadline",
+
 
     //Reset password
     "reset_password_title" => "Reset your password", 
@@ -33,6 +40,39 @@ $lang = array(
     "signup_button" => "Sign up",
 
 
+    //Applicantprofile
+    "summary" => "Summary", 
+    "skills" => "Skills", 
+    "education" => "Education",
+    "edit_profile_button" => "Edit profile", 
+    "send_message_button" => "Send message",
+    "download_resume_button" => "Download resume",
+
+    //Applyjob
+    "apply_for" => "Apply for:",
+    "motivational_text_label" => "Motivational text",
+    "motivational_text_placeholder" => "Why would you like to work for us?",
+    "autofill" => "Autofill",
+    "last_position_label" => "Current or last position",
+    "upload_motivation_label" => "Upload motivational letter", 
+    "apply_button" => "Apply!",
+
+    //companydashboard
+    "company_profile_label" => "Company profile", 
+    "jobad_label" => "Job Listings", 
+    "applications_label" => "Applications",
+    "candidates_label" => "Candidates",
+    "messages_label" => "Messages",
+
+    //companyprofile
+    "about_subtitle" => "About the company",
+    "contact_button" => "Contact us", 
+
+    //Jobdetails
+    "edit_jobad_button" => "Edit joblisting",
+    "delte_button" => "Delete",
+
+
     //Labels
     "email_label" => "E-mail",
     "password_label" => "Password",
@@ -45,6 +85,14 @@ $lang = array(
     "employer_name_label" => "Company name",
     "orgnumber_label" => "Organization number",
     "industry_label" => "Which industry do you consider yourselves in?",
+    "jobdescription_label" => "Job description",
+    "jobdescription_placeholder" => "Write about the position",
+    "publish_button" => "Publish",
+    "new_job_ad_title" => "Make a new job listing!",
+
+    //editprofile
+
+    "save_button" => "Save changes",
 
 
     //Placeholder texts
@@ -58,6 +106,8 @@ $lang = array(
     "repeat_password_placeholder" => "Repeat your password",
     "location_placeholder" => "Choose location",
     "education_placeholder" => "Choose education",
+    "jobtype_placeholder" => "Choose form of employment",
+    "filter_placeholder" => "Filter",
 
     
 );

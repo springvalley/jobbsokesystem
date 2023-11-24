@@ -2,6 +2,7 @@
 include "models/employer/employer.model.php";
 include "models/employer/employer.editModel.php";
 require_once "/xampp/htdocs/jobbsokesystem/library/errorhandler.php";
+require_once "/xampp/htdocs/jobbsokesystem/library/languages/lang.php";
 /*
 if (!isset($_GET["id"]) || $_SESSION["userType"] != "employer") {
     header("location: index.php");

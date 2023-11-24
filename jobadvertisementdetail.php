@@ -3,6 +3,7 @@ include "components/header.php";
 require_once "../jobbsokesystem/models/jobListing/JobListingModel.php";
 require_once "../jobbsokesystem/views/JobListingView.php";
 require_once "../jobbsokesystem/library/errorhandler.php";
+require_once "/xampp/htdocs/jobbsokesystem/library/languages/lang.php";
 
 //Check if 'jobListing_id' is present in the query string of the URL, if not redirect to index page.
 if (isset($_GET["id"])) {
@@ -42,19 +43,19 @@ if ($jobAdDetail) {
                 </div>
             </div>
             <div>
-                <button type="button" class="btn btn-primary" ' . ($isLoggedInAsEmployer ? 'hidden' : '') . '>Send melding</button></div>';
+                <button type="button" class="btn btn-primary" ' . ($isLoggedInAsEmployer ? 'hidden' : '') . '>'. translate("send_message_button") .'</button></div>';
 
     if ($isJobAdOwner) {
         echo '
         <div>
-            <a class="btn editButton" href="editJobAd.php?id=' . $jobAdDetail->jobListing_id . '";><i class="fa-regular fa-pen-to-square"></i> Redigere</a>
+            <a class="btn editButton" href="editJobAd.php?id=' . $jobAdDetail->jobListing_id . '";><i class="fa-regular fa-pen-to-square"></i>'. translate("edit_jobad_button") .'</a>
         </div>';
         //Show Delete job advertisement button for creator.
         echo '        
             <form action="./controllers/JobListingController.php" method="post" onsubmit="return confirmDeletion();">  
                 <input type="hidden" name="type" value="deleteJobAd">  
                 <input type="hidden" name="jobListing_id" value="' . $jobAdDetail->jobListing_id . '">                  
-                <button class="btn deleteButton" type="submit"> <i class="fa-regular fa-trash-can"></i> Slett</button>           
+                <button class="btn deleteButton" type="submit"> <i class="fa-regular fa-trash-can"></i>'. translate("delete_button") .'</button>           
             </form>';
     }
     echo '    
@@ -69,10 +70,10 @@ if ($jobAdDetail) {
                         <b>' . $jobAdDetail->company_name . '</b>                        
                     </div>
                     <div class="col-5">
-                        Bransje: ' . '<b>' . $jobAdDetail->industry_name . '</b>                        
+                        '. translate("industry") .': ' . '<b>' . $jobAdDetail->industry_name . '</b>                        
                     </div>                                        
                     <div class="col applicationDeadlineDateBadge">
-                    Søknadsfrist: ' . date('d-m-Y', strtotime($jobAdDetail->application_deadline)) . '
+                    '. translate("deadline") .': ' . date('d-m-Y', strtotime($jobAdDetail->application_deadline)) . '
                 </div>
                 </div>
                 <div class="row">
@@ -80,29 +81,29 @@ if ($jobAdDetail) {
                         <b style="font-size: 20px;">' . $jobAdDetail->job_title . '</b>
                     </div>
                     <div class="col-5 mt-2">
-                        Stillingstittel: ' . '<b>' . $jobAdDetail->position_name . '</b>
+                        '. translate("job_title") .': ' . '<b>' . $jobAdDetail->position_name . '</b>
                     </div>
                     <div class="col-6 mt-2">
-                        Ansettelsesform: ' . '<b>' . $jobAdDetail->jobType . '</b>
+                        '. translate("form_of_employment") .': ' . '<b>' . $jobAdDetail->jobType . '</b>
                     </div>
                     <div class="col-6 mt-2">
-                        Sted: ' . '<b>' . $jobAdDetail->location_name . '</b>
+                        '. translate("location") .': ' . '<b>' . $jobAdDetail->location_name . '</b>
                     </div>                    
                 </div>
                 <div class="flex-container mt-2">
                     <div>
-                        Publiseringsdato: ' . '<b>' . date('d-m-Y', strtotime($jobAdDetail->published_time)) . '</b>
+                        '. translate("published_date") .': ' . '<b>' . date('d-m-Y', strtotime($jobAdDetail->published_time)) . '</b>
                     </div>                   
                     
                     <div>
-                        <a class="btn btn-primary" data-toggle="collapse" href="applyjob.php?id=' . $jobAdDetail->jobListing_id . '" role="button" aria-expanded="false" ' . ($isLoggedInAsEmployer ? 'hidden' : '') . '>Søk Stilling</a>
+                        <a class="btn btn-primary" data-toggle="collapse" href="applyjob.php?id=' . $jobAdDetail->jobListing_id . '" role="button" aria-expanded="false" ' . ($isLoggedInAsEmployer ? 'hidden' : '') . '>'. translate("apply_button") .'</a>
                         <a class="btn btn-primary" data-toggle="collapse" href="listcompanyjobapplications.php?id=' . $jobAdDetail->jobListing_id . '" role="button" aria-expanded="false" ' . ($isJobAdOwner ? '' : 'hidden') . '>Se alle søknader</a>
                     </div>
                 </div>
             </div>
         </div>
         <div class="job-content mt-3">
-            <h4><b>Om jobben</b></h4>
+            <h4><b>'. translate("summary").'</b></h4>
             <p>
                 ' . $jobAdDetail->description . ' 
             </p>
