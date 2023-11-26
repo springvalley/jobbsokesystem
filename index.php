@@ -9,11 +9,10 @@ require_once "/xampp/htdocs/jobbsokesystem/library/errorhandler.php";
 $helperModel = new Helper();
 ?>
 
-
 <div class="container">
     <h1><?php echo translate("find_job_title") ?></h1>
     <?php ErrorHandler::displayError() ?>
-                    <?php ErrorHandler::displaySuccess() ?>
+    <?php ErrorHandler::displaySuccess() ?>
     <form method="GET" action="./controllers/JobListingController.php">
         <input type="hidden" name="type" value="filter">
         <div class="row mt-3">
@@ -57,9 +56,9 @@ $helperModel = new Helper();
     <hr class="my-4">
     <?php
     $jobListingView = new JobListingView();
-    if(!isset($_SESSION["jobListingsToShow"])){
+    if (!isset($_SESSION["jobListingsToShow"])) {
         $jobAds = $jobListingView->fetchAllJobAds();
-    }else{
+    } else {
         $jobAds = $_SESSION["jobListingsToShow"];
         unset($_SESSION["jobListingsToShow"]);
     }
@@ -83,7 +82,7 @@ $helperModel = new Helper();
                            <b style="font-size: 20px;">' . $jobAd->job_title . '</b>
                        </div>
                        <div class="col-5 mt-2">
-                            ' . translate("job_title") . ': ' . '<b>' . $jobAd->position_name . '</b>
+                            ' . translate("job_position") . ': ' . '<b>' . $jobAd->position_name . '</b>
                         </div>
                        <div class="col-6 mt-2">
                             ' . translate("form_of_employment") . ': ' . '<b>' . $jobAd->jobType . '</b>
@@ -97,7 +96,7 @@ $helperModel = new Helper();
                             ' . translate("published_date") . ': ' . '<b>' . date('d-m-Y', strtotime($jobAd->published_time)) . '</b>
                         </div>
                        <div style="color: red; padding-right: 5rem;">
-                            ' . translate("deadline") . ': ' . '<b>' . date('d-m-Y', strtotime($jobAd->application_deadline)) . '</b>
+                            ' . translate("applicationDeadline") . ': ' . '<b>' . date('d-m-Y', strtotime($jobAd->application_deadline)) . '</b>
                         </div>
                        <div>
                        <a class="btn btn-primary" href="jobadvertisementdetail.php?id=' . $jobAd->jobListing_id . '"role="button">' . translate("see_details_button") . '</a>

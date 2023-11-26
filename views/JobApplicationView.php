@@ -3,10 +3,12 @@
 class JobApplicationView
 {
     private $jobApplicationModel;
+    // private $helper;
 
     public function __construct()
     {
         $this->jobApplicationModel = new JobApplicationModel();
+        // $this->helper = new Helper();
     }
 
     public function fetchJobApplication($jobApplication_id)
@@ -33,5 +35,11 @@ class JobApplicationView
         } else {
             return $listJobApplications;
         }
+    }
+
+    public function processJobApplicationAction($jobApplicationId, $newApplicationStatusId)
+    {
+        $jobApplicationStatus = $this->jobApplicationModel->updateApplicationStatus($jobApplicationId, $newApplicationStatusId);
+        return $jobApplicationStatus;
     }
 }

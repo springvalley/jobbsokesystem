@@ -1,14 +1,12 @@
 <?php
 
+/**
+ * Validator is a helper class for validating inputs that go through the system. Includes empty inputs, name validation and so on. 
+ * @since 0.5.0
+ */
+
 class Validator
 {
-
-    /**
-     * Validator is a helper class for validating inputs that go through the system. Includes empty inputs, name validation and so on. 
-     * @since 0.5.0
-     */
-
-
     /**
      * This function is used to check if any of the inputs are empty.
      * @param mixed $inputs can be any number of inputs 
@@ -128,6 +126,11 @@ class Validator
         return !$industry == 0;
     }
 
+    /**
+     * This function is used to check if empty input application deadline date.
+     * @param mixed $applicationDeadline The Value to be checked for emptiness.
+     * @return bool true if input field is empty, false otherwise. 
+     */
     public static function isEmptyInputApplicationDeadline($applicationDeadline)
     {
         if (empty($applicationDeadline)) {
@@ -137,6 +140,11 @@ class Validator
         }
     }
 
+    /**
+     * This function is used to check if the application deadline date is out of date.
+     * @param mixed $applicationDeadline The Value to be checked and compared with the current date.
+     * @return bool true if the application deadline is smaller than the current date, false otherwise. 
+     */
     public static function isOldApplicationDeadlineDate($applicationDeadline)
     {
         $today = date("d-m-Y");
@@ -147,6 +155,11 @@ class Validator
         }
     }
 
+    /**
+     * This function is used to check if an employer has been logged in.
+     * @param int $employerId The employer id to be checked.
+     * @return bool true if an employer has not logged in, false otherwise. 
+     */
     public static function isEmployerLoggedIn($employerId)
     {
         if (empty($employerId)) {
@@ -154,5 +167,34 @@ class Validator
         } else {
             return false;
         }
+    }
+
+    /**
+     * This function is used to check if the current user session indicates that a user has been logged in and has a role of employer.    
+     * @return bool true if a user is logged in as employer, false otherwise. 
+     */
+    public static function isLoggedInAsEmployer()
+    {
+        $employer = ($_SESSION["id"]) && $_SESSION["userType"] === "employer";
+        return $employer;
+    }
+
+
+    /**
+     * This function is used to check if the logged in user is the owner of the job advertisement.   
+     * This function determines ownership by comparing the company name associated with the job advertisement to the name stored
+     * in the session for the logged-in user.
+     * @param string $jobAdCompanyName The name of the company associated with the job ad to be compared.
+     * @return bool true if the logged-in user is the employer who creates the job advertisement, false otherwise. 
+     */
+    public static function isJobAdOwner($jobAdCompanyName)
+    {
+        //Check if the user id session is not set or if the logged-in user is not employer
+        if (!isset($_SESSION["id"]) || $_SESSION["userType"] !== "employer") {
+            return false; //If the user is not logged-in as an employer.
+        }
+        //If the user is logged-in as an employer, so check the company name of the session
+        //matches the provided company name ($jobAdCompanyName) of the job advertisement
+        return $_SESSION["name"] === $jobAdCompanyName;
     }
 }
