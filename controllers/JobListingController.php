@@ -15,6 +15,60 @@ require_once "/xampp/htdocs/jobbsokesystem/library/errorhandler.php";
 class JobListingController
 {
 
+
+    public function getJobAdsByFilter($locationFilter, $industryFilter, $jobTypeFilter)
+    {
+        $joblistingsToShow = array();
+        $jobListingModel = new JobListingModel();
+        if ($jobTypeFilter == 0 && $industryFilter == 0 && $locationFilter == 0) {
+            ErrorHandler::setError("Vennligst velg minst ett filter!");
+            header("location: ../index.php");
+            exit();
+        }
+
+        if ($jobTypeFilter == 0) {
+            $jobTypeFilter = "jl.jobType_id";
+        }
+        if ($industryFilter == 0) {
+            $industryFilter = "jl.industry_id";
+        }
+        if ($locationFilter == 0) {
+            $locationFilter = "jl.location_id";
+        }
+
+       $joblistingsToShow =  $jobListingModel->getJobListingsByFilters($locationFilter, $industryFilter, $jobTypeFilter);
+
+        if($joblistingsToShow != false){
+            $filteredArray = $this->array_unique_object("jobListing_id", $joblistingsToShow);
+            $_SESSION["jobListingsToShow"] = $filteredArray;
+            header("location: ../index.php");
+            exit();
+        }else{
+            ErrorHandler::setError("Ingen resultater ble funnet med dine kriterier");
+            header("location: ../index.php");
+            exit();
+        }
+    }
+
+    //Function to help get a unique array in case of duplicates, in built array_unique function didnt work. 
+    private function array_unique_object($key, $array)
+    {
+        $result = array();
+        $keysAdded = array();
+        foreach ($array as $item) {
+            foreach ($item as $searchKey => $value) {
+                if ($key == $searchKey) {
+                    if (!in_array($value, $keysAdded)) {
+                        array_push($result, $item);
+                        array_push($keysAdded, $value);
+                    }
+                }
+            }
+        }
+        return $result;
+    }
+
+
     /**
      * This function is used to create a new job advertisement.
      * 
@@ -107,6 +161,7 @@ class JobListingController
         }
     }
 
+
     /**
      * This private function is used to validate data input to the form for both "createNewJobAd" and "editJobAd".
      * @param $data The data input to the form.
@@ -169,6 +224,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             break;
         case "deleteJobAd":
             $init->deleteJobAd();
+            break;
+    }
+} else {
+    switch ($_GET["type"]) {
+        case "filter":
+            $locationFilter = $_GET["location"];
+            $industryFilter = $_GET["industry"];
+            $jobtypeFilter = $_GET["jobtype"];
+            $init->getJobAdsByFilter($locationFilter, $industryFilter, $jobtypeFilter);
             break;
     }
 }

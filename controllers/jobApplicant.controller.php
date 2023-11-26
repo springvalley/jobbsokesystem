@@ -62,6 +62,8 @@ class JobApplicantController
             exit();
         }
 
+    
+
         //Update db using model
         //Redirect user to profile if successful, if else redirect to other page with errormessages
         if ($model->updateJobApplicantProfile($data)) {

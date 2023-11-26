@@ -108,4 +108,92 @@ class JobListingModel
             return false;
         }
     }
+
+
+    public function getJobListingsByFilters($locationfilter, $industryfilter, $jobtypefilter)
+    {
+        $this->db->query("SELECT jl.jobListing_id, jl.job_title, jl.description, jl.published_time, e.company_name, l.location_name, i.industry_name, jt.jobType, jl.position_name, jl.application_deadline
+                     FROM joblisting AS jl
+                     INNER JOIN employer AS e ON jl.employer_id = e.employer_id
+                     INNER JOIN location AS l ON jl.location_id = l.location_id
+                     INNER JOIN industry AS i ON jl.industry_id = i.industry_id
+                     INNER JOIN jobtype AS jt ON jl.jobType_id = jt.jobType_id
+                     WHERE jl.location_id = ".$locationfilter." 
+                     AND jl.industry_id = ".$industryfilter."
+                    AND jl.jobType_id = ".$jobtypefilter."");
+
+//FIX: Dette fungerer ikke med bind fordi ?????? vi burde sikkert finne en sikrere måte å gjøre dette på
+
+
+/*
+        $this->db->bind(":location_id", $locationfilter, );
+        $this->db->bind(":industry_id", $industryfilter);
+        $this->db->bind(":jobtype_id", $jobtypefilter);*/
+        $row = $this->db->fetchMultiRow();
+
+        if ($this->db->rowCount() > 0) {
+            return $row;
+        } else {
+            return false;
+        }
+    }
+
+    public function getJobListingsByLocation($location_id)
+    {
+        $this->db->query("SELECT jl.jobListing_id, jl.job_title, jl.description, jl.published_time, e.company_name, l.location_name, i.industry_name, jt.jobType, jl.position_name, jl.application_deadline
+                     FROM joblisting AS jl
+                     INNER JOIN employer AS e ON jl.employer_id = e.employer_id
+                     INNER JOIN location AS l ON jl.location_id = l.location_id
+                     INNER JOIN industry AS i ON jl.industry_id = i.industry_id
+                     INNER JOIN jobtype AS jt ON jl.jobType_id = jt.jobType_id
+                     WHERE jl.location_id = :location_id");
+
+        $this->db->bind(":location_id", $location_id);
+        $row = $this->db->fetchMultiRow();
+
+        if ($this->db->rowCount() > 0) {
+            return $row;
+        } else {
+            return false;
+        }
+    }
+    public function getJobListingsByIndustry($industry_id)
+    {
+
+        $this->db->query("SELECT jl.jobListing_id, jl.job_title, jl.description, jl.published_time, e.company_name, l.location_name, i.industry_name, jt.jobType, jl.position_name, jl.application_deadline
+        FROM joblisting AS jl
+        INNER JOIN employer AS e ON jl.employer_id = e.employer_id
+        INNER JOIN location AS l ON jl.location_id = l.location_id
+        INNER JOIN industry AS i ON jl.industry_id = i.industry_id
+        INNER JOIN jobtype AS jt ON jl.jobType_id = jt.jobType_id
+        WHERE jl.industry_id = :industry_id");
+
+        $this->db->bind(":industry_id", $industry_id);
+        $row = $this->db->fetchMultiRow();
+
+        if ($this->db->rowCount() > 0) {
+            return $row;
+        } else {
+            return false;
+        }
+    }
+    public function getJobListingsByJobType($jobType_id)
+    {
+        $this->db->query("SELECT jl.jobListing_id, jl.job_title, jl.description, jl.published_time, e.company_name, l.location_name, i.industry_name, jt.jobType, jl.position_name, jl.application_deadline
+        FROM joblisting AS jl
+        INNER JOIN employer AS e ON jl.employer_id = e.employer_id
+        INNER JOIN location AS l ON jl.location_id = l.location_id
+        INNER JOIN industry AS i ON jl.industry_id = i.industry_id
+        INNER JOIN jobtype AS jt ON jl.jobType_id = jt.jobType_id
+        WHERE jl.jobtype_id = :jobtype_id");
+
+        $this->db->bind(":jobtype_id", $jobType_id);
+        $row = $this->db->fetchMultiRow();
+
+        if ($this->db->rowCount() > 0) {
+            return $row;
+        } else {
+            return false;
+        }
+    }
 }
