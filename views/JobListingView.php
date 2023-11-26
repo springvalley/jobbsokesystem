@@ -8,6 +8,7 @@
  */
 
 require_once "/xampp/htdocs/jobbsokesystem/models/helpers.php";
+require_once "/xampp/htdocs/jobbsokesystem/models/jobListing/JobListingModel.php";
 
 class JobListingView
 {
