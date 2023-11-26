@@ -118,14 +118,14 @@ class JobListingModel
                      INNER JOIN location AS l ON jl.location_id = l.location_id
                      INNER JOIN industry AS i ON jl.industry_id = i.industry_id
                      INNER JOIN jobtype AS jt ON jl.jobType_id = jt.jobType_id
-                     WHERE jl.location_id = ".$locationfilter." 
-                     AND jl.industry_id = ".$industryfilter."
-                    AND jl.jobType_id = ".$jobtypefilter."");
+                     WHERE jl.location_id = " . $locationfilter . " 
+                     AND jl.industry_id = " . $industryfilter . "
+                    AND jl.jobType_id = " . $jobtypefilter . "");
 
-//FIX: Dette fungerer ikke med bind fordi ?????? vi burde sikkert finne en sikrere måte å gjøre dette på
+        //FIX: Dette fungerer ikke med bind fordi ?????? vi burde sikkert finne en sikrere måte å gjøre dette på
 
 
-/*
+        /*
         $this->db->bind(":location_id", $locationfilter, );
         $this->db->bind(":industry_id", $industryfilter);
         $this->db->bind(":jobtype_id", $jobtypefilter);*/

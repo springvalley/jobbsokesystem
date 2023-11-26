@@ -8,7 +8,7 @@ require_once "/xampp/htdocs/jobbsokesystem/library/errorhandler.php";
 class JobApplicantController
 {
 
- /**
+    /**
      * This function is used to edit an jobapplicant in the database.
      * @param  
      * @return
@@ -95,6 +95,7 @@ class JobApplicantController
             "userName" => htmlspecialchars(trim($_POST["name"])),
             "userPhone" => htmlspecialchars(trim($_POST["phone"])),
             "userEmail" => htmlspecialchars(trim($_POST["email"])),
+            "lastJob" => htmlspecialchars(trim($_POST["lastJob"])),
             "coverletter" => htmlspecialchars(trim($_POST["coverletter"])),
             "userEducationLevel" => htmlspecialchars(trim($_POST["education"]))
         ];
@@ -114,11 +115,11 @@ class JobApplicantController
             exit();
         }
         //Validate a valid summary
-        if (!Validator::isNameValid($data["coverletter"])) {
-            ErrorHandler::setError("Motivasjonsbrevet du har skrevet er ikke gyldig");
-            header("location: ../applyjob.php?id=" . (int)$data["jobListing_id"]);
-            exit();
-        }
+        // if (!Validator::isNameValid($data["coverletter"])) {
+        //     ErrorHandler::setError("Søknadsbrev du har skrevet er ikke gyldig");
+        //     header("location: ../applyjob.php?id=" . (int)$data["jobListing_id"]);
+        //     exit();
+        // }
 
         //Validate a valid email
         if (!Validator::isEmailValid($data["userEmail"])) {

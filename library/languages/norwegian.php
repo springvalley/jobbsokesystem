@@ -11,26 +11,26 @@ $lang = array(
     //Index
     "find_job_title" => "Finn en ny jobb",
     "search_button" => "Søk",
-    "see_details_button" => "Se detaljer",    
-    "industry" => "Industri",
+    "see_details_button" => "Se detaljer",
+    "industry" => "Bransje",
     "form_of_employment" => "Ansettelsesform",
-    "job_title" => "Jobtittel",
+    "job_position" => "Jobbstilling",
     "location" => "Sted",
     "published_date" => "Publisert dato",
-    "deadline" => "Frist",
+    "applicationDeadline" => "Søknadsfrist",
 
     //Reset password
-    "reset_password_title" => "Tilbakestill ditt passord", 
-    "reset_password_text" => "Vi sender et nytt passord til din email addresse", 
+    "reset_password_title" => "Tilbakestill ditt passord",
+    "reset_password_text" => "Vi sender et nytt passord til din email addresse",
     "reset_password_button" => "Tilbakestill passord",
     "return_button" => "Tilbake til login",
-    
+
     //Login
     "login_title" => "Logg inn",
     "applicant_subtitle" => "Arbeidssøker",
     "employer_subtitle" => "Arbeidsgiver",
     "forgot_password_button" => "Glemt passord?",
-    "cancel_button" => "Avbryt", 
+    "cancel_button" => "Avbryt",
     "signin_button" => "Logg inn",
     "new_account_text" => "Har du ikke en bruker? <a href='signup.php'>Registrer deg her!</a>",
 
@@ -39,40 +39,40 @@ $lang = array(
     "signup_button" => "Registrer ny bruker",
 
     //Applicantprofile
-    "summary" => "Oppsummering", 
-    "skills" => "Ferdigheter", 
+    "summary" => "Oppsummering",
+    "skills" => "Ferdigheter",
     "education" => "Utdanning",
-    "edit_profile_button" => "Rediger profil", 
+    "edit_profile_button" => "Rediger profil",
     "send_message_button" => "Send melding",
     "download_resume_button" => "Last ned CV",
 
-      //Applyjob
-      "apply_for" => "Søk på stilling som:",
-      "motivational_text_label" => "Motivasjonsbrev",
-      "motivational_text_placeholder" => "Hvorfor vil du jobbe for oss?",
-      "autofill" => "Autofyll",
-      "last_position_label" => "Nåværende eller siste stilling",
-      "upload_motivation_label" => "Last opp motivasjonsbrev", 
-      "apply_button" => "Søk på jobben!",
+    //Applyjob
+    "apply_for" => "Søk på stilling som:",
+    "motivational_text_label" => "Motivasjonsbrev",
+    "motivational_text_placeholder" => "Hvorfor vil du jobbe for oss?",
+    "autofill" => "Autofyll",
+    "last_position_label" => "Nåværende eller siste stilling",
+    "upload_motivation_label" => "Last opp motivasjonsbrev",
+    "apply_button" => "Søk på jobben!",
 
-          //companydashboard
-    "company_profile_label" => "Bedriftsprofil", 
-    "jobad_label" => "Jobannonser", 
+    //companydashboard
+    "company_profile_label" => "Bedriftsprofil",
+    "jobad_label" => "Jobbannonser",
     "applications_label" => "Søknader",
     "candidates_label" => "Kandidater",
     "messages_label" => "Meldinger",
 
-        //companyprofile
-        "about_subtitle" => "Om bedriften",
-        "contact_button" => "Kontakt oss", 
+    //companyprofile
+    "about_subtitle" => "Om bedriften",
+    "contact_button" => "Kontakt oss",
 
-            //editprofile
+    //editprofile
 
     "save_button" => "Lagre endringer",
 
-        //Jobdetails
-        "edit_jobad_button" => "Rediger annonse",
-        "delte_button" => "Slett",
+    //Jobdetails
+    "edit_jobad_button" => " Redigere",
+    "delete_button" => " Slett",
 
 
     //Labels
@@ -87,6 +87,9 @@ $lang = array(
     "employer_name_label" => "Bedriftsnavn",
     "orgnumber_label" => "Organisasjonsnummer",
     "industry_label" => "Hvilken industri jobber dere i?",
+    "job_title_label" => "Jobbtittel",
+    "position_name_label" => "Jobbstilling",
+    "jobType_label" => "Ansettelsesform",
     "jobdescription_label" => "Beskrivelse av jobben",
     "jobdescription_placeholder" => "Skriv litt om jobben",
     "publish_button" => "Publiser",
@@ -97,16 +100,21 @@ $lang = array(
     "email_placeholder" => "Skriv inn din e-post",
     "company_name_placeholder" => "Skriv inn navnet på din bedrift",
     "orgnumber_placeholder" => "Skriv inn organisasjonsnummer",
-    "industry_placeholder" => "Velg industri",
+    "industry_placeholder" => "Velg bransje",
     "name_placeholder" => "Skriv inn ditt navn",
     "phone_placeholder" => "Skriv inn ditt telefonnummer",
     "password_placeholder" => "Skriv inn ditt passord",
     "repeat_password_placeholder" => "Gjenta passord",
+    "job_title_placeholder" => "Skriv inn jobbtittel",
+    "position_placeholder" => "Skriv inn jobbstilling",
     "location_placeholder" => "Velg sted",
     "education_placeholder" => "Velg utdannelse",
     "jobtype_placeholder" => "Velg ansettelsesform",
-    "filter_placeholder" => "Filtrer"
+    "filter_placeholder" => "Filtrer",
 
-    
+    //Buttons
+    "goBack" => "Tilbake",
+    "viewAllJobApplications" => "Se Alle Jobbsøknader",
+
+
 );
-?>

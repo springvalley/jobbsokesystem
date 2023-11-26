@@ -196,10 +196,10 @@ class JobApplicantModel
 
     public function applyToJob($data)
     {
-        $this->db->query("INSERT INTO jobapplication(jobApplicant_id, jobListing_id, application_text, cover_letter, application_status_id) VALUES (:jobApplicant_id, :jobListing_id, :application_text, :cover_letter, 1)");
+        $this->db->query("INSERT INTO jobapplication(jobApplicant_id, jobListing_id, current_or_lastJob, cover_letter, application_status_id) VALUES (:jobApplicant_id, :jobListing_id, :lastJob, :cover_letter, 1)");
         $this->db->bind(":jobApplicant_id", $data["jobApplicant_id"]);
         $this->db->bind(":jobListing_id", $data["jobListing_id"]);
-        $this->db->bind(":application_text", $data["coverletter"]);
+        $this->db->bind(":lastJob", $data["lastJob"]);
         $this->db->bind(":cover_letter", $data["coverletter"]);
 
         if ($this->db->execute()) {
