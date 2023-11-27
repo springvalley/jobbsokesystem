@@ -15,7 +15,13 @@ require_once "/xampp/htdocs/jobbsokesystem/library/errorhandler.php";
 class JobListingController
 {
 
-
+/**
+     * This function is used to get job advertisements based on certain filters.
+     * @param int $locationFilter - An integer  value corresponding to a location_id in the database
+     * @param int $industryFilter - An integer  value corresponding to a industry_id in the database
+     * @param int $jobTypeFilter - An integer  value corresponding to a jobtype_id in the database
+     * @return mixed The jobads as specified by the filters, nothing otherwise
+     */
     public function getJobAdsByFilter($locationFilter, $industryFilter, $jobTypeFilter)
     {
         $joblistingsToShow = array();
@@ -36,21 +42,28 @@ class JobListingController
             $locationFilter = "jl.location_id";
         }
 
-       $joblistingsToShow =  $jobListingModel->getJobListingsByFilters($locationFilter, $industryFilter, $jobTypeFilter);
+        $joblistingsToShow =  $jobListingModel->getJobListingsByFilters($locationFilter, $industryFilter, $jobTypeFilter);
 
-        if($joblistingsToShow != false){
+        if ($joblistingsToShow != false) {
             $filteredArray = $this->array_unique_object("jobListing_id", $joblistingsToShow);
             $_SESSION["jobListingsToShow"] = $filteredArray;
             header("location: ../index.php");
             exit();
-        }else{
+        } else {
             ErrorHandler::setError("Ingen resultater ble funnet med dine kriterier");
             header("location: ../index.php");
             exit();
         }
     }
 
-    //Function to help get a unique array in case of duplicates, in built array_unique function didnt work. 
+    /**
+     * This function is used to get job advertisements based on certain filters.
+     * @param int $locationFilter - An integer  value corresponding to a location_id in the database
+     * @param int $industryFilter - An integer  value corresponding to a industry_id in the database
+     * @param int $jobTypeFilter - An integer  value corresponding to a jobtype_id in the database
+     * @return mixed The jobads as specified by the filters, nothing otherwise
+     */
+
     private function array_unique_object($key, $array)
     {
         $result = array();
@@ -227,12 +240,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             break;
     }
 } else {
-    switch ($_GET["type"]) {
-        case "filter":
-            $locationFilter = $_GET["location"];
-            $industryFilter = $_GET["industry"];
-            $jobtypeFilter = $_GET["jobtype"];
-            $init->getJobAdsByFilter($locationFilter, $industryFilter, $jobtypeFilter);
-            break;
+    if (isset($_GET["type"])) {
+        switch ($_GET["type"]) {
+            case "filter":
+                $locationFilter = $_GET["location"];
+                $industryFilter = $_GET["industry"];
+                $jobtypeFilter = $_GET["jobtype"];
+                $init->getJobAdsByFilter($locationFilter, $industryFilter, $jobtypeFilter);
+                break;
+        }
     }
 }

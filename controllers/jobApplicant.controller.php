@@ -85,6 +85,12 @@ class JobApplicantController
     {
     }
 
+    /**
+     * This function is used to make a new jobapplication for a job applicant.
+     * @param  
+     * @return
+     */
+
     public function applyToJob()
     {
         $model = new JobApplicantModel();
@@ -114,12 +120,6 @@ class JobApplicantController
             header("location: ../applyjob.php?id=" . (int)$data["jobListing_id"]);
             exit();
         }
-        //Validate a valid summary
-        // if (!Validator::isNameValid($data["coverletter"])) {
-        //     ErrorHandler::setError("Søknadsbrev du har skrevet er ikke gyldig");
-        //     header("location: ../applyjob.php?id=" . (int)$data["jobListing_id"]);
-        //     exit();
-        // }
 
         //Validate a valid email
         if (!Validator::isEmailValid($data["userEmail"])) {
