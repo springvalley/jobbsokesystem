@@ -195,9 +195,7 @@ class UserController
 
     public function logout()
     {
-        unset($_SESSION["name"]);
-        unset($_SESSION["id"]);
-        unset($_SESSION["email"]);
+        session_start();
         session_destroy();
         header("location: ../index.php");
         exit();

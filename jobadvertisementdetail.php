@@ -8,7 +8,7 @@ require_once "/xampp/htdocs/jobbsokesystem/library/validator.php";
 
 $jobListingView = new JobListingView();
 //Check if 'jobListing_id' is present in the query string of the URL, if not redirect to index page.
-if (isset($_GET["id"])) {
+if (Validator::isLoggedIn()) {
     $jobListingId = htmlspecialchars($_GET["id"]);
     $jobAdDetail = $jobListingView->fetchJobAdByJobListingId($jobListingId);
     if (!$jobAdDetail) {

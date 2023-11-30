@@ -7,15 +7,11 @@ require_once "/xampp/htdocs/jobbsokesystem/library/languages/lang.php";
 
 $helperModel = new Helper();
 
-if (!isset($_GET["id"])) {
-    header("Location: index.php");
-    exit();
-}
+
 $jobListingId = $_GET["id"];
 
-//You have to be signed in to apply for a job
-if (!isset($_SESSION["id"])) {
-    header("location: index.php");
+if (!Validator::isLoggedIn()) {
+    header("Location: ./index.php");
     exit();
 }
 

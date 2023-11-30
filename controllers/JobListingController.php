@@ -57,11 +57,9 @@ class JobListingController
     }
 
     /**
-     * This function is used to get job advertisements based on certain filters.
-     * @param int $locationFilter - An integer  value corresponding to a location_id in the database
-     * @param int $industryFilter - An integer  value corresponding to a industry_id in the database
-     * @param int $jobTypeFilter - An integer  value corresponding to a jobtype_id in the database
-     * @return mixed The jobads as specified by the filters, nothing otherwise
+     * This function is used to return all unique instances of objects in arrays, created because array_unique did not work with objects.
+     * @param int $key - The key you want to use to differentiate the objects in the array on
+     * @return array The unique array
      */
 
     private function array_unique_object($key, $array)
@@ -152,6 +150,10 @@ class JobListingController
             }
         }
     }
+
+      /**
+     * This function is used to delete a job listing in the database.
+     */
 
     public function deleteJobAd()
     {

@@ -4,24 +4,13 @@ include "models/jobApplicant/jobApplicant.viewModel.php";
 require_once "/xampp/htdocs/jobbsokesystem/library/errorhandler.php"; 
 require_once "/xampp/htdocs/jobbsokesystem/library/languages/lang.php";
 
-if (!isset($_GET["id"])) {
+if (!Validator::isLoggedIn()) {
     header("location: index.php");
 }
 $applicantToGet = isset($_GET["id"]) ? $_GET["id"] : 1;
 $jobApplicantView = new JobApplicantViewModel($applicantToGet);
 ?>
 <div class="container">
-    <p class="errormessage">
-        <?php
-        if (isset($_GET["error"])) {
-            $error = $_GET["error"];
-            switch ($error) {
-                case "updateSuccess":
-                    echo "Profilen din ble oppdatert!";
-                    break;
-            }
-        };
-        ?></p>
     <div class="flex-container">
         <div>
             <div class="goBackLink mb-3">
@@ -30,7 +19,7 @@ $jobApplicantView = new JobApplicantViewModel($applicantToGet);
             </div>
         </div>
         <div>
-            <?php if ($_SESSION["id"] == $jobApplicantView->getApplicantID()) { ?>
+            <?php if (Validator::isLoggedIn() && Validator::ownsResource($jobApplicantView->getApplicantID()) && Validator::isJobApplicant()) { ?>
                 <form action="editapplicantprofile.php" method="post">
                     <input type="hidden" name="applicant_id" value=<?php echo $jobApplicantView->getApplicantID() ?>>
                     <button type="submit" class="editProfileButton"><?php echo translate("edit_profile_button")?></button>

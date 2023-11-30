@@ -77,13 +77,6 @@ class JobApplicantController
         }
     }
 
-    public function delete($id)
-    {
-    }
-
-    public function display($id)
-    {
-    }
 
     /**
      * This function is used to make a new jobapplication for a job applicant.

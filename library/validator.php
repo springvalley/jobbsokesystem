@@ -156,6 +156,47 @@ class Validator
     }
 
     /**
+     * This function is used to check if a user is logged into the system.
+     * @return bool true if logged in, false otherwise. 
+     */
+
+    public static function isLoggedIn(){
+        return isset($_SESSION["id"]);
+    }
+
+     /**
+     * This function is used to check if an employer is logged into the system.
+     * @return bool true if logged in, false otherwise. 
+     */
+
+    public static function isEmployer(){
+        if(Validator::isLoggedIn()){
+            return ($_SESSION["userType"]) == "employer";
+        }
+    }
+
+     /**
+     * This function is used to check if a jobapplicant is logged into the system.
+     * @return bool true if logged in, false otherwise. 
+     */
+    public static function isJobApplicant(){
+        if(Validator::isLoggedIn()){
+            return ($_SESSION["userType"]) == "jobapplicant";
+        }
+    }
+
+     /**
+     * This function is used to check if someone owns a resource, i.e profile or job listing.
+     * @param int the ID of the user. 
+     * @return bool true if owned, false otherwise. 
+     */
+    public static function ownsResource($resourceID){
+        if(Validator::isLoggedIn()){
+            return ($_SESSION["id"]) == $resourceID;
+        }
+    }
+
+    /**
      * This function is used to check if an employer has been logged in.
      * @param int $employerId The employer id to be checked.
      * @return bool true if an employer has not logged in, false otherwise. 
@@ -197,4 +238,7 @@ class Validator
         //matches the provided company name ($jobAdCompanyName) of the job advertisement
         return $_SESSION["name"] === $jobAdCompanyName;
     }
+
+
+
 }

@@ -9,6 +9,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $applicantToGet = (int)$_GET["id"];
 }
 $jobApplicantView = new JobApplicantEditModel($applicantToGet);
+if(!Validator::isLoggedIn() || !Validator::isJobApplicant() || !Validator::ownsResource($applicantToGet)){
+    header("location: ./index.php");
+    exit();
+}
 ?>
 
 <div class="container">
