@@ -3,8 +3,9 @@ include "models/employer/employer.model.php";
 include "models/employer/employer.viewModel.php";
 require_once "/xampp/htdocs/jobbsokesystem/library/errorhandler.php";
 require_once "/xampp/htdocs/jobbsokesystem/library/languages/lang.php";
-if (!isset($_GET["id"])) {
-    header("location: index.php");
+if (!Validator::isLoggedIn()) {
+    header("location: ./index.php");
+    exit();
 }
 $employerToGet = isset($_GET["id"]) ? $_GET["id"] : 1;
 $employerView = new EmployerViewModel($employerToGet);
@@ -40,8 +41,7 @@ $employerView = new EmployerViewModel($employerToGet);
                 <div class="tab-pane fade show active" id="nav-profile" role="tabpanel" aria-labelledby="nav-home-tab">
                     <!--Må fikse knappen senere-->
                     <div>
-                        <?php if ($_SESSION["userType"] == "employer" && $_SESSION["id"] == $employerView->getEmployer_id()) {
-                        ?>
+                        <?php if(Validator::isLoggedIn() && Validator::isEmployer() && Validator::ownsResource($employerView->getEmployer_id())){?>
                             <a class=" btn editProfileButton" href='editcompanyprofile.php?id=<?php echo $employerView->getEmployer_id(); ?>'>Rediger Profil</a>
                         <?php } else {
                             echo " <button type='button' class='editProfileButton mt-3's> Send mail</button>";

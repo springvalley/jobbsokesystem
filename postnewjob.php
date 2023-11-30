@@ -17,8 +17,12 @@ require_once "/xampp/htdocs/jobbsokesystem/library/languages/lang.php";
                 <h1><?php echo translate("new_job_ad_title") ?></h1>
                 <?php
                 $joblisting = new JobListingView();
-                if (isset($_SESSION["id"]) && $_SESSION["userType"] === "employer") {
+                if (Validator::isLoggedIn() && Validator::isEmployer()) {
                     $employerId = $_SESSION["id"];
+                }else{
+                    ErrorHandler::setError("Du må være logget inn for å poste en ny jobb");
+                    header("location: ./index.php");
+                    exit();
                 }
                 ErrorHandler::displayError();
                 $jobTitle = isset($_SESSION["dataInputForPostNewJob"]["jobTitle"]) ? $_SESSION["dataInputForPostNewJob"]["jobTitle"] : '';

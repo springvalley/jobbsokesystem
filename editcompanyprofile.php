@@ -3,15 +3,12 @@ include "models/employer/employer.model.php";
 include "models/employer/employer.editModel.php";
 require_once "/xampp/htdocs/jobbsokesystem/library/errorhandler.php";
 require_once "/xampp/htdocs/jobbsokesystem/library/languages/lang.php";
-/*
-if (!isset($_GET["id"]) || $_SESSION["userType"] != "employer") {
-    header("location: index.php");
-    exit();
-}*/
+
+
 $employerToGet = isset($_GET["id"]) ? $_GET["id"] : 1;
 $employerView = new EmployerEditModel($employerToGet);
-if ($_SESSION["id"] != $employerView->getEmployer_id()) {
-    header("location: jobapplicant.php");
+if(!Validator::isLoggedIn() || !Validator::isEmployer() || !Validator::ownsResource($employerToGet)){
+    header("location: ./index.php");
     exit();
 }
 ?>

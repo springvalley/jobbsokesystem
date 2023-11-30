@@ -78,14 +78,6 @@ class EmployerController
             exit();
         }
     }
-
-    public function delete($id)
-    {
-    }
-
-    public function display($id)
-    {
-    }
 }
 
 $init = new EmployerController();
