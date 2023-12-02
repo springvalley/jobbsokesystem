@@ -15,8 +15,8 @@ require_once "/xampp/htdocs/jobbsokesystem/library/errorhandler.php";
 class JobListingController
 {
 
-/**
-     * This function is used to get job advertisements based on certain filters.
+    /**
+     * This function is used to filter job advertisements based on selected location, industry and job type.
      * @param int $locationFilter - An integer  value corresponding to a location_id in the database
      * @param int $industryFilter - An integer  value corresponding to a industry_id in the database
      * @param int $jobTypeFilter - An integer  value corresponding to a jobtype_id in the database
@@ -151,10 +151,9 @@ class JobListingController
         }
     }
 
-      /**
-     * This function is used to delete a job listing in the database.
+    /**
+     * This function is used to delete a job advertisement.
      */
-
     public function deleteJobAd()
     {
         if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["jobListing_id"])) {
@@ -179,8 +178,8 @@ class JobListingController
 
     /**
      * This private function is used to validate data input to the form for both "createNewJobAd" and "editJobAd".
-     * @param $data The data input to the form.
-     * @param $redirection The redirectURL.
+     * @param mixed $data The data input to the form.
+     * @param mixed $redirection The redirectURL.
      */
     private function validateJobAdInputForm($data, $redirection)
     {

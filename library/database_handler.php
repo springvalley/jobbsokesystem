@@ -37,7 +37,7 @@ class DB_Handler
         }
     }
 
-      /**
+    /**
      * This function is used to prepare a SQL statement for execution.
      * @param string $sql The SQL statement to be prepared. 
      * @return void
@@ -47,7 +47,7 @@ class DB_Handler
         $this->stmt = $this->dbh->prepare($sql);
     }
 
-      /**
+    /**
      * This function is used to bind parameters to the PDO statement. 
      * @param mixed $param The parameter to bind. 
      * @param mixed $value The value to bind to the parameter
@@ -80,34 +80,37 @@ class DB_Handler
      * @return boolean True or false based on if the prepared statement executede successfully.
      */
 
-    public function execute(){
+    public function execute()
+    {
         return $this->stmt->execute();
     }
 
-      /**
+    /**
      * This function is used to fetch multiple rows of data from a database. 
      * @return array|boolean An array of objects or false if no rows were found.
      */
-    public function fetchMultiRow(){
+    public function fetchMultiRow()
+    {
         $this->execute();
         return $this->stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
-      /**
+    /**
      * This function is used to fetch a single row of data from the database.
      * @return mixed A single object or false if no rows were found.
      */
-    public function fetchSingleRow(){
+    public function fetchSingleRow()
+    {
         $this->execute();
         return $this->stmt->fetch(PDO::FETCH_OBJ);
     }
 
-      /**
+    /**
      * This function is used to retrieve the rowcount of the previously executed statement.
      * @return int The number of rows affected by the previous SQL statement.
      */
-    public function rowCount(){
+    public function rowCount()
+    {
         return $this->stmt->rowCount();
     }
-
 }

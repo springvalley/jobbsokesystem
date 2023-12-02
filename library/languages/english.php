@@ -49,13 +49,12 @@ $lang = array(
     "download_resume_button" => "Download CV",
 
     //Applyjob
-    "apply_for" => "Apply for:",
+    "apply_for_position" => "Apply for a position:",
     "motivational_text_label" => "Cover letter",
     "motivational_text_placeholder" => "Why would you like to work for us?",
-    "autofill" => "Autofill your information",
     "last_position_label" => "Current or last position",
-    "upload_otherDocuments_label" => "Upload other documents",
-    "apply_button" => "Apply!",
+    "upload_diploma_label" => "Upload your diploma",
+
 
     //companydashboard
     "company_profile_label" => "Company profile",
@@ -96,6 +95,7 @@ $lang = array(
     //editprofile
 
     "save_button" => "Save changes",
+    "download_cv_label" => "CV",
 
 
     //Placeholder texts
@@ -117,5 +117,7 @@ $lang = array(
     //buttons
     "goBack" => "Back",
     "viewAllJobApplications" => "View Job Applications",
+    "apply_button" => "Send application",
+    "autofill_button" => "Autofill your information",
 
 );

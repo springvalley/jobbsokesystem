@@ -1,7 +1,7 @@
 <?php include "components/header.php";
 include "models/jobApplicant/jobApplicant.model.php";
 include "models/jobApplicant/jobApplicant.viewModel.php";
-require_once "/xampp/htdocs/jobbsokesystem/library/errorhandler.php"; 
+require_once "/xampp/htdocs/jobbsokesystem/library/errorhandler.php";
 require_once "/xampp/htdocs/jobbsokesystem/library/languages/lang.php";
 
 if (!Validator::isLoggedIn()) {
@@ -13,82 +13,113 @@ $jobApplicantView = new JobApplicantViewModel($applicantToGet);
 <div class="container">
     <div class="flex-container">
         <div>
-            <div class="goBackLink mb-3">
+            <!-- <div class="goBackLink mb-3">
                 <i class="fa-solid fa-angle-left"></i>
                 <a href="foremployer.php">Tilbake søkeresultat</a>
-            </div>
+            </div> -->
         </div>
         <div>
             <?php if (Validator::isLoggedIn() && Validator::ownsResource($jobApplicantView->getApplicantID()) && Validator::isJobApplicant()) { ?>
                 <form action="editapplicantprofile.php" method="post">
                     <input type="hidden" name="applicant_id" value=<?php echo $jobApplicantView->getApplicantID() ?>>
-                    <button type="submit" class="editProfileButton"><?php echo translate("edit_profile_button")?></button>
+                    <button type="submit" class="editProfileButton"><?php echo translate("edit_profile_button") ?></button>
                 </form>
             <?php  } ?>
         </div>
     </div>
     <?php ErrorHandler::displayError() ?>
     <?php ErrorHandler::displaySuccess() ?>
-    <div class="row">
-        <div class="col-md-3 applicantProfile">
-            <img src="img\test.jpg">
-            <div class="contactInfo">
-                <p><?php echo translate("name_label")?>: <?php echo $jobApplicantView->getName() ?></p>
-                <p><?php echo translate("phone_label")?>: <?php echo $jobApplicantView->getPhoneNumber() ?></p>
-                <p><?php echo translate("email_label")?>: <?php echo $jobApplicantView->getEmail() ?></p>
-                <p><?php echo translate("location")?>: <?php echo $jobApplicantView->getLocation_name() ?></p>
+    <div class="row justify-content-center">
+        <div class="row">
+            <!--Profile card start-->
+            <div class="col-md-4 grid-margin w-10">
+                <div class="card">
+                    <div class="profile-card">
+                        <div class="profile-header">
+                            <div class="profilePicture">
+                                <img src="http://localhost/jobbsokesystem/assets/uploadFiles/<?php echo urlencode(basename($jobApplicantView->getProfileImage())); ?>" class="img img-fluid">
+                            </div>
+                        </div>
+                        <div class="profile-content m-3">
+                            <div class="header">
+                                <?php echo translate("name_label") ?>: <?php echo $jobApplicantView->getName() ?>
+                            </div>
+                            <div class="header">
+                                <?php echo translate("phone_label") ?>:
+                                <?php echo $jobApplicantView->getPhoneNumber() ?>
+                            </div>
+                            <div class="header">
+                                <?php echo translate("email_label") ?>: <?php echo $jobApplicantView->getEmail() ?>
+                            </div>
+                            <div class="header">
+                                <?php echo translate("location") ?>: <?php echo $jobApplicantView->getLocation_name() ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="col-md-9 profile-info">
-            <div class="CV-header">
-                <p><?php echo translate("summary")?>:</p>
-            </div>
-            <p> <?php
-                $data = $jobApplicantView->getSummary();
-                if ($data) {
-                    echo $data;
-                } else {
-                    echo "Det er ikke et sammendrag om deg registrert i vår database.";
-                }
-                echo $jobApplicantView->getSummary() ?></p>
-            <div class="CV-header">
-                <p><?php echo translate("skills")?>:</p>
-            </div>
-            <p>
-            <ul>
-                <?php
-                $data = $jobApplicantView->getSkills();
-                if (count($data) > 0) {
-                    foreach ($data as $row) {
-                        echo "<li><span style='font-weight:bold'>" . $row->skill_name . "</span></li>";
-                    }
-                } else {
-                    echo "Ingen kompetanse er registrert i vår database.";
-                }
-                ?>
-            </ul>
-            </p>
-            <div class="CV-header">
-                <p><?php echo translate("education")?>:</p>
-            </div>
-            <p>
-                <?php
-                $data = $jobApplicantView->getEducation();
-                if ($data) {
-                    echo $data->educationlevel_name;
-                } else {
-                    echo "Ingen utdanning er registrert i vår database.";
-                }
-                ?>
-            </p>
-            <div class="CV-header">
-                <p>CV</p>
-                <form>
-                    <button type="submit" class="btn btn-success"><?php echo translate("download_resume_button")?>:</button>
-                </form>
-            </div>
+            <!--Profile card end-->
+            <div class="col-md-8 grid-margin">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <p class="card-title font-weight-bold"><?php echo translate("summary") ?></p>
+                                <p class="content">
+                                    <?php
+                                    $data = $jobApplicantView->getSummary();
+                                    if ($data) {
+                                        echo $data;
+                                    } else {
+                                        echo "Det er ikke et sammendrag om deg registrert i vår database.";
+                                    }
+                                    echo $jobApplicantView->getSummary()
+                                    ?>
+                                </p>
+                                <hr>
+                            </div>
+                        </div>
+                        <p class="card-title"><?php echo translate("skills") ?></p>
+                        <p>
+                        <ul>
+                            <?php
+                            $data = $jobApplicantView->getSkills();
+                            if (count($data) > 0) {
+                                foreach ($data as $row) {
+                                    echo "<li><span>" . $row->skill_name . "</span></li>";
+                                }
+                            } else {
+                                echo "Ingen kompetanse er registrert i vår database.";
+                            }
+                            ?>
+                        </ul>
+                        </p>
+                        <hr>
+                        <p class="card-title"><?php echo translate("education") ?></p>
+                        <p class="content">
+                            <?php
+                            $data = $jobApplicantView->getEducation();
+                            if ($data) {
+                                echo $data->educationlevel_name;
+                            } else {
+                                echo "Ingen utdanning er registrert i vår database.";
+                            }
+                            ?>
+                        </p>
+                        <hr>
+                        <p class="header"><?php echo translate("download_cv_label") ?></p>
+                        <a href="http://localhost/jobbsokesystem/assets/uploadFiles/<?php echo urlencode(basename($jobApplicantView->getCVFile())); ?>" target="_blank">
+                            <li class="list-group-item mt-2"><b>Se din CV </b><i class='fa-solid fa-eye'></i>
+                            </li>
+                        </a>
 
+
+
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+</div>
 </div>
 <?php include "components/footer.php" ?>

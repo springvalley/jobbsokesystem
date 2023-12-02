@@ -21,30 +21,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["jobApplicationId"])) {
 //Check if there is an 'id' parameter in the GET request.
 if (isset($_GET["id"])) {
     $jobApplicationId = htmlspecialchars($_GET["id"]);
-    $jobApplicationDetail = $jobApplicationView->fetchJobApplication($jobApplicationId);
+    $jobApplicationDetails = $jobApplicationView->fetchJobApplicationDetails($jobApplicationId);
 } else {
     header("Location: index.php");
     exit();
 }
-if (!$jobApplicationDetail) {
+if (!$jobApplicationDetails) {
     header("Location: index.php");
     exit();
 }
 
 $isLoggedInAsEmployer = Validator::isLoggedInAsEmployer();
-$isJobAdOwner = Validator::isJobAdOwner($jobApplicationDetail->company_name);
+$isJobAdOwner = Validator::isJobAdOwner($jobApplicationDetails->company_name);
 ?>
 <div class="container">
     <div class="goBackLink">
         <i class="fa-solid fa-angle-left"></i>
-        <?php echo '<a ' . ($isLoggedInAsEmployer && $isJobAdOwner ? 'href="listcompanyjobapplications.php?id=' . $jobApplicationDetail->jobListing_id . '"' : 'href="myJobApplications.php"') . '>Tilbake</a>'; ?>
+        <?php echo '<a ' . ($isLoggedInAsEmployer && $isJobAdOwner ? 'href="listcompanyjobapplications.php?id=' . $jobApplicationDetails->jobListing_id . '"' : 'href="myJobApplications.php"') . '>Tilbake</a>'; ?>
     </div>
     <div class="row justify-content-center">
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
             <input type="hidden" name="jobApplicationId" value="<?php echo $jobApplicationId; ?>">
             <div class="row">
                 <div class="job-title">
-                    <p> Søknad på stilling som: <?php echo $jobApplicationDetail->position_name; ?></p>
+                    <p> Søknad på stilling som: <?php echo $jobApplicationDetails->position_name; ?></p>
                 </div>
                 <div class="col-md-4 grid-margin w-10">
                     <div class="card">
@@ -52,15 +52,16 @@ $isJobAdOwner = Validator::isJobAdOwner($jobApplicationDetail->company_name);
                             <!--NEED TO BE FIXED. GET UPLOADED PROFILE PICTURE FROM JOBSEEKER -->
                             <div class="profile-header">
                                 <div class="profilePicture">
-                                    <img src="./img/joseph_profile_image.jpg" class="img img-fluid">
+                                    <img src="http://localhost/jobbsokesystem/assets/uploadFiles/<?php echo urlencode(basename($jobApplicationDetails->profile_picture)); ?>"
+                                        class="img img-fluid">
                                 </div>
                             </div>
 
                             <div class="profile-content m-3">
-                                <div class="header">Fullnavn: <?php echo $jobApplicationDetail->name; ?></div>
-                                <div class="header">Telefonnr.: <?php echo $jobApplicationDetail->phone_number; ?>
+                                <div class="header">Fullnavn: <?php echo $jobApplicationDetails->name; ?></div>
+                                <div class="header">Telefonnr.: <?php echo $jobApplicationDetails->phone_number; ?>
                                 </div>
-                                <p class="header">E-post: <?php echo $jobApplicationDetail->email; ?></p>
+                                <p class="header">E-post: <?php echo $jobApplicationDetails->email; ?></p>
                             </div>
                         </div>
                     </div>
@@ -71,34 +72,41 @@ $isJobAdOwner = Validator::isJobAdOwner($jobApplicationDetail->company_name);
                             <div class="row">
                                 <div class="col-9">
                                     <p class="card-title font-weight-bold">Kandidat nr.:
-                                        <?php echo $jobApplicationDetail->jobApplicant_id; ?> </p>
+                                        <?php echo $jobApplicationDetails->jobApplicant_id; ?> </p>
                                 </div>
                                 <?php
                                 $statusClass = "";
-                                if (isset($jobApplicationDetail->application_status_name)) {
-                                    if ($jobApplicationDetail->application_status_name === "Avslag") {
+                                if (isset($jobApplicationDetails->application_status_name)) {
+                                    if ($jobApplicationDetails->application_status_name === "Avslag") {
                                         $statusClass = "statusReject";
                                     }
                                 }
                                 ?>
                                 <div class="col-3 applicationStatusBadge <?php echo $statusClass; ?>">
                                     <p>
-                                        <?php echo $jobApplicationDetail->application_status_name; ?>
+                                        <?php echo $jobApplicationDetails->application_status_name; ?>
                                     </p>
                                 </div>
                             </div>
                             <hr>
                             <p class="header">Søknadsbrev</p>
-                            <p class="content"><?php echo $jobApplicationDetail->cover_letter; ?></p>
+                            <p class="content"><?php echo $jobApplicationDetails->cover_letter; ?></p>
                             <p class="header">Utdanningsnivå:</p>
-                            <p class="content"> <?php echo $jobApplicationDetail->educationlevel_name; ?>
+                            <p class="content"> <?php echo $jobApplicationDetails->educationlevel_name; ?>
                             </p>
                             <p class="header">Dokumenter</p>
                             <ul list-group list-group-flush>
-                                <li class="list-group-item mt-2"><b>Last ned CV her
-                                        <?php echo $jobApplicationDetail->cv_path; ?> </b> <i class="fa-solid fa-download"></i></li>
-                                <li class="list-group-item mt-2"><b>Last ned søknadsbrev her</b><i class="fa-solid fa-download"></i></li>
-                                <li class="list-group-item mt-2"><b>Last ned diploma her </b><i class="fa-solid fa-download"></i></li>
+                                <a href="http://localhost/jobbsokesystem/assets/uploadFiles/<?php echo urlencode(basename($jobApplicationDetails->cv_path)); ?>"
+                                    download>
+                                    <li class="list-group-item mt-2"><b>Last ned CV </b><i
+                                            class='fa-solid fa-download'></i></li>
+                                </a>
+
+                                <a href="http://localhost/jobbsokesystem/assets/uploadFiles/<?php echo urlencode(basename($jobApplicationDetails->diploma_path)); ?>"
+                                    download>
+                                    <li class="list-group-item mt-2"><b>Last ned diplom </b><i
+                                            class='fa-solid fa-download'></i></li>
+                                </a>
                             </ul>
 
                         </div>

@@ -16,13 +16,13 @@ class JobApplicationModel
                         a.application_status_name, jl.position_name, jl.published_time, jl.application_deadline, 
                         e.company_name, l.location_name, i.industry_name, jl.jobListing_id, jt.jobType
                         FROM jobapplication AS ja
-                        JOIN joblisting AS jl ON ja.jobListing_id = jl.jobListing_id
-                        JOIN jobapplicant AS j ON ja.jobApplicant_id = j.jobApplicant_id
-                        JOIN employer AS e ON jl.employer_id = e.employer_id
-                        JOIN location AS l ON jl.location_id = l.location_id
-                        JOIN industry AS i ON jl.industry_id = i.industry_id
-                        JOIN jobtype AS jt ON jl.jobType_id = jt.jobType_id
-                        JOIN applicationstatus AS a ON ja.application_status_id = a.application_status_id        
+                        INNER JOIN joblisting AS jl ON ja.jobListing_id = jl.jobListing_id
+                        INNER JOIN jobapplicant AS j ON ja.jobApplicant_id = j.jobApplicant_id
+                        INNER JOIN employer AS e ON jl.employer_id = e.employer_id
+                        INNER JOIN location AS l ON jl.location_id = l.location_id
+                        INNER JOIN industry AS i ON jl.industry_id = i.industry_id
+                        INNER JOIN jobtype AS jt ON jl.jobType_id = jt.jobType_id
+                        INNER JOIN applicationstatus AS a ON ja.application_status_id = a.application_status_id        
                         WHERE ja.jobListing_id = :jobListing_id
                         ORDER BY ja.apply_date DESC");
         // $this->db->bind(":employer_id", $employer_id);
@@ -37,10 +37,10 @@ class JobApplicationModel
         }
     }
 
-    public function getJobApplication($jobApplication_id)
+    public function getJobApplicationDetails($jobApplication_id)
     {
         $this->db->query("SELECT ja.*, jl.position_name, jl.published_time, jl.application_deadline, a.application_status_name,
-        e.company_name, l.location_name, i.industry_name, jl.jobListing_id, jt.jobType, j.jobApplicant_id, j.name, j.email, j.phone_number, el.educationlevel_name
+        e.company_name, l.location_name, i.industry_name, jl.jobListing_id, jt.jobType, j.jobApplicant_id, j.name, j.email, j.phone_number, j.profile_picture, el.educationlevel_name
                         FROM jobapplication AS ja 
                         INNER JOIN joblisting AS jl ON ja.jobListing_id = jl.jobListing_id                       
                         INNER JOIN employer AS e ON jl.employer_id = e.employer_id

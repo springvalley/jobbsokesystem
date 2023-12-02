@@ -38,8 +38,15 @@ require_once "/xampp/htdocs/jobbsokesystem/views/JobApplicationView.php";
                 </div>
                 <div class="col-5">
                     Bransje: ' . '<b>' . $jobApplication->industry_name . '</b>
-                </div>
-                <div class="col-2 applicationStatusBadge">
+                </div>';
+            $statusClass = "";
+            if (isset($listJobApplication->application_status_name)) {
+                if ($listJobApplication->application_status_name === "Avslag") {
+                    $statusClass = "statusReject";
+                }
+            }
+            echo '
+                <div class="col-2 applicationStatusBadge' . $statusClass . '">
                     ' . $jobApplication->application_status_name . '
                 </div>
 

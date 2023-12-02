@@ -8,10 +8,11 @@ class JobApplicantViewModel extends JobApplicantModel
     private $phoneNumber;
     private $location_name;
     private $summary;
-    private $profilePicture;
     private $skills = array();
     private $educationData;
     private $allData;
+    private $profileImage;
+    private $cvFile;
 
     public function __construct($jobApplicant_id)
     {
@@ -24,7 +25,8 @@ class JobApplicantViewModel extends JobApplicantModel
         $this->phoneNumber = $jobApplicantData->phone_number;
         $this->location_name = $jobApplicantData->location_name;
         $this->summary = $jobApplicantData->summary;
-        $this->profilePicture = $jobApplicantData->location_name;
+        $this->profileImage = $jobApplicantData->profile_picture;
+        $this->cvFile = $jobApplicantData->cv_path;
         $this->educationData =  $this->getEducationData($jobApplicant_id);
         $this->skills = $this->getSkillData($jobApplicant_id);
     }
@@ -35,7 +37,8 @@ class JobApplicantViewModel extends JobApplicantModel
         return $this->allData;
     }
 
-    public function getApplicantID(){
+    public function getApplicantID()
+    {
         return $this->jobApplicant_id;
     }
 
@@ -66,13 +69,20 @@ class JobApplicantViewModel extends JobApplicantModel
     {
         return $this->summary;
     }
-    public function getProfilePicture()
-    {
-        return $this->profilePicture;
-    }
+
 
     public function getSkills()
     {
         return $this->skills;
+    }
+
+    public function getProfileImage()
+    {
+        return $this->profileImage;
+    }
+
+    public function getCVFile()
+    {
+        return $this->cvFile;
     }
 }

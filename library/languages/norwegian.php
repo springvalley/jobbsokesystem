@@ -47,13 +47,12 @@ $lang = array(
     "download_resume_button" => "Last ned CV",
 
     //Applyjob
-    "apply_for" => "Søk på stilling som:",
+    "apply_for_position" => "Søk på stilling som:",
     "motivational_text_label" => "Motivasjonsbrev",
     "motivational_text_placeholder" => "Hvorfor vil du jobbe for oss?",
-    "autofill" => "Autofyll",
     "last_position_label" => "Nåværende eller siste stilling",
     "upload_motivation_label" => "Last opp motivasjonsbrev",
-    "apply_button" => "Søk på jobben!",
+
 
     //companydashboard
     "company_profile_label" => "Bedriftsprofil",
@@ -67,8 +66,8 @@ $lang = array(
     "contact_button" => "Kontakt oss",
 
     //editprofile
-
     "save_button" => "Lagre endringer",
+    "download_cv_label" => "CV",
 
     //Jobdetails
     "edit_jobad_button" => " Redigere",
@@ -83,7 +82,7 @@ $lang = array(
     "phone_label" => "Telefonnummer",
     "location_label" => "Velg sted",
     "education_label" => "Velg utdannelse",
-    "cv_label" => "Last opp CV",
+    "cv_label" => "Last opp din CV",
     "employer_name_label" => "Bedriftsnavn",
     "orgnumber_label" => "Organisasjonsnummer",
     "industry_label" => "Hvilken industri jobber dere i?",
@@ -94,6 +93,7 @@ $lang = array(
     "jobdescription_placeholder" => "Skriv litt om jobben",
     "publish_button" => "Publiser",
     "new_job_ad_title" => "Lag en ny jobbannonse",
+    "upload_diploma_label" => "Last opp ditt diplom",
 
 
     //Placeholder texts
@@ -115,6 +115,8 @@ $lang = array(
     //Buttons
     "goBack" => "Tilbake",
     "viewAllJobApplications" => "Se Alle Jobbsøknader",
+    "apply_button" => "Send jobbsøknad",
+    "autofill_button" => "Autofyll din informasjon",
 
 
 );

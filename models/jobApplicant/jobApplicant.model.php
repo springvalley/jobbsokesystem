@@ -29,15 +29,9 @@ class JobApplicantModel
     {
 
         //Prepare the sql query
-        $this->db->query("UPDATE jobapplicant SET 
-        name=:name,
-        email=:email, 
-        phone_number=:phone_number,
-        location_id=:location_id,
-        summary=:summary,
-        educationlevel_id=:educationlevel_id
-        WHERE jobapplicant_id = :jobapplicant_id;
-        ");
+        $this->db->query("UPDATE jobapplicant SET name = :name, email=:email, phone_number=:phone_number, location_id=:location_id, 
+                        summary=:summary, educationlevel_id=:educationlevel_id, profile_picture = :profileImage , cv_path = :cvFile 
+                        WHERE jobapplicant_id = :jobapplicant_id; ");
 
         //Bind the variables to the data array
         $this->db->bind(":name", $data["userName"]);
@@ -47,6 +41,8 @@ class JobApplicantModel
         $this->db->bind(":summary", $data["userSummary"]);
         $this->db->bind(":educationlevel_id", $data["userEducationLevel"]);
         $this->db->bind(":jobapplicant_id", $data["jobApplicant_id"]);
+        $this->db->bind(":profileImage", $data["profileImage"]);
+        $this->db->bind(":cvFile", $data["cv"]);
 
         //Execute the statement
         $this->db->execute();
@@ -110,7 +106,7 @@ class JobApplicantModel
      */
     protected function getJobApplicantProfile($jobApplicantID)
     {
-        $this->db->query("SELECT ja.jobApplicant_id, ja.name, ja.email, ja.phone_number, ja.summary, l.location_name FROM jobapplicant as ja INNER JOIN location as l on ja.location_id = l.location_id WHERE ja.jobApplicant_id = :jobapplicant_id");
+        $this->db->query("SELECT ja.jobApplicant_id, ja.name, ja.email, ja.phone_number, ja.summary, ja.profile_picture, cv_path, l.location_name FROM jobapplicant as ja INNER JOIN location as l on ja.location_id = l.location_id WHERE ja.jobApplicant_id = :jobapplicant_id");
         $this->db->bind(":jobapplicant_id", $jobApplicantID);
         $row = $this->db->fetchSingleRow();
         if ($this->db->rowCount() > 0) {
@@ -188,6 +184,18 @@ class JobApplicantModel
         }
     }
 
+    public function getExistingFiles($jobApplicantID)
+    {
+        $this->db->query("SELECT profile_picture, cv_path FROM jobapplicant WHERE jobapplicant_id = :jobapplicant_id");
+        $this->db->bind(":jobapplicant_id", $jobApplicantID);
+        $row = $this->db->fetchSingleRow();
+        if ($this->db->rowCount() > 0) {
+            return $row;
+        } else {
+            return false;
+        }
+    }
+
     /**
      * This function is used to make a new jobapplication.
      * @param mixed $data the data for the jobapplication that is to  be made.
@@ -196,11 +204,14 @@ class JobApplicantModel
 
     public function applyToJob($data)
     {
-        $this->db->query("INSERT INTO jobapplication(jobApplicant_id, jobListing_id, current_or_lastJob, cover_letter, application_status_id) VALUES (:jobApplicant_id, :jobListing_id, :lastJob, :cover_letter, 1)");
+        $this->db->query("INSERT INTO jobapplication(jobApplicant_id, jobListing_id, current_or_lastJob, cover_letter, cv_path, diploma_path, application_status_id) 
+        VALUES (:jobApplicant_id, :jobListing_id, :lastJob, :cover_letter, :cv_path, :diploma_path, 1)");
         $this->db->bind(":jobApplicant_id", $data["jobApplicant_id"]);
         $this->db->bind(":jobListing_id", $data["jobListing_id"]);
         $this->db->bind(":lastJob", $data["lastJob"]);
         $this->db->bind(":cover_letter", $data["coverletter"]);
+        $this->db->bind(":cv_path", $data["cvFile"]);
+        $this->db->bind(":diploma_path", $data["diplomaFile"]);
 
         if ($this->db->execute()) {
             return true;

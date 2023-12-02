@@ -4,14 +4,13 @@ require_once "/xampp/htdocs/jobbsokesystem/library/database_handler.php";
 require_once "/xampp/htdocs/jobbsokesystem/library/validator.php";
 require_once "/xampp/htdocs/jobbsokesystem/models/jobApplicant/jobApplicant.model.php";
 require_once "/xampp/htdocs/jobbsokesystem/library/errorhandler.php";
+require_once "/xampp/htdocs/jobbsokesystem/library/FileUploadHandler.php";
 
 class JobApplicantController
 {
 
     /**
-     * This function is used to edit an jobapplicant in the database.
-     * @param  
-     * @return
+     * This function is used to edit profile of jobapplicant.     
      */
     public function edit()
     {
@@ -40,7 +39,6 @@ class JobApplicantController
             exit();
         }
 
-
         //Validate a valid name
         if (!Validator::isNameValid($data["userName"])) {
             ErrorHandler::setError(ErrorHandler::$invalidNameError);
@@ -54,15 +52,41 @@ class JobApplicantController
             exit();
         }
 
-
         //Validate a valid email
         if (!Validator::isEmailValid($data["userEmail"])) {
             ErrorHandler::setError(ErrorHandler::$invalidEmailError);
             header("location: ../editapplicantprofile.php?id=" . (int)$data["jobApplicant_id"]);
             exit();
         }
+        $profileImage = $_FILES["profileImage"];
+        $cvFile = $_FILES["cv"];
 
-    
+
+        if (!empty($profileImage["tmp_name"]) && !empty($cvFile["tmp_name"])) {
+            $cvFilePath = FileUploadHandler::uploadFile($cvFile);
+            $profileImageFilePath = FileUploadHandler::uploadFile($profileImage);
+            if ($cvFilePath === false && $profileImageFilePath === false) {
+                ErrorHandler::setError("Filer kan ikke bli lastet opp. Vennligst, prøv igjen!");
+                header("location: ../editapplicantprofile.php?id=" . (int)$data["jobApplicant_id"]);
+                exit();
+            }
+
+            //The file path of CV and diploma are stored in the '$data' array if the files are successfully uploaded.
+            $data["profileImage"] = $profileImageFilePath;
+            $data["cv"] = $cvFilePath;
+        } else {
+            //Get the existing files that are already uploaded
+            $existingFiles = $model->getExistingFiles($data["jobApplicant_id"]);
+            // Check if the files are already uploaded, so retrieve the existing file 
+            //instead of asking upload new files every time user edit profile.
+            if ($existingFiles) {
+                $data["profileImage"] = $existingFiles->profile_picture;
+                $data["cv"] = $existingFiles->cv_path;
+            } else {
+                ErrorHandler::setError("Du har ikke lastet opp noen filer på din profil.");
+                header("location: ../applicantprofile.php?id=" . (int)$data["jobApplicant_id"]);
+            }
+        }
 
         //Update db using model
         //Redirect user to profile if successful, if else redirect to other page with errormessages
@@ -84,6 +108,9 @@ class JobApplicantController
      * @return
      */
 
+    /**
+     * This function is used to apply for a job.
+     */
     public function applyToJob()
     {
         $model = new JobApplicantModel();
@@ -96,7 +123,7 @@ class JobApplicantController
             "userEmail" => htmlspecialchars(trim($_POST["email"])),
             "lastJob" => htmlspecialchars(trim($_POST["lastJob"])),
             "coverletter" => htmlspecialchars(trim($_POST["coverletter"])),
-            "userEducationLevel" => htmlspecialchars(trim($_POST["education"]))
+            "userEducationLevel" => htmlspecialchars(trim($_POST["education"])),
         ];
 
         //Validate empty inputs
@@ -128,16 +155,36 @@ class JobApplicantController
             exit();
         }
 
+
         if ($model->applicantHasAppliedToJob($data["jobListing_id"], $data["jobApplicant_id"])) {
             ErrorHandler::setError("Du har allerede søkt på denne jobben.");
             header("location: ../applyjob.php?id=" . (int)$data["jobListing_id"]);
             exit();
         }
 
+        $cvFile = $_FILES["cv"];
+        $diplomaFile = $_FILES["diploma"];
+        if (!empty($cvFile["tmp_name"]) && !empty($diplomaFile["tmp_name"])) {
+            //Call 'uploadFile' function from FileUploadHandler class
+            $cvFilePath = FileUploadHandler::uploadFile($cvFile);
+            $diplomaFilePath = FileUploadHandler::uploadFile($diplomaFile);
+            if ($cvFilePath === false && $diplomaFilePath === false) {
+                ErrorHandler::setError("Filer kan ikke bli lastet opp. Vennligst, prøv igjen!");
+                header("location: ../applyjob.php?id=" . (int)$data["jobListing_id"]);
+                exit();
+            }
+
+            //The file path of CV and diploma are stored in the '$data' array if the files are successfully uploaded.
+            $data["cvFile"] = $cvFilePath;
+            $data["diplomaFile"] = $diplomaFilePath;
+        } else {
+            ErrorHandler::setError("Vennligst, last opp CV og diplom!");
+            header("location: ../applyjob.php?id=" . (int)$data["jobListing_id"]);
+            exit();
+        }
 
         if ($model->applyToJob($data)) {
             ErrorHandler::setSuccess("Søknaden din ble opprettet!");
-            // header("location: ../applyjob.php?id=" . (int)$data["jobListing_id"]);
             header("Location: ../myJobApplications.php");
             exit();
         } else {
@@ -147,6 +194,7 @@ class JobApplicantController
         }
     }
 }
+
 
 $init = new JobApplicantController();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
