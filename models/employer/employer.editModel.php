@@ -1,4 +1,3 @@
-
 <?php
 require_once "/xampp/htdocs/jobbsokesystem/models/helpers.php";
 class EmployerEditModel extends EmployerModel
@@ -10,7 +9,7 @@ class EmployerEditModel extends EmployerModel
     private $phoneNumber;
     private $location_name;
     private $industry_name;
-    private $profilePicture;
+    private $profileImage;
     private $orgNumber;
     private $locations = array();
     private $summary;
@@ -27,7 +26,7 @@ class EmployerEditModel extends EmployerModel
         $this->phoneNumber = $jobApplicantData->phone_number;
         $this->location_name = $jobApplicantData->location_name;
         $this->industry_name = $jobApplicantData->industry_name;
-        $this->profilePicture = $jobApplicantData->location_name;
+        $this->profileImage = $jobApplicantData->profile_picture;
         $this->orgNumber = $jobApplicantData->orgNumber;
         $this->locations = $this->helper->getAllLocations();
         $this->summary = $jobApplicantData->summary;
@@ -39,7 +38,8 @@ class EmployerEditModel extends EmployerModel
     {
         return $this->allData;
     }
-    public function getLocations(){
+    public function getLocations()
+    {
         return $this->locations;
     }
 
@@ -52,28 +52,39 @@ class EmployerEditModel extends EmployerModel
     {
         return $this->company_name;
     }
+
     public function getEmail()
     {
         return $this->email;
     }
+
     public function getPhonenumber()
     {
         return $this->phoneNumber;
     }
+
     public function getLocation_name()
     {
         return $this->location_name;
     }
+
     public function getIndustryName()
     {
         return $this->industry_name;
     }
+
     public function getOrganizationNumber()
     {
         return $this->orgNumber;
     }
+
     public function getSummary()
     {
         return $this->summary;
+    }
+
+    public function getProfileImage()
+    {
+        return $this->profileImage;
     }
 }

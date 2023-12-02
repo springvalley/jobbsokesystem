@@ -9,13 +9,15 @@ class JobApplicantEditModel extends JobApplicantModel
     private $phoneNumber;
     private $location_name;
     private $summary;
-    private $profilePicture;
     private $skills = array();
     private $educationData;
     private $possibleEducations = array();
     private $locations = array();
     private $possibleSkills = array();
     private $allData;
+    private $profileImage;
+    private $cvFile;
+
 
     public function __construct($jobApplicant_id)
     {
@@ -29,7 +31,8 @@ class JobApplicantEditModel extends JobApplicantModel
         $this->phoneNumber = $jobApplicantData->phone_number;
         $this->location_name = $jobApplicantData->location_name;
         $this->summary = $jobApplicantData->summary;
-        $this->profilePicture = $jobApplicantData->location_name;
+        $this->profileImage = $jobApplicantData->profile_picture;
+        $this->cvFile = $jobApplicantData->cv_path;
         $this->educationData =  $this->getEducationData($jobApplicant_id);
         $this->skills = $this->getSkillData($jobApplicant_id);
         $this->locations = $this->helper->getAllLocations();
@@ -37,20 +40,24 @@ class JobApplicantEditModel extends JobApplicantModel
         $this->possibleEducations = $this->helper->getAllEducations();
     }
 
-    public function getPossibleEducations(){
+    public function getPossibleEducations()
+    {
         return $this->possibleEducations;
     }
 
-    public function getPossibleSkills(){
+    public function getPossibleSkills()
+    {
         return $this->possibleSkills;
     }
-    public function getLocations(){
+    public function getLocations()
+    {
         return $this->locations;
     }
 
-    public function getSkillNames(){
+    public function getSkillNames()
+    {
         $newArray = array();
-        foreach($this->skills as $skill){
+        foreach ($this->skills as $skill) {
             array_push($newArray, $skill->skill_name);
         }
         return $newArray;
@@ -62,7 +69,8 @@ class JobApplicantEditModel extends JobApplicantModel
         return $this->allData;
     }
 
-    public function getApplicantID(){
+    public function getApplicantID()
+    {
         return $this->jobApplicant_id;
     }
 
@@ -89,13 +97,20 @@ class JobApplicantEditModel extends JobApplicantModel
     {
         return $this->location_name;
     }
+
     public function getSummary()
     {
         return $this->summary;
     }
-    public function getProfilePicture()
+
+    public function getProfileImage()
     {
-        return $this->profilePicture;
+        return $this->profileImage;
+    }
+
+    public function getCVFile()
+    {
+        return $this->cvFile;
     }
 
     public function getSkills()
@@ -103,12 +118,14 @@ class JobApplicantEditModel extends JobApplicantModel
         return $this->skills;
     }
 
-    public function addSkill($id){
+    public function addSkill($id)
+    {
         array_push($this->skills, $id);
         var_dump($this->skills);
         exit();
     }
-    public function removeSKill($id){
+    public function removeSKill($id)
+    {
         //foreach
     }
 }

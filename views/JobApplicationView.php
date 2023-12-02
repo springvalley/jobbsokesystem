@@ -11,9 +11,9 @@ class JobApplicationView
         // $this->helper = new Helper();
     }
 
-    public function fetchJobApplication($jobApplication_id)
+    public function fetchJobApplicationDetails($jobApplication_id)
     {
-        $jobApplicationDetail = $this->jobApplicationModel->getJobApplication($jobApplication_id);
+        $jobApplicationDetail = $this->jobApplicationModel->getJobApplicationDetails($jobApplication_id);
         return $jobApplicationDetail;
     }
 

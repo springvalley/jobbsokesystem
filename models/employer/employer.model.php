@@ -1,5 +1,5 @@
-
 <?php
+
 /**
  * JobApplicantModel is a class responsible for for managing job applicant data in the database. 
  * It provides methods to update job applicant profiles, retrieve job applicant data, and manage their skills.
@@ -34,7 +34,8 @@ class EmployerModel
         email=:email, 
         phone_number=:phone_number,
         location_id=:location_id,
-        summary=:summary
+        summary=:summary,
+        profile_picture = :profileImage
         WHERE employer_id = :employer_id;
         ");
 
@@ -45,6 +46,7 @@ class EmployerModel
         $this->db->bind(":location_id", $data["userLocation"]);
         $this->db->bind(":summary", $data["userSummary"]);
         $this->db->bind(":employer_id", $data["employer_id"]);
+        $this->db->bind(":profileImage", $data["profileImage"]);
 
         //Execute the statement
         return ($this->db->execute());
@@ -56,7 +58,23 @@ class EmployerModel
      */
     protected function getEmployerProfile($employerID)
     {
-        $this->db->query("SELECT e.employer_id, e.company_name, e.orgNumber, e.email, e.phone_number, e.summary, l.location_name, i.industry_name FROM employer as e INNER JOIN location as l on e.location_id = l.location_id INNER JOIN industry as i on e.industry_id = i.industry_id WHERE e.employer_id = :employer_id");
+        $this->db->query("SELECT e.employer_id, e.company_name, e.orgNumber, e.email, e.phone_number, e.summary, e.profile_picture, l.location_name, i.industry_name 
+                            FROM employer as e 
+                            INNER JOIN location as l on e.location_id = l.location_id 
+                            INNER JOIN industry as i on e.industry_id = i.industry_id 
+                            WHERE e.employer_id = :employer_id");
+        $this->db->bind(":employer_id", $employerID);
+        $row = $this->db->fetchSingleRow();
+        if ($this->db->rowCount() > 0) {
+            return $row;
+        } else {
+            return false;
+        }
+    }
+
+    public function getExistingProfileImageFile($employerID)
+    {
+        $this->db->query("SELECT profile_picture FROM employer WHERE employer_id = :employer_id");
         $this->db->bind(":employer_id", $employerID);
         $row = $this->db->fetchSingleRow();
         if ($this->db->rowCount() > 0) {

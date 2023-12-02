@@ -3,8 +3,6 @@ require_once "/xampp/htdocs/jobbsokesystem/models/JobApplicationModel.php";
 require_once "/xampp/htdocs/jobbsokesystem/views/JobApplicationView.php";
 require_once "/xampp/htdocs/jobbsokesystem/views/JobListingView.php";
 require_once "/xampp/htdocs/jobbsokesystem/library/validator.php";
-
-
 ?>
 <div class="container">
     <div class="flex-container">
@@ -16,30 +14,27 @@ require_once "/xampp/htdocs/jobbsokesystem/library/validator.php";
         </div>
     </div>
     <h1>Jobbsøknader</h1>
-
     <?php
     echo "<br>";
-
-    // if (isset($_SESSION["id"]) && $_SESSION["userType"] === "employer") {
-    //     $employerId = $_SESSION["id"];
-    // }
-    // Validator::isLoggedInAsEmployer();
     $jobApplicationView = new JobApplicationView();
     $jobListingId = isset($_GET["id"]) ? htmlspecialchars($_GET["id"]) : null;
 
     $jobListingView = new JobListingView();
 
     $jobAdDetail = $jobListingView->fetchJobAdByJobListingId($jobListingId);
-
+    //Check if the logged-in user is not owner of job ad, so redirect user to index page.
     if (!Validator::isJobAdOwner($jobAdDetail->company_name)) {
         header("Location: index.php");
         exit();
     }
-
+    //Get list of job applications associated with the job ad.
     $listJobApplications = $jobApplicationView->fetchListJobApplicationsForEmployer($jobListingId);
+    // include "components/jobAdInfoHeader.php";
 
+
+    //List of job applications
     if (!$listJobApplications) {
-        echo "Du har ingen jobbsøknad.";
+        echo "Fant ingen jobbsøknad til denne jobbannonsen.";
     } else {
         foreach ($listJobApplications as $listJobApplication) {
             echo '<div class="card listJobApplicationCard">
@@ -50,8 +45,15 @@ require_once "/xampp/htdocs/jobbsokesystem/library/validator.php";
                 </div>
                 <div class="col-5">
                     Kandidatsnavn: ' . '<b>' . $listJobApplication->name . '</b>                 
-                </div>               
-                <div class="col applicationStatusBadge">
+                </div> ';
+            $statusClass = "";
+            if (isset($listJobApplication->application_status_name)) {
+                if ($listJobApplication->application_status_name === "Avslag") {
+                    $statusClass = "statusReject";
+                }
+            }
+            echo '             
+                <div class="col applicationStatusBadge ' . $statusClass . '">
                 ' . $listJobApplication->application_status_name . ' 
             </div>               
             </div>

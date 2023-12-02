@@ -160,38 +160,42 @@ class Validator
      * @return bool true if logged in, false otherwise. 
      */
 
-    public static function isLoggedIn(){
+    public static function isLoggedIn()
+    {
         return isset($_SESSION["id"]);
     }
 
-     /**
+    /**
      * This function is used to check if an employer is logged into the system.
      * @return bool true if logged in, false otherwise. 
      */
 
-    public static function isEmployer(){
-        if(Validator::isLoggedIn()){
+    public static function isEmployer()
+    {
+        if (Validator::isLoggedIn()) {
             return ($_SESSION["userType"]) == "employer";
         }
     }
 
-     /**
+    /**
      * This function is used to check if a jobapplicant is logged into the system.
      * @return bool true if logged in, false otherwise. 
      */
-    public static function isJobApplicant(){
-        if(Validator::isLoggedIn()){
+    public static function isJobApplicant()
+    {
+        if (Validator::isLoggedIn()) {
             return ($_SESSION["userType"]) == "jobapplicant";
         }
     }
 
-     /**
+    /**
      * This function is used to check if someone owns a resource, i.e profile or job listing.
      * @param int the ID of the user. 
      * @return bool true if owned, false otherwise. 
      */
-    public static function ownsResource($resourceID){
-        if(Validator::isLoggedIn()){
+    public static function ownsResource($resourceID)
+    {
+        if (Validator::isLoggedIn()) {
             return ($_SESSION["id"]) == $resourceID;
         }
     }
@@ -239,6 +243,42 @@ class Validator
         return $_SESSION["name"] === $jobAdCompanyName;
     }
 
+    public static function isEmptyFile($file)
+    {
+        if (empty($file)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
+    public static function is_uploaded_file($file)
+    {
+        if (is_uploaded_file($file)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
+    //Check whether folder exists
+    public static function foler_exists($fileFolder)
+    {
+        if (!file_exists($fileFolder)) {
+            if (!mkdir($fileFolder, 0777, true)) {
+                return false;
+            }
+        } else {
+            return true;
+        }
+    }
+
+    public static function is_correct_fileType($fileType, $allowedFileType)
+    {
+        if (!in_array($fileType, $allowedFileType)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 }

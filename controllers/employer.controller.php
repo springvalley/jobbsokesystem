@@ -4,11 +4,13 @@ require_once "/xampp/htdocs/jobbsokesystem/library/database_handler.php";
 require_once "/xampp/htdocs/jobbsokesystem/library/validator.php";
 require_once "/xampp/htdocs/jobbsokesystem/models/employer/employer.model.php";
 require_once "/xampp/htdocs/jobbsokesystem/library/errorhandler.php";
+require_once "/xampp/htdocs/jobbsokesystem/library/FileUploadHandler.php";
+
 
 class EmployerController
 {
 
-  /**
+    /**
      * This function is used to edit an employer in the database.
      * @param  
      * @return
@@ -65,6 +67,31 @@ class EmployerController
             header("location: ../editcompanyprofile.php?id=" . (int)$data["employer_id"]);
             exit();
         }
+
+        $profileImage = $_FILES["profileImage"];
+        if (!empty($profileImage["tmp_name"])) {
+
+            $profileImageFilePath = FileUploadHandler::uploadFile($profileImage);
+            if ($profileImageFilePath === false) {
+                ErrorHandler::setSuccess("Profile bildet kan ikke lastet opp. Vennligst, prøv på nytt!");
+                header("location: ../editcompanyprofile.php?id=" . (int)$data["employer_id"]);
+                exit();
+            }
+            $data["profileImage"] = $profileImageFilePath;
+        } else {
+            //Get the existing files that are already uploaded
+
+            $existingFile = $model->getExistingProfileImageFile($data["employer_id"]);
+            // Check if the files are already uploaded, so retrieve the existing file 
+            //instead of asking upload new files every time user edit profile.
+            if ($existingFile) {
+                $data["profileImage"] = $existingFile->profile_picture;
+            } else {
+                ErrorHandler::setError("Du har ikke lastet opp noen filer på din profil.");
+                header("location: ../editcompanyprofile.php?id=" . (int)$data["employer_id"]);
+            }
+        }
+
 
         //Update db using model
         //Redirect user to profile if successful, if else redirect to other page with errormessages
