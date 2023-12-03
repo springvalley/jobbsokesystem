@@ -28,7 +28,7 @@ $isJobAdOwner = Validator::isJobAdOwner($jobAdDetail->company_name);
             <div class="goBackLink mb-3">
                 <i class="fa-solid fa-angle-left"></i>
                 <?php
-                echo '<a ' . ($isLoggedInAsEmployer && $isJobAdOwner ? 'href="companyjobads.php"' : 'href="index.php"') . '>Tilbake</a>';
+                echo '<a ' . ($isLoggedInAsEmployer && $isJobAdOwner ? 'href="companyjobads.php"' : 'href="index.php"') . '>' . translate("goBack") . '</a>';
                 ?>
             </div>
         </div>
@@ -91,10 +91,10 @@ $isJobAdOwner = Validator::isJobAdOwner($jobAdDetail->company_name);
                         <div>
                             <a class="btn btn-primary" data-toggle="collapse"
                                 href="applyjob.php?id=' . $jobAdDetail->jobListing_id . '" role="button"
-                                aria-expanded="false" ' . ($isLoggedInAsEmployer ? ' hidden' : '') . '>Søk Stilling</a>
+                                aria-expanded="false" ' . ($isLoggedInAsEmployer ? ' hidden' : '') . '>' . translate("apply_for_job_button") . '</a>
                         <a class="btn btn-primary" data-toggle="collapse" href="listcompanyjobapplications.php?id=' .
                             $jobAdDetail->jobListing_id . '" role="button" aria-expanded="false" ' . ($isJobAdOwner
-                                ? '' : 'hidden') . '>Se alle søknader</a>
+                                ? '' : 'hidden') . '>' . translate("view_all_jobApplication_button") . '</a>
                         </div>'
                         ?>
                     </div>
@@ -115,7 +115,7 @@ $isJobAdOwner = Validator::isJobAdOwner($jobAdDetail->company_name);
 
 <!--This function is used to popup the message for the user to confirm if the user wants to delete the job advertisement-->
 <script>
-    function confirmDeletion() {
-        return confirm("Er du sikker på at du vil slette denne jobbannonsen?");
-    }
+function confirmDeletion() {
+    return confirm("Er du sikker på at du vil slette denne jobbannonsen?");
+}
 </script>

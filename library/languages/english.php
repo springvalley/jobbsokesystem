@@ -1,23 +1,30 @@
 <?php
 $lang = array(
     //Nav items
-    "title" => "Find a new job!",
+    "title" => "Find A New Job!",
     "home_nav" => "Home",
-    "find_job_nav" => "Find a job",
+    "find_job_nav" => "Find A Job",
     "for_employer_nav" => "For employer",
     "login/register_nav" => "Sign in/Sign up",
     "my_account_nav" => "My Account",
 
-    //Index
-    "find_job_title" => "Find a new job",
+
+
+    //Index - My jobapplications - JobApplicationDetail - CompanyJobAds
+    "find_job_title" => "Find A New Job",
+    "companyJobAds_header" => "Job Listings",
+    "my_job_applications_header" => "My Job Applications",
+    "apply_for_position_header" => "Application for the position of: ",
     "search_button" => "Search",
-    "see_details_button" => "View Details",
     "industry" => "Industry",
     "form_of_employment" => "Employment type",
-    "job_position" => "Position",
+    "job_position" => "Job position",
     "location" => "Location",
     "published_date" => "Published date",
     "applicationDeadline" => "Deadline",
+    "apply_date" => "Applied date: ",
+    "application_status" => "",
+    "see_details_button" => "View Details",
 
 
     //Reset password
@@ -33,7 +40,7 @@ $lang = array(
     "forgot_password_button" => "Forgot your password?",
     "cancel_button" => "Cancel",
     "signin_button" => "Sign in",
-    "new_account_text" => "Dont have an account? <a href='signup.php'>Sign up here!</a>",
+    "new_account_text" => "Don't have an account? <a href='signup.php'>Sign up here!</a>",
 
     //Register
     "new_account_title" => "Register new user",
@@ -41,7 +48,10 @@ $lang = array(
 
 
     //Applicantprofile
-    "summary" => "Summary",
+    "about_me" => "About me",
+    "fullName" => "Full name: ",
+    "phoneNumber" => "Telephone number: ",
+    "email" => "Email: ",
     "skills" => "Skills",
     "education" => "Education",
     "edit_profile_button" => "Edit profile",
@@ -55,21 +65,50 @@ $lang = array(
     "last_position_label" => "Current or last position",
     "upload_diploma_label" => "Upload your diploma",
 
+    //Jobapplication - ListCompanyJobApplications
+    "candidate_number" => "Candidate no.: ",
+    "candidate_name" => "Name of candidate: ",
+    "coverLetter" => "Cover Letter: ",
+    "educationLevel" => "Education level: ",
+    "documents" => "Documents",
+    "jobApplication_header" => "Job Application List",
+    "goBackToCompanyJobAds_button" => "Back to joblisting",
+
+
+    //Documents
+    "download_CV" => "Download CV ",
+    "download_diploma" => "Download diploma ",
+
 
     //companydashboard
+    "dashboard_header" => "Dashboard",
     "company_profile_label" => "Company profile",
     "jobad_label" => "Job Listings",
-    "applications_label" => "Applications",
+    "applications_label" => "Job Applications",
     "candidates_label" => "Candidates",
     "messages_label" => "Messages",
+    "overview_jobApplications" => "Job Application List Overview",
+    "overview_candidates" => "Candidate List Overview",
+    "index" => "No.",
+    "total_count_jobApplications" => "Total number of job applications",
+    "total_count_candidates" => "Total number of candidates",
+    "goBackToDashboard_button" => "Back to Dashboard",
 
     //companyprofile
-    "about_subtitle" => "About the company",
+    "about_company" => "About the company",
     "contact_button" => "Contact us",
+    "save_changes_button" => "Save changes",
+    "contact_us" => "Contact us",
+    "company_name" => "Compnay name: ",
+    "organisation_number" => "Organisation number: ",
+    "telephone_number" => "Telephone no.: ",
+    "email" => "Email: ",
+    "visit_website" => "Visit our website here.",
 
-    //Jobdetails
+    //JobDetails
     "edit_jobad_button" => " Edit",
     "delete_button" => " Delete",
+    "view_all_jobApplication_button" => "View all job applications",
 
 
     //Labels
@@ -91,12 +130,7 @@ $lang = array(
     "jobdescription_placeholder" => "Write about the position",
     "publish_button" => "Publish",
     "new_job_ad_title" => "Create new job advertisement",
-
-    //editprofile
-
-    "save_button" => "Save changes",
     "download_cv_label" => "CV",
-
 
     //Placeholder texts
     "email_placeholder" => "Enter your email",
@@ -113,11 +147,24 @@ $lang = array(
     "education_placeholder" => "Choose education",
     "jobtype_placeholder" => "Choose employment type",
     "filter_placeholder" => "Filter",
+    //Search input
+    "input_searchText_placeholder" => "Free Text Search",
 
     //buttons
     "goBack" => "Back",
+    "save_button" => "Save changes",
     "viewAllJobApplications" => "View Job Applications",
     "apply_button" => "Send application",
     "autofill_button" => "Autofill your information",
+    "apply_for_job_button" => "Apply for position",
+    "view_cv" => "View CV",
+    "edit_profileImage_button" => "Change profile image",
+    "upload_new_cv" => "Upload new CV",
+    "view_job_application_button" => "View job application",
+    "createNewJobAd_button" => "+ Create a new job advertisement",
+    "accept_button" => "Aksepter Jobbsøknad",
+    "reject_button" => "Avvis Jobbsøknad",
+
+
 
 );

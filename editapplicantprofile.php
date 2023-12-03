@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $applicantToGet = (int)$_GET["id"];
 }
 $jobApplicantView = new JobApplicantEditModel($applicantToGet);
-if(!Validator::isLoggedIn() || !Validator::isJobApplicant() || !Validator::ownsResource($applicantToGet)){
+if (!Validator::isLoggedIn() || !Validator::isJobApplicant() || !Validator::ownsResource($applicantToGet)) {
     header("location: ./index.php");
     exit();
 }
@@ -21,7 +21,7 @@ if(!Validator::isLoggedIn() || !Validator::isJobApplicant() || !Validator::ownsR
         <div>
             <div class="goBackLink mb-3">
                 <i class="fa-solid fa-angle-left"></i>
-                <a href="applicantprofile.php?id=<?php echo $applicantToGet ?>">Tilbake Profil</a>
+                <a href="applicantprofile.php?id=<?php echo $applicantToGet ?>"><?php echo translate("goBack"); ?></a>
             </div>
         </div>
     </div>
@@ -45,7 +45,7 @@ if(!Validator::isLoggedIn() || !Validator::isJobApplicant() || !Validator::ownsR
                                 <label for="uploadImage" class="btn-sm btn btn-info text-white">
                                     <input onchange="display_image_name(this.files[0].name)" type="file"
                                         name="profileImage" id="uploadImage" style="display: none;">
-                                    Endre bildet
+                                    <?php echo translate("edit_profileImage_button"); ?>
                                 </label>
                                 <small class="file_info text-muted"></small>
                             </div>
@@ -92,7 +92,7 @@ if(!Validator::isLoggedIn() || !Validator::isJobApplicant() || !Validator::ownsR
                     <div class="card-body">
                         <div class="row">
                             <div class="col-12">
-                                <p class="card-title font-weight-bold"><?php echo translate("summary") ?></p>
+                                <p class="card-title font-weight-bold"><?php echo translate("about_me") ?></p>
                                 <p>
                                     <textarea class="form-control" rows=7 type="text" name="summary"
                                         value='<?php echo $jobApplicantView->getSummary(); ?>'></textarea>
@@ -134,16 +134,12 @@ if(!Validator::isLoggedIn() || !Validator::isJobApplicant() || !Validator::ownsR
                                 <!--Upload CV-->
                                 <div class="form-group col-md-8">
                                     <label for="formFile"
-                                        class="card-title form-label"><?php echo translate("cv_label") ?></label>
+                                        class="card-title form-label"><?php echo translate("upload_new_cv") ?></label>
                                     <input class="form-control" type="file" name="cv" id="file">
-                                    <!-- <a href="http://localhost/jobbsokesystem/assets/<?php echo urlencode(basename($jobApplicantView->getCVFile())); ?>"
-                                        download>
-                                        <li class="list-group-item mt-2"><b>Se CV</b><i
-                                                class='fa-solid fa-download'></i></li>
-                                    </a> -->
                                     <a href="http://localhost/jobbsokesystem/assets/uploadFiles/<?php echo urlencode(basename($jobApplicantView->getCVFile())); ?>"
                                         target="_blank">
-                                        <li class="list-group-item mt-2"><b>Se CV</b><i class='fa-solid fa-eye'></i>
+                                        <li class="list-group-item mt-2"><b><?php echo translate("view_cv") ?></b><i
+                                                class='fa-solid fa-eye'></i>
                                         </li>
                                     </a>
                                 </div>

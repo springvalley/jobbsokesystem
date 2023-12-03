@@ -3,12 +3,10 @@
 class JobApplicationView
 {
     private $jobApplicationModel;
-    // private $helper;
 
     public function __construct()
     {
         $this->jobApplicationModel = new JobApplicationModel();
-        // $this->helper = new Helper();
     }
 
     public function fetchJobApplicationDetails($jobApplication_id)

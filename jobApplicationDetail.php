@@ -37,14 +37,15 @@ $isJobAdOwner = Validator::isJobAdOwner($jobApplicationDetails->company_name);
 <div class="container">
     <div class="goBackLink">
         <i class="fa-solid fa-angle-left"></i>
-        <?php echo '<a ' . ($isLoggedInAsEmployer && $isJobAdOwner ? 'href="listcompanyjobapplications.php?id=' . $jobApplicationDetails->jobListing_id . '"' : 'href="myJobApplications.php"') . '>Tilbake</a>'; ?>
+        <?php echo '<a ' . ($isLoggedInAsEmployer && $isJobAdOwner ? 'href="listcompanyjobapplications.php?id=' . $jobApplicationDetails->jobListing_id . '"' : 'href="myJobApplications.php"') . '>' . translate("goBack") . '</a>'; ?>
     </div>
     <div class="row justify-content-center">
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
             <input type="hidden" name="jobApplicationId" value="<?php echo $jobApplicationId; ?>">
             <div class="row">
                 <div class="job-title">
-                    <p> Søknad på stilling som: <?php echo $jobApplicationDetails->position_name; ?></p>
+                    <?php echo translate("apply_for_position_header") ?>
+                    <p><?php echo $jobApplicationDetails->position_name; ?></p>
                 </div>
                 <div class="col-md-4 grid-margin w-10">
                     <div class="card">
@@ -58,10 +59,12 @@ $isJobAdOwner = Validator::isJobAdOwner($jobApplicationDetails->company_name);
                             </div>
 
                             <div class="profile-content m-3">
-                                <div class="header">Fullnavn: <?php echo $jobApplicationDetails->name; ?></div>
-                                <div class="header">Telefonnr.: <?php echo $jobApplicationDetails->phone_number; ?>
+                                <div class="header"><?php echo translate("fullName") . $jobApplicationDetails->name; ?>
                                 </div>
-                                <p class="header">E-post: <?php echo $jobApplicationDetails->email; ?></p>
+                                <div class="header">
+                                    <?php echo translate("phoneNumber") . $jobApplicationDetails->phone_number; ?>
+                                </div>
+                                <p class="header"><?php echo translate("email") . $jobApplicationDetails->email; ?></p>
                             </div>
                         </div>
                     </div>
@@ -71,8 +74,9 @@ $isJobAdOwner = Validator::isJobAdOwner($jobApplicationDetails->company_name);
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-9">
-                                    <p class="card-title font-weight-bold">Kandidat nr.:
-                                        <?php echo $jobApplicationDetails->jobApplicant_id; ?> </p>
+                                    <p class="card-title font-weight-bold">
+                                        <?php echo translate("candidate_number") . $jobApplicationDetails->jobApplicant_id; ?>
+                                    </p>
                                 </div>
                                 <?php
                                 $statusClass = "";
@@ -89,23 +93,23 @@ $isJobAdOwner = Validator::isJobAdOwner($jobApplicationDetails->company_name);
                                 </div>
                             </div>
                             <hr>
-                            <p class="header">Søknadsbrev</p>
+                            <p class="header"><?php echo translate("coverLetter"); ?></p>
                             <p class="content"><?php echo $jobApplicationDetails->cover_letter; ?></p>
-                            <p class="header">Utdanningsnivå:</p>
+                            <p class="header"><?php echo translate("educationLevel"); ?></p>
                             <p class="content"> <?php echo $jobApplicationDetails->educationlevel_name; ?>
                             </p>
-                            <p class="header">Dokumenter</p>
+                            <p class="header"><?php echo translate("documents"); ?></p>
                             <ul list-group list-group-flush>
                                 <a href="http://localhost/jobbsokesystem/assets/uploadFiles/<?php echo urlencode(basename($jobApplicationDetails->cv_path)); ?>"
                                     download>
-                                    <li class="list-group-item mt-2"><b>Last ned CV </b><i
+                                    <li class="list-group-item mt-2"><b><?php echo translate("download_CV"); ?> </b><i
                                             class='fa-solid fa-download'></i></li>
                                 </a>
 
                                 <a href="http://localhost/jobbsokesystem/assets/uploadFiles/<?php echo urlencode(basename($jobApplicationDetails->diploma_path)); ?>"
                                     download>
-                                    <li class="list-group-item mt-2"><b>Last ned diplom </b><i
-                                            class='fa-solid fa-download'></i></li>
+                                    <li class="list-group-item mt-2"><b><?php echo translate("download_diploma"); ?>
+                                        </b><i class='fa-solid fa-download'></i></li>
                                 </a>
                             </ul>
 
@@ -116,8 +120,8 @@ $isJobAdOwner = Validator::isJobAdOwner($jobApplicationDetails->company_name);
                 if ($isJobAdOwner) {
                     echo '
                     <div class="form-group col-md-12 text-center m-3">
-                        <button type="submit" name="action" value="reject" class="btn btn-danger">Avvis</button>
-                        <button type="submit" name="action" value="accept" class="btn btn-primary">Aksepter</button>
+                        <button type="submit" name="action" value="reject" class="btn btn-danger" style="margin-right: 5px;">' . translate("reject_button") . '</button>
+                        <button type="submit" name="action" value="accept" class="btn btn-primary">' . translate("accept_button") . '</button>
                     </div>';
                 }
 

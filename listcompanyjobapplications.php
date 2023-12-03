@@ -9,11 +9,12 @@ require_once "/xampp/htdocs/jobbsokesystem/library/validator.php";
         <div>
             <div class="goBackLink mb-3">
                 <i class="fa-solid fa-angle-left"></i>
-                <a href="companyjobads.php">Tilbake</a>
+                <!--THIS ONE SHOULD BE FIXED-->
+                <a href="companyjobads.php"><?php echo translate("goBackToCompanyJobAds_button"); ?></a>
             </div>
         </div>
     </div>
-    <h1>Jobbsøknader</h1>
+    <h1><?php echo translate("jobApplication_header"); ?></h1>
     <?php
     echo "<br>";
     $jobApplicationView = new JobApplicationView();
@@ -41,10 +42,10 @@ require_once "/xampp/htdocs/jobbsokesystem/library/validator.php";
         <div class="card-body">
             <div class="row">
                 <div class="col-5">
-                    Kandidatnr: <b>' . $listJobApplication->jobApplicant_id . '</b>
+                    ' . translate("candidate_number") . ' <b>' . $listJobApplication->jobApplicant_id . '</b>
                 </div>
                 <div class="col-5">
-                    Kandidatsnavn: ' . '<b>' . $listJobApplication->name . '</b>                 
+                ' . translate("candidate_name") . '<b>' . $listJobApplication->name . '</b>                 
                 </div> ';
             $statusClass = "";
             if (isset($listJobApplication->application_status_name)) {
@@ -61,29 +62,28 @@ require_once "/xampp/htdocs/jobbsokesystem/library/validator.php";
                 <div class="col-12 mt-2">
                 </div>
                 <div class="col-5 mt-2">
-                    Stillingtittel: ' . '<b>' . $listJobApplication->position_name . '</b>
+                    ' . translate("job_position") . ': ' . '<b>' . $listJobApplication->position_name . '</b>
                 </div>
                 <div class="col-6 mt-2">
-                    Ansettelsesform: ' . '<b>' . $listJobApplication->jobType . '</b>
+                    ' . translate("form_of_employment") . ': ' . '<b>' . $listJobApplication->jobType . '</b>
                 </div>
                 <div class="col-6 mt-2">
-                    Sted: ' . '<b>' . $listJobApplication->location_name . '</b>
+                    ' . translate("location") . ': ' . '<b>' . $listJobApplication->location_name . '</b>
                 </div>
             </div>
             <div class="flex-container mt-2">
                 <div>
-                    Søknadsdato: ' . '<b>' . date('d-m-Y', strtotime($listJobApplication->apply_date)) . '</b>
+                    ' . translate("apply_date") . ': ' . '<b>' . date('d-m-Y', strtotime($listJobApplication->apply_date)) . '</b>
                 </div>
-                <div style="color: red; margin-right: 1rem;">
-                    Søknadsfrist for stilling: ' . '<b>' . date(
+                <div style="color: red; margin-right: 2rem;">
+                    ' . translate("applicationDeadline") . ': ' . '<b>' . date(
                 'd-m-Y',
                 strtotime($listJobApplication->application_deadline)
             ) . '</b>
                 </div>
                 <div>
                     <a class="btn btn-primary"
-                        href="jobApplicationDetail.php?id=' . $listJobApplication->jobApplication_id . '" role="button">Se
-                        Søknad</a>
+                        href="jobApplicationDetail.php?id=' . $listJobApplication->jobApplication_id . '" role="button">' . translate("view_job_application_button") . '</a>
                 </div>
             </div>
         </div>
