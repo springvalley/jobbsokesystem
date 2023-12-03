@@ -21,7 +21,8 @@ $jobAdDetail = $jobListingView->fetchJobAdByJobListingId($jobListingId);
 <div class="container">
     <div class="goBackLink">
         <i class="fa-solid fa-angle-left"></i>
-        <a href="<?php echo 'jobadvertisementdetail.php?id=' . $jobAdDetail->jobListing_id ?>">Tilbake jobbannonsen</a>
+        <a
+            href="<?php echo 'jobadvertisementdetail.php?id=' . $jobAdDetail->jobListing_id ?>"><?php echo translate("goBack"); ?></a>
     </div>
     <div class="flex-container justify-content-start">
         <button class="autoFillInfoButton" style="margin-bottom: 10px;"

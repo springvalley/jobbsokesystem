@@ -8,8 +8,11 @@ $lang = array(
     "login/register_nav" => "Logg inn/registrer ny bruker",
     "my_account_nav" => "Min bruker",
 
-    //Index
+    //Index - My jobapplications - JobApplicationDetail - CompanyJobAds
     "find_job_title" => "Finn en ny jobb",
+    "companyJobAds_header" => "Jobbannonser",
+    "my_job_applications_header" => "Mine jobbsøknader",
+    "apply_for_position_header" => "Søknad på stilling som: ",
     "search_button" => "Søk",
     "see_details_button" => "Se detaljer",
     "industry" => "Bransje",
@@ -18,6 +21,7 @@ $lang = array(
     "location" => "Sted",
     "published_date" => "Publisert dato",
     "applicationDeadline" => "Søknadsfrist",
+    "apply_date" => "Søknadsdato: ",
 
     //Reset password
     "reset_password_title" => "Tilbakestill ditt passord",
@@ -39,7 +43,10 @@ $lang = array(
     "signup_button" => "Registrer ny bruker",
 
     //Applicantprofile
-    "summary" => "Oppsummering",
+    "fullName" => "Fullnavn: ",
+    "phoneNumber" => "Telefonnr.: ",
+    "email" => "E-post: ",
+    "about_me" => "Litt om meg",
     "skills" => "Ferdigheter",
     "education" => "Utdanning",
     "edit_profile_button" => "Rediger profil",
@@ -53,17 +60,43 @@ $lang = array(
     "last_position_label" => "Nåværende eller siste stilling",
     "upload_motivation_label" => "Last opp motivasjonsbrev",
 
+    //Jobapplication - ListCompanyJobApplications
+    "candidate_number" => "Kandidat nr.: ",
+    "candidate_name" => "Kandidatesnavn: ",
+    "coverLetter" => "Søknadsbrev: ",
+    "educationLevel" => "Utdanningsnivå: ",
+    "documents" => "Dokumenter",
+    "jobApplication_header" => "Jobbsøknadlisten",
+    "goBackToCompanyJobAds_button" => "Tilbake alle jobbanonser",
+
+    //Documents
+    "download_CV" => "Last ned CV ",
+    "download_diploma" => "Last ned diplom ",
 
     //companydashboard
+    "dashboard_header" => "Dashbord",
     "company_profile_label" => "Bedriftsprofil",
     "jobad_label" => "Jobbannonser",
     "applications_label" => "Søknader",
     "candidates_label" => "Kandidater",
     "messages_label" => "Meldinger",
+    "overview_jobApplications" => "Oversikt over jobbsøknadlisten",
+    "overview_candidates" => "Oversikt over kandidatlisten",
+    "index" => "Nr.",
+    "total_count_jobApplications" => "Total antall jobbsøknader",
+    "total_count_candidates" => "Total antall kandidater",
+    "goBackToDashboard_button" => "Tilbake Dashbord",
 
     //companyprofile
-    "about_subtitle" => "Om bedriften",
+    "about_company" => "Om bedriften",
     "contact_button" => "Kontakt oss",
+    "save_changes_button" => "Save changes",
+    "contact_us" => "Kontakt oss",
+    "company_name" => "Bedriftsnavn: ",
+    "organisation_number" => "Organisasjon nr.: ",
+    "telephone_number" => "Telefon nr.: ",
+    "email" => "E-post: ",
+    "visit_website" => "Besøk vår hjemmesider her.",
 
     //editprofile
     "save_button" => "Lagre endringer",
@@ -72,6 +105,7 @@ $lang = array(
     //Jobdetails
     "edit_jobad_button" => " Redigere",
     "delete_button" => " Slett",
+    "view_all_jobApplication_button" => "Se alle jobbsøknader",
 
 
     //Labels
@@ -111,12 +145,21 @@ $lang = array(
     "education_placeholder" => "Velg utdannelse",
     "jobtype_placeholder" => "Velg ansettelsesform",
     "filter_placeholder" => "Filtrer",
+    "input_searchText_placeholder" => "Søk i fritekst",
 
     //Buttons
     "goBack" => "Tilbake",
     "viewAllJobApplications" => "Se Alle Jobbsøknader",
     "apply_button" => "Send jobbsøknad",
     "autofill_button" => "Autofyll din informasjon",
+    "apply_for_job_button" => "Søk på stilling",
+    "view_cv" => "Se CV",
+    "edit_profileImage_button" => "Endre profilbildet",
+    "upload_new_cv" => "Last opp en ny CV",
+    "view_job_application_button" => "Se jobbsøknad",
+    "createNewJobAd_button" => "+ Legg til en ny jobbannonse",
+    "accept_button" => "Accept Application",
+    "reject_button" => "Reject Application",
 
 
 );

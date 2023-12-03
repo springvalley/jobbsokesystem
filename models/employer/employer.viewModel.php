@@ -18,6 +18,7 @@ class EmployerViewModel extends EmployerModel
         parent::__construct();
         $this->employer_id = $employer_id;
         $jobApplicantData = $this->getEmployerProfile($employer_id);
+        // $totalJobListing = $this->totalCountJobListingByEmployerId($employer_id);
         $this->company_name = $jobApplicantData->company_name;
         $this->email = $jobApplicantData->email;
         $this->phoneNumber = $jobApplicantData->phone_number;
@@ -72,5 +73,42 @@ class EmployerViewModel extends EmployerModel
     public function getProfileImage()
     {
         return $this->profileImage;
+    }
+
+
+    public function getTotalNumberOfJobListingsByEmployerId($employerId)
+    {
+        $totalNumberOfJobListings = $this->totalNumberOfJobListingsGroupByEmployerId($employerId);
+        foreach ($totalNumberOfJobListings as $jobListing) {
+            return $jobListing->totalJobListings;
+        }
+    }
+
+    public function getTotalNumberOfJobApplicationsByEmployerId($employerId)
+    {
+        $totalNumberOfJobApplications = $this->totalNumberOfJobApplications($employerId);
+        foreach ($totalNumberOfJobApplications as $jobApplication) {
+            return $jobApplication->totalJobApplications;
+        }
+    }
+
+    public function getTotalNumberOfJobApplicants($employerId)
+    {
+        $totalNumberOfJobApplicants = $this->totalNumberOfJobApplicants($employerId);
+        foreach ($totalNumberOfJobApplicants as $jobApplicant) {
+            return $jobApplicant->totalApplicants;
+        }
+    }
+
+    public function displayOverviewOfJobApplications($employerId)
+    {
+        $overviewJobApplications = $this->getOverviewOfJobApplicationsGroupByJobListing($employerId);
+        return $overviewJobApplications;
+    }
+
+    public function displayOverviewOfCandidates($employerId)
+    {
+        $overviewCandidates = $this->getOverviewOfCandidatesGroupByJobListing($employerId);
+        return $overviewCandidates;
     }
 }

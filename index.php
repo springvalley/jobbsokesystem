@@ -17,7 +17,8 @@ $helperModel = new Helper();
         <input type="hidden" name="type" value="filter">
         <div class="row mt-3">
             <div class="col">
-                <input type="text" class="form-control" id="searchText" aria-describedby="searchText" placeholder="Søk i fritekst (eks: 1,2,3)">
+                <input type="text" class="form-control" id="searchText" aria-describedby="searchText"
+                    placeholder="<?php echo translate("input_searchText_placeholder"); ?>">
             </div>
             <div class="col">
                 <select class="form-select" name="jobtype">
@@ -70,12 +71,12 @@ $helperModel = new Helper();
                        <div class="col-5"> 
                             <b>' . $jobAd->company_name . '</b>
                        </div>
-                       <div class="col-6">
+                       <div class="col-5">
                             ' . translate("industry") . ': ' . '<b>' . $jobAd->industry_name . '</b>                       
                        </div>
-                       <div class="col">
-                           <i class="fa-regular fa-heart"></i>
-                       </div>
+                       <div class="col applicationDeadlineDateBadge">
+                            ' . translate("applicationDeadline") . ': ' .  date('d-m-Y', strtotime($jobAd->application_deadline)) . '
+                        </div>
                    </div>
                    <div class="row">
                        <div class="col-12 mt-2">
@@ -94,10 +95,7 @@ $helperModel = new Helper();
                    <div class="flex-container mt-2">
                        <div>                          
                             ' . translate("published_date") . ': ' . '<b>' . date('d-m-Y', strtotime($jobAd->published_time)) . '</b>
-                        </div>
-                       <div style="color: red; padding-right: 5rem;">
-                            ' . translate("applicationDeadline") . ': ' . '<b>' . date('d-m-Y', strtotime($jobAd->application_deadline)) . '</b>
-                        </div>
+                        </div>                    
                        <div>
                        <a class="btn btn-primary" href="jobadvertisementdetail.php?id=' . $jobAd->jobListing_id . '"role="button">' . translate("see_details_button") . '</a>
                        </div>

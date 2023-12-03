@@ -14,7 +14,7 @@ class JobApplicationModel
     {
         $this->db->query("SELECT ja.jobApplication_id, ja.apply_date, j.jobApplicant_id, j.name, j.educationlevel_id,
                         a.application_status_name, jl.position_name, jl.published_time, jl.application_deadline, 
-                        e.company_name, l.location_name, i.industry_name, jl.jobListing_id, jt.jobType
+                        e.company_name, e.employer_id, l.location_name, i.industry_name, jl.jobListing_id, jt.jobType
                         FROM jobapplication AS ja
                         INNER JOIN joblisting AS jl ON ja.jobListing_id = jl.jobListing_id
                         INNER JOIN jobapplicant AS j ON ja.jobApplicant_id = j.jobApplicant_id
@@ -40,7 +40,7 @@ class JobApplicationModel
     public function getJobApplicationDetails($jobApplication_id)
     {
         $this->db->query("SELECT ja.*, jl.position_name, jl.published_time, jl.application_deadline, a.application_status_name,
-        e.company_name, l.location_name, i.industry_name, jl.jobListing_id, jt.jobType, j.jobApplicant_id, j.name, j.email, j.phone_number, j.profile_picture, el.educationlevel_name
+        e.company_name, e.orgNumber, l.location_name, i.industry_name, jl.jobListing_id, jt.jobType, j.jobApplicant_id, j.name, j.email, j.phone_number, j.profile_picture, el.educationlevel_name
                         FROM jobapplication AS ja 
                         INNER JOIN joblisting AS jl ON ja.jobListing_id = jl.jobListing_id                       
                         INNER JOIN employer AS e ON jl.employer_id = e.employer_id
@@ -89,6 +89,12 @@ class JobApplicationModel
         }
     }
 
+    /**
+     * This function is used to update status of job application. The jobapplication can be rejected or accepted.
+     * @param int $jobApplicationId The ID of jobapplication
+     * @param int $newApplicationStatusId The updated ID of applicationstatus.
+     * 
+     */
     public function updateApplicationStatus($jobApplicationId, $newApplicationStatusId)
     {
         $this->db->query("UPDATE jobapplication SET application_status_id = :newApplicationStatusId
@@ -99,6 +105,23 @@ class JobApplicationModel
 
         if ($this->db->execute()) {
             return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function fetchEmployerID($employerId)
+    {
+        $this->db->query("SELECT e.employer_id, e.company_name, e.orgNumber, e.email, e.phone_number, e.summary, e.profile_picture, l.location_name, i.industry_name 
+        FROM employer as e 
+        INNER JOIN location as l on e.location_id = l.location_id 
+        INNER JOIN industry as i on e.industry_id = i.industry_id 
+        WHERE e.employer_id = :employer_id");
+
+        $this->db->bind(":employer_id", $employerId);
+        $row = $this->db->fetchSingleRow();
+        if ($this->db->rowCount() > 0) {
+            return $row;
         } else {
             return false;
         }

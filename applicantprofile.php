@@ -20,10 +20,11 @@ $jobApplicantView = new JobApplicantViewModel($applicantToGet);
         </div>
         <div>
             <?php if (Validator::isLoggedIn() && Validator::ownsResource($jobApplicantView->getApplicantID()) && Validator::isJobApplicant()) { ?>
-                <form action="editapplicantprofile.php" method="post">
-                    <input type="hidden" name="applicant_id" value=<?php echo $jobApplicantView->getApplicantID() ?>>
-                    <button type="submit" class="editProfileButton"><?php echo translate("edit_profile_button") ?></button>
-                </form>
+            <form action="editapplicantprofile.php" method="post">
+                <input type="hidden" name="applicant_id" value=<?php echo $jobApplicantView->getApplicantID() ?>>
+                <button type="submit"
+                    class="editProfileButton m-3"><?php echo translate("edit_profile_button") ?></button>
+            </form>
             <?php  } ?>
         </div>
     </div>
@@ -37,7 +38,8 @@ $jobApplicantView = new JobApplicantViewModel($applicantToGet);
                     <div class="profile-card">
                         <div class="profile-header">
                             <div class="profilePicture">
-                                <img src="http://localhost/jobbsokesystem/assets/uploadFiles/<?php echo urlencode(basename($jobApplicantView->getProfileImage())); ?>" class="img img-fluid">
+                                <img src="http://localhost/jobbsokesystem/assets/uploadFiles/<?php echo urlencode(basename($jobApplicantView->getProfileImage())); ?>"
+                                    class="img img-fluid">
                             </div>
                         </div>
                         <div class="profile-content m-3">
@@ -64,7 +66,7 @@ $jobApplicantView = new JobApplicantViewModel($applicantToGet);
                     <div class="card-body">
                         <div class="row">
                             <div class="col-12">
-                                <p class="card-title font-weight-bold"><?php echo translate("summary") ?></p>
+                                <p class="card-title font-weight-bold"><?php echo translate("about_me") ?></p>
                                 <p class="content">
                                     <?php
                                     $data = $jobApplicantView->getSummary();
@@ -108,8 +110,10 @@ $jobApplicantView = new JobApplicantViewModel($applicantToGet);
                         </p>
                         <hr>
                         <p class="header"><?php echo translate("download_cv_label") ?></p>
-                        <a href="http://localhost/jobbsokesystem/assets/uploadFiles/<?php echo urlencode(basename($jobApplicantView->getCVFile())); ?>" target="_blank">
-                            <li class="list-group-item mt-2"><b>Se din CV </b><i class='fa-solid fa-eye'></i>
+                        <a href="http://localhost/jobbsokesystem/assets/uploadFiles/<?php echo urlencode(basename($jobApplicantView->getCVFile())); ?>"
+                            target="_blank">
+                            <li class="list-group-item mt-2"><b><?php echo translate("view_cv"); ?> </b><i
+                                    class='fa-solid fa-eye'></i>
                             </li>
                         </a>
 
