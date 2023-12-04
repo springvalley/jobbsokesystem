@@ -1,13 +1,16 @@
-<?php include "components/header.php";
-include "models/jobApplicant/jobApplicant.model.php";
-include "models/jobApplicant/jobApplicant.viewModel.php";
-require_once "/xampp/htdocs/jobbsokesystem/library/errorhandler.php";
-require_once "/xampp/htdocs/jobbsokesystem/library/languages/lang.php";
+<?php 
+
+include "components/header.php";
+include "./models/jobApplicant/jobApplicant.model.php";
+include "./views/JobApplicantView.php";
+require_once "./library/errorhandler.php";
+require_once "./library/languages/lang.php";
 
 if (!Validator::isLoggedIn()) {
     header("location: index.php");
+    exit();
 }
-$applicantToGet = isset($_GET["id"]) ? $_GET["id"] : 1;
+$applicantToGet = $_GET["id"];
 $jobApplicantView = new JobApplicantViewModel($applicantToGet);
 ?>
 <div class="container">

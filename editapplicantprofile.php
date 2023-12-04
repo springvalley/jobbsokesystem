@@ -1,6 +1,6 @@
 <?php include "components/header.php";
 include ".\models\jobApplicant\jobApplicant.model.php";
-include ".\models\jobApplicant\jobApplicanteditModel.php";
+include "./views/JobApplicationEditView.php";
 require_once "/xampp/htdocs/jobbsokesystem/library/errorhandler.php";
 require_once "/xampp/htdocs/jobbsokesystem/library/languages/lang.php";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {

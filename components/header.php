@@ -15,9 +15,6 @@
 
 
 <body>
-  <?php
-  var_dump($_SESSION);
-  ?>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -42,6 +39,11 @@
           <li class="nav-item">
             <a class="nav-link" href="login.php"><?php echo translate("login/register_nav") ?></a>
           </li>
+          <?php if(Validator::isLoggedIn() && Validator::isEmployer()){ ?>
+            <li class="nav-item">
+            <a class="nav-link" href="postnewjob.php"><?php echo translate("createNewJobAd_button") ?></a>
+          </li>
+          <?php } ?>
           
           <li class="nav-item">
             <?php
@@ -62,7 +64,7 @@
       </div>
     </div>
   </nav>
-
+<!--
   <a href="index.php">index || </a>
   <a href="forgotPassword.php">forgot password || </a>
   <a class="done" href="login.php">login || </a>
@@ -75,5 +77,5 @@
   <a href="companyjobads.php">companyjobads ||</a>
   <a href="applyjob.php">applyjob || </a>
   <a href="jobapplication.php">jobapplication || </a>
-  <a href="jobadvertisementdetail.php">jobadvertisementdetail </a>
+  <a href="jobadvertisementdetail.php">jobadvertisementdetail </a> -->
   </nav>

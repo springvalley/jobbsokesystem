@@ -1,6 +1,6 @@
 <?php include "components/header.php";
-include "models/employer/employer.model.php";
-include "models/employer/employer.viewModel.php";
+include "./models/employer/employer.model.php";
+include "./views/EmployerView.php";
 require_once "/xampp/htdocs/jobbsokesystem/library/errorhandler.php";
 require_once "/xampp/htdocs/jobbsokesystem/library/languages/lang.php";
 if (!Validator::isLoggedIn()) {
@@ -41,11 +41,6 @@ $employerView = new EmployerViewModel($employerToGet);
                     <button class="nav-link active" id="nav-profile-tab" data-bs-toggle="tab"
                         data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-home"
                         aria-selected="true"><?php echo translate("about_company") ?></button>
-                    <!-- <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Kontakt</button> -->
-                    <button class="nav-link" id="nav-job-ads-tab" data-bs-toggle="tab" data-bs-target="#nav-job-ads"
-                        type="button" role="tab" aria-controls="nav-profile"
-                        aria-selected="false"><?php echo translate("jobad_label") ?></button>
-                    <!-- <button class="nav-link" id="nav-message-tab" data-bs-toggle="tab" data-bs-target="#nav-message" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Meldinger</button> -->
                 </div>
 
             </nav>
