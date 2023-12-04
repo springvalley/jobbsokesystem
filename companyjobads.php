@@ -6,7 +6,7 @@ require_once "./controllers/JobListingController.php";
 require_once "./views/JobListingView.php";
 require_once "./library/errorhandler.php";
 require_once "./models/employer/employer.model.php";
-require_once "./models/employer/employer.viewModel.php";
+require_once "./views/EmployerView.php";
 
 $employerToGet = isset($_GET["id"]) ? $_GET["id"] : 1;
 $employerView = new EmployerViewModel($employerToGet);
@@ -22,7 +22,7 @@ if (!Validator::isLoggedIn() || !Validator::isEmployer() || !Validator::ownsReso
             <div class="goBackLink mb-3">
                 <i class="fa-solid fa-angle-left"></i>
                 <?php
-                if (Validator::isLoggedIn() || Validator::isEmployer() || Validator::ownsResource($employerView->getEmployer_id())) {
+                if (Validator::isLoggedIn() && Validator::isEmployer() && Validator::ownsResource($employerView->getEmployer_id())) {
                     echo '<a href="companydashboard.php?id=' . $_SESSION["id"] . '">' . translate("goBackToDashboard_button") . '</a>';
                 } else {
                     header("Location: index.php");

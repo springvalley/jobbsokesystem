@@ -69,7 +69,7 @@ class JobListingModel
 
     public function getAllJobListingsByEmployer($employerId)
     {
-        $this->db->query("SELECT jl.jobListing_id, jl.job_title, jl.description, jl.published_time, e.company_name, l.location_name, i.industry_name, jt.jobType, jl.position_name, jl.application_deadline
+        $this->db->query("SELECT jl.jobListing_id, jl.job_title, jl.description, jl.published_time, e.company_name,e.employer_id, l.location_name, i.industry_name, jt.jobType, jl.position_name, jl.application_deadline
                      FROM joblisting AS jl
                      INNER JOIN employer AS e ON jl.employer_id = e.employer_id
                      INNER JOIN location AS l ON jl.location_id = l.location_id
@@ -91,7 +91,7 @@ class JobListingModel
 
     public function getJobAdByJobListingId($jobListing_id)
     {
-        $this->db->query("SELECT jl.jobListing_id, jl.job_title, jl.description, jl.published_time, e.company_name, l.location_name, i.industry_name, jt.jobType, jl.position_name, jl.application_deadline
+        $this->db->query("SELECT jl.jobListing_id, jl.job_title, jl.description, jl.published_time,e.employer_id, e.company_name, l.location_name, i.industry_name, jt.jobType, jl.position_name, jl.application_deadline
                      FROM joblisting AS jl
                      INNER JOIN employer AS e ON jl.employer_id = e.employer_id
                      INNER JOIN location AS l ON jl.location_id = l.location_id

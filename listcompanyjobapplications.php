@@ -24,7 +24,7 @@ require_once "/xampp/htdocs/jobbsokesystem/library/validator.php";
 
     $jobAdDetail = $jobListingView->fetchJobAdByJobListingId($jobListingId);
     //Check if the logged-in user is not owner of job ad, so redirect user to index page.
-    if (!Validator::isJobAdOwner($jobAdDetail->company_name)) {
+    if (!Validator::ownsResource($jobAdDetail->employer_id) || !Validator::isEmployer()) {
         header("Location: index.php");
         exit();
     }
