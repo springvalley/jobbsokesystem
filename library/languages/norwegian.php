@@ -5,8 +5,17 @@ $lang = array(
     "home_nav" => "Hjem",
     "find_job_nav" => "Finn en jobb",
     "for_employer_nav" => "For arbeidsgiver",
-    "login/register_nav" => "Logg inn/registrer ny bruker",
+    "login" => "Logg inn",
+    "logout" => "Logg ut",
+    "signup" => "Registrer ny bruker",
     "my_account_nav" => "Min bruker",
+    "company_profile" => "Bedriftensprofil",
+    "dashboard" => "Se Dashbord",
+    "applicant_profile" => "Min profil",
+    "view_my_jobapplications" => "Se alle mine jobbsøknader",
+    "post_new_job" => "Post en ny jobbannonse",
+    "english" => "Engelsk",
+    "norwegian" => "Norsk",
 
     //Index - My jobapplications - JobApplicationDetail - CompanyJobAds
     "find_job_title" => "Finn en ny jobb",

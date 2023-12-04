@@ -1,7 +1,7 @@
 <?php
 include "components/header.php";
 require_once "/xampp/htdocs/jobbsokesystem/models/employer/employer.model.php";
-require_once "/xampp/htdocs/jobbsokesystem/models/employer/employer.viewModel.php";
+require_once "/xampp/htdocs/jobbsokesystem/views/EmployerView.php";
 require_once "/xampp/htdocs/jobbsokesystem/library/languages/lang.php";
 
 $employerToGet = isset($_GET["id"]) ? $_GET["id"] : 1;
