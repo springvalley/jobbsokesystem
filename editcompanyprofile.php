@@ -1,6 +1,6 @@
 <?php include "components/header.php";
 include "models/employer/employer.model.php";
-include "models/employer/employer.editModel.php";
+include "./views/EmployerEditView.php";
 require_once "/xampp/htdocs/jobbsokesystem/library/errorhandler.php";
 require_once "/xampp/htdocs/jobbsokesystem/library/languages/lang.php";
 
