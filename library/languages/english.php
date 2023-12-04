@@ -5,8 +5,18 @@ $lang = array(
     "home_nav" => "Home",
     "find_job_nav" => "Find A Job",
     "for_employer_nav" => "For employer",
-    "login/register_nav" => "Sign in/Sign up",
+    "login" => "Login",
+    "logout" => "Log out",
+    "signup" => "Sign up",
     "my_account_nav" => "My Account",
+    "company_profile" => "Company Profile",
+    "dashboard" => "View Dashboard",
+    "applicant_profile" => "My Profile",
+    "view_my_jobapplications" => "View my job applications",
+    "post_new_job" => "Post New Job",
+    "english" => "English",
+    "norwegian" => "Norwegian",
+
 
 
 
