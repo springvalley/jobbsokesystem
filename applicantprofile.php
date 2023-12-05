@@ -16,12 +16,6 @@ $jobApplicantView = new JobApplicantViewModel($applicantToGet);
 <div class="container">
     <div class="flex-container">
         <div>
-            <!-- <div class="goBackLink mb-3">
-                <i class="fa-solid fa-angle-left"></i>
-                <a href="foremployer.php">Tilbake søkeresultat</a>
-            </div> -->
-        </div>
-        <div>
             <?php if (Validator::isLoggedIn() && Validator::ownsResource($jobApplicantView->getApplicantID()) && Validator::isJobApplicant()) { ?>
                 <form action="editapplicantprofile.php" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="applicant_id" value=<?php echo $jobApplicantView->getApplicantID() ?>>

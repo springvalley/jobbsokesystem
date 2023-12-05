@@ -30,8 +30,6 @@ class FileUploadHandler
             //However, if it fails to create a new directory, display error message.
             if (!Validator::foler_exists($fileFolder)) {
                 ErrorHandler::setError("Kan ikke opprette en ny mappe!");
-                // header("location: . $redirection " . $data);
-                // exit();
                 return false;
             }
 
@@ -50,8 +48,6 @@ class FileUploadHandler
             $fileName = substr(hash('sha256', uniqid('', true)), 0, 8) . "." . array_search($fileType, $allowedFileType);
             if (!Validator::is_correct_fileType($fileType, $allowedFileType)) {
                 ErrorHandler::setError("Ugyldig filtype! Du kan kun laste opp en fil som har type: JPG, PNG og PDF. Vennligst, prøv på nytt!");
-                // header("location: ../editapplicantprofile.php?id=" . (int)$data["jobapplicant_id"]);
-                // exit();
                 return false;
             }
 
@@ -62,8 +58,6 @@ class FileUploadHandler
             //Move uploaded file from temporary location to the specific file path               
             if (!move_uploaded_file($file["tmp_name"], $filePath)) {
                 ErrorHandler::setError("Kan ikke laste opp bildet. Vennligst, prøv på nytt!");
-                // header("location: ../editapplicantprofile.php?id=" . (int)$data["jobapplicant_id"]);
-                // exit();
                 return false;
             }
             return $filePath;

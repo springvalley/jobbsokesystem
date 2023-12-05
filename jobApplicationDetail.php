@@ -50,11 +50,9 @@ $isJobAdOwner = Validator::ownsResource($jobApplicationDetails->employer_id);
                 <div class="col-md-4 grid-margin w-10">
                     <div class="card">
                         <div class="profile-card">
-                            <!--NEED TO BE FIXED. GET UPLOADED PROFILE PICTURE FROM JOBSEEKER -->
                             <div class="profile-header">
                                 <div class="profilePicture">
-                                    <img src="http://localhost/jobbsokesystem/assets/uploadFiles/<?php echo urlencode(basename($jobApplicationDetails->profile_picture)); ?>"
-                                        class="img img-fluid">
+                                    <img src="http://localhost/jobbsokesystem/assets/uploadFiles/<?php echo urlencode(basename($jobApplicationDetails->profile_picture)); ?>" class="img img-fluid">
                                 </div>
                             </div>
 
@@ -100,14 +98,11 @@ $isJobAdOwner = Validator::ownsResource($jobApplicationDetails->employer_id);
                             </p>
                             <p class="header"><?php echo translate("documents"); ?></p>
                             <ul list-group list-group-flush>
-                                <a href="http://localhost/jobbsokesystem/assets/uploadFiles/<?php echo urlencode(basename($jobApplicationDetails->cv_path)); ?>"
-                                    download>
-                                    <li class="list-group-item mt-2"><b><?php echo translate("download_CV"); ?> </b><i
-                                            class='fa-solid fa-download'></i></li>
+                                <a href="http://localhost/jobbsokesystem/assets/uploadFiles/<?php echo urlencode(basename($jobApplicationDetails->cv_path)); ?>" download>
+                                    <li class="list-group-item mt-2"><b><?php echo translate("download_CV"); ?> </b><i class='fa-solid fa-download'></i></li>
                                 </a>
 
-                                <a href="http://localhost/jobbsokesystem/assets/uploadFiles/<?php echo urlencode(basename($jobApplicationDetails->diploma_path)); ?>"
-                                    download>
+                                <a href="http://localhost/jobbsokesystem/assets/uploadFiles/<?php echo urlencode(basename($jobApplicationDetails->diploma_path)); ?>" download>
                                     <li class="list-group-item mt-2"><b><?php echo translate("download_diploma"); ?>
                                         </b><i class='fa-solid fa-download'></i></li>
                                 </a>
