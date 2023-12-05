@@ -35,6 +35,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="login.php"><?php echo translate("login") ?></a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="signup.php"><?php echo translate("signup") ?></a>
+                        </li>
                         <?php } ?>
 
                         <?php if (Validator::isLoggedIn() && Validator::isEmployer()) { ?>
