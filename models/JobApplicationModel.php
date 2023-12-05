@@ -40,7 +40,7 @@ class JobApplicationModel
     public function getJobApplicationDetails($jobApplication_id)
     {
         $this->db->query("SELECT ja.*, jl.position_name, jl.published_time, jl.application_deadline, a.application_status_name,
-        e.company_name, e.orgNumber, l.location_name, i.industry_name, jl.jobListing_id, jt.jobType, j.jobApplicant_id, j.name, j.email, j.phone_number, j.profile_picture, el.educationlevel_name
+        e.company_name, e.employer_id, e.orgNumber, l.location_name, i.industry_name, jl.jobListing_id, jt.jobType, j.jobApplicant_id, j.name, j.email, j.phone_number, j.profile_picture, el.educationlevel_name
                         FROM jobapplication AS ja 
                         INNER JOIN joblisting AS jl ON ja.jobListing_id = jl.jobListing_id                       
                         INNER JOIN employer AS e ON jl.employer_id = e.employer_id

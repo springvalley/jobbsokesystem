@@ -167,8 +167,8 @@ $lang = array(
     "upload_new_cv" => "Last opp en ny CV",
     "view_job_application_button" => "Se jobbsøknad",
     "createNewJobAd_button" => "+ Legg til en ny jobbannonse",
-    "accept_button" => "Accept Application",
-    "reject_button" => "Reject Application",
+    "accept_button" => "Aksepter søknad",
+    "reject_button" => "Avvis søknad",
 
 
 );

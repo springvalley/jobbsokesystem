@@ -40,14 +40,4 @@ class JobApplicationView
         $jobApplicationStatus = $this->jobApplicationModel->updateApplicationStatus($jobApplicationId, $newApplicationStatusId);
         return $jobApplicationStatus;
     }
-
-    
-     /**
-     * This function is used to get all job advertisements.     
-     * @return array A list of job advertisements.
-     */
-
-     public function fetchEmployerID($jobListing_id){
-        return $this->jobApplicationModel->getEmployerIDForListing($jobListing_id);
-     }
 }
