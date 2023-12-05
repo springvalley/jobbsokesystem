@@ -8,7 +8,7 @@ require_once "/xampp/htdocs/jobbsokesystem/library/languages/lang.php";
 $helperModel = new Helper();
 
 
-$jobListingId = $_GET["id"];
+$jobListingId = htmlentities($_GET["id"]);
 
 if (!Validator::isLoggedIn()) {
     header("Location: ./index.php");
@@ -21,12 +21,10 @@ $jobAdDetail = $jobListingView->fetchJobAdByJobListingId($jobListingId);
 <div class="container">
     <div class="goBackLink">
         <i class="fa-solid fa-angle-left"></i>
-        <a
-            href="<?php echo 'jobadvertisementdetail.php?id=' . $jobAdDetail->jobListing_id ?>"><?php echo translate("goBack"); ?></a>
+        <a href="<?php echo 'jobadvertisementdetail.php?id=' . $jobAdDetail->jobListing_id ?>"><?php echo translate("goBack"); ?></a>
     </div>
     <div class="flex-container justify-content-start">
-        <button class="autoFillInfoButton" style="margin-bottom: 10px;"
-            onclick=autofill()><?php echo translate("autofill_button") ?></button>
+        <button class="autoFillInfoButton" style="margin-bottom: 10px;" onclick=autofill()><?php echo translate("autofill_button") ?></button>
     </div>
     <div class="row justify-content-center">
         <form action="./controllers/jobApplicant.controller.php" method="POST" enctype="multipart/form-data">
@@ -43,23 +41,19 @@ $jobAdDetail = $jobListingView->fetchJobAdByJobListingId($jobListingId);
                     <div class="form-row">
                         <div class="form-group col-md-8">
                             <label for="name"><?php echo translate("name_label") ?></label>
-                            <input type="text" class="form-control" name="name" id="name"
-                                placeholder="<?php echo translate("name_placeholder") ?>">
+                            <input type="text" class="form-control" name="name" id="name" placeholder="<?php echo translate("name_placeholder") ?>">
                         </div>
                         <div class="form-group col-md-8">
                             <label for="email"><?php echo translate("email_label") ?></label>
-                            <input type="text" class="form-control" name="email" id="email"
-                                placeholder="<?php echo translate("email_placeholder") ?>">
+                            <input type="text" class="form-control" name="email" id="email" placeholder="<?php echo translate("email_placeholder") ?>">
                         </div>
                         <div class="form-group col-md-8">
                             <label for="phone"><?php echo translate("phone_label") ?></label>
-                            <input type="number" class="form-control" name="phone" id="phone"
-                                placeholder="<?php echo translate("phone_placeholder") ?>">
+                            <input type="number" class="form-control" name="phone" id="phone" placeholder="<?php echo translate("phone_placeholder") ?>">
                         </div>
                         <div class="form-group col-md-8">
                             <label for="lastJob"><?php echo translate("last_position_label") ?></label>
-                            <input type="text" class="form-control" name="lastJob" id="lastjob"
-                                aria-describedby="lastjob" placeholder="<?php echo translate("last_position_label") ?>">
+                            <input type="text" class="form-control" name="lastJob" id="lastjob" aria-describedby="lastjob" placeholder="<?php echo translate("last_position_label") ?>">
                         </div>
                         <div class="form-group col-md-8">
                             <label for="location"><?php echo translate("education_label") ?></label>
@@ -78,8 +72,7 @@ $jobAdDetail = $jobListingView->fetchJobAdByJobListingId($jobListingId);
                 <div class="col-md-6">
                     <div class="form-group col-md-8">
                         <label for="coverletter"><?php echo translate("motivational_text_label") ?></label>
-                        <textarea class="form-control" rows="5" id="coverletter" name="coverletter"
-                            placeholder="<?php echo translate("motivational_text_placeholder") ?>"></textarea>
+                        <textarea class="form-control" rows="5" id="coverletter" name="coverletter" placeholder="<?php echo translate("motivational_text_placeholder") ?>"></textarea>
 
                     </div>
                     <!--File upload-->
@@ -94,8 +87,7 @@ $jobAdDetail = $jobListingView->fetchJobAdByJobListingId($jobListingId);
                 </div>
                 <div class="form-group text-center mt-3">
                     <!--Må lage en script som viser til jobbsøker at søknaden har sendt etter å ha trykke på "Send Søknad"-->
-                    <button id="applyjobb-button" type="submit"
-                        class="btn btn-primary"><?php echo translate("apply_button") ?></button>
+                    <button id="applyjobb-button" type="submit" class="btn btn-primary"><?php echo translate("apply_button") ?></button>
                 </div>
             </div>
     </div>
@@ -104,10 +96,10 @@ $jobAdDetail = $jobListingView->fetchJobAdByJobListingId($jobListingId);
 </div>
 
 <script>
-function autofill() {
-    document.getElementById("name").value = "<?php echo $_SESSION["name"]; ?>";
-    document.getElementById("email").value = "<?php echo $_SESSION["email"]; ?>";
-    document.getElementById("phone").value = "<?php echo $_SESSION["phone"]; ?>";
-}
+    function autofill() {
+        document.getElementById("name").value = "<?php echo $_SESSION["name"]; ?>";
+        document.getElementById("email").value = "<?php echo $_SESSION["email"]; ?>";
+        document.getElementById("phone").value = "<?php echo $_SESSION["phone"]; ?>";
+    }
 </script>
 <?php include "components/footer.php" ?>
