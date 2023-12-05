@@ -13,12 +13,12 @@ if (!Validator::isLoggedIn() || !Validator::isEmployer() || !Validator::ownsReso
 }
 ?>
 <div class="container">
-    <!--Denne linken må endres for at det ikke vises seg til jobbsøker-->
+
     <div class="flex-container">
         <div>
             <div class="goBackLink mb-3">
                 <i class="fa-solid fa-angle-left"></i>
-                <a href="companydashboard.php"><?php echo translate("goBackToDashboard_button"); ?></a>
+                <a href="companydashboard.php?id=<?php echo $employerView->getEmployer_id() ?>"><?php echo translate("goBackToDashboard_button"); ?></a>
             </div>
         </div>
     </div>
@@ -26,14 +26,10 @@ if (!Validator::isLoggedIn() || !Validator::isEmployer() || !Validator::ownsReso
         <div class="row d-flex align-items-center justify-content-center company-profile">
             <!--Upload Company Profile Image-->
             <div class="col-md-7 col-lg-5 col-xl-5">
-                <!-- <img src="img/img_company.jpg" class="company-image"> -->
-                <!-- <img src="img/img_company.jpg" class="company-image"> -->
-                <img class="company-image"
-                    src="http://localhost/jobbsokesystem/assets/uploadFiles/<?php echo urlencode(basename($employerView->getProfileImage())); ?>">
+                <img class="company-image" src="http://localhost/jobbsokesystem/assets/uploadFiles/<?php echo urlencode(basename($employerView->getProfileImage())); ?>">
                 <div class="text-center m-3">
                     <label for="uploadImage" class="btn-sm btn btn-info text-white">
-                        <input onchange="display_image_name(this.files[0].name)" type="file" name="profileImage"
-                            id="uploadImage" style="display: none;">
+                        <input onchange="display_image_name(this.files[0].name)" type="file" name="profileImage" id="uploadImage" style="display: none;">
                         <?php echo translate("edit_profileImage_button"); ?>
                     </label>
                     <small class="file_info text-muted"></small>
@@ -43,31 +39,25 @@ if (!Validator::isLoggedIn() || !Validator::isEmployer() || !Validator::ownsReso
             <div class="col-md-8 col-lg-7 col-xl-6 offset-xl-1 profile-tab">
                 <nav>
                     <div class="nav nav-tabs mb-2" id="nav-tab" role="tablist">
-                        <button class="nav-link active" id="nav-profile-tab" data-bs-toggle="tab"
-                            data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-home"
-                            aria-selected="true"><?php echo translate("about_company") ?></button>
-                        <!-- <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Kontakt</button> -->
+                        <button class="nav-link active" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-home" aria-selected="true"><?php echo translate("about_company") ?></button>
                     </div>
                 </nav>
                 <?php ErrorHandler::displayError() ?>
                 <?php ErrorHandler::displaySuccess() ?>
                 <div class="tab-content" id="nav-tabContent">
-                    <div class="tab-pane fade show active" id="nav-profile" role="tabpanel"
-                        aria-labelledby="nav-home-tab">
+                    <div class="tab-pane fade show active" id="nav-profile" role="tabpanel" aria-labelledby="nav-home-tab">
 
                         <input name="type" value="edit" hidden />
                         <input name="employer_id" value=<?php echo $employerView->getEmployer_id(); ?> hidden />
                         <div>
-                            <button type='submit'
-                                class='editProfileButton mt-3'><?php echo translate("save_changes_button"); ?></button>
+                            <button type='submit' class='editProfileButton mt-3'><?php echo translate("save_changes_button"); ?></button>
                         </div>
 
                         <div class="profile-header">
                             <p><?php echo $employerView->getCompanyName() ?></p>
                         </div>
                         <p>
-                            <textarea class="form-control" name="summary" rows=10 cols=30
-                                value=<?php $employerView->getSummary(); ?>></textarea>
+                            <textarea class="form-control" name="summary" rows=10 cols=30 value=<?php $employerView->getSummary(); ?>></textarea>
                         </p>
                         <div class="col-md-6">
                             <label for="location" class="card-title"><?php echo translate("location"); ?></label>
@@ -89,26 +79,22 @@ if (!Validator::isLoggedIn() || !Validator::isEmployer() || !Validator::ownsReso
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item"><b><?php echo translate("company_name"); ?> </b>
                                     <div class="col-md-6">
-                                        <input class="form-control" name="name"
-                                            value=<?php echo $employerView->getCompanyName(); ?> />
+                                        <input class="form-control" name="name" value=<?php echo $employerView->getCompanyName(); ?> />
                                     </div>
                                 </li>
                                 <li class="list-group-item"><b><?php echo translate("organisation_number"); ?></b>
                                     <div class="col-md-6">
-                                        <input class="form-control" name="orgNumber"
-                                            value=<?php echo $employerView->getOrganizationNumber(); ?>>
+                                        <input class="form-control" name="orgNumber" value=<?php echo $employerView->getOrganizationNumber(); ?>>
                                     </div>
                                 </li>
                                 <li class="list-group-item"><b><?php echo translate("telephone_number"); ?></b>
                                     <div class="col-md-6">
-                                        <input class="form-control" name="phone"
-                                            value=<?php echo $employerView->getPhonenumber(); ?>>
+                                        <input class="form-control" name="phone" value=<?php echo $employerView->getPhonenumber(); ?>>
                                     </div>
                                 </li>
                                 <li class="list-group-item"><b><?php echo translate("email"); ?></b>
                                     <div class="col-md-6">
-                                        <input class="form-control" name="email"
-                                            value=<?php echo $employerView->getEmail(); ?>>
+                                        <input class="form-control" name="email" value=<?php echo $employerView->getEmail(); ?>>
                                     </div>
                                 </li>
                                 <li class="list-group-item"><a href="#"><?php echo translate("visit_website"); ?></a>
@@ -122,8 +108,8 @@ if (!Validator::isLoggedIn() || !Validator::isEmployer() || !Validator::ownsReso
     </form>
 </div>
 <script>
-function display_image_name(file_name) {
-    var file_info = document.querySelector(".file_info").innerHTML = "<br><b>Valgt fil:</b> <br>" + file_name;
-}
+    function display_image_name(file_name) {
+        var file_info = document.querySelector(".file_info").innerHTML = "<br><b>Valgt fil:</b> <br>" + file_name;
+    }
 </script>
 <?php include "components/footer.php" ?>
