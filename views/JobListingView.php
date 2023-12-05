@@ -36,7 +36,7 @@ class JobListingView
 
       /**
      * This function is used to get all job advertisements.     
-     * @return array A list of job advertisements.
+     * @return mixed A list of job advertisements.
      */
 
 

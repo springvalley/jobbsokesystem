@@ -10,7 +10,7 @@ $helperModel = new Helper();
 
 $jobListingId = $_GET["id"];
 
-if (!Validator::isLoggedIn()) {
+if (!Validator::isLoggedIn() || empty($_GET["id"])) {
     header("Location: ./index.php");
     exit();
 }

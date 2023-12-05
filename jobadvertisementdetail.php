@@ -8,19 +8,18 @@ require_once "/xampp/htdocs/jobbsokesystem/library/validator.php";
 
 $jobListingView = new JobListingView();
 //Check if 'jobListing_id' is present in the query string of the URL, if not redirect to index page.
-if (Validator::isLoggedIn()) {
-    $jobListingId = htmlspecialchars($_GET["id"]);
-    $jobAdDetail = $jobListingView->fetchJobAdByJobListingId($jobListingId);
-    if (!$jobAdDetail) {
-        header("Location: ./index.php");
-        exit();
-    }
-} else {
-    header("Location: ./index.php");
+if (!Validator::isLoggedIn()) {
+    header("location: ./index.php");
     exit();
 }
+$jobListingId = htmlspecialchars($_GET["id"]);
+$jobAdDetail = $jobListingView->fetchJobAdByJobListingId($jobListingId);
 $isLoggedInAsEmployer = Validator::isLoggedInAsEmployer();
-$isJobAdOwner = Validator::isJobAdOwner($jobAdDetail->company_name);
+$isJobAdOwner = Validator::ownsResource($jobAdDetail->employer_id);
+if($jobAdDetail->jobListing_id === false){
+    header("location: ./index.php");
+    exit();
+}
 ?>
 <div class="container">
     <div class="flex-container">
@@ -115,7 +114,7 @@ $isJobAdOwner = Validator::isJobAdOwner($jobAdDetail->company_name);
 
 <!--This function is used to popup the message for the user to confirm if the user wants to delete the job advertisement-->
 <script>
-function confirmDeletion() {
-    return confirm("Er du sikker på at du vil slette denne jobbannonsen?");
-}
+    function confirmDeletion() {
+        return confirm("Er du sikker på at du vil slette denne jobbannonsen?");
+    }
 </script>
