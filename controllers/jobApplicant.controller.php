@@ -103,12 +103,6 @@ class JobApplicantController
 
 
     /**
-     * This function is used to make a new jobapplication for a job applicant.
-     * @param  
-     * @return
-     */
-
-    /**
      * This function is used to apply for a job.
      */
     public function applyToJob()

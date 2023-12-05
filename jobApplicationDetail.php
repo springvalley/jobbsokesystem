@@ -32,7 +32,7 @@ if (!$jobApplicationDetails) {
 }
 
 $isLoggedInAsEmployer = Validator::isLoggedInAsEmployer();
-$isJobAdOwner = Validator::ownsResource($jobApplicationDetails->employer_id);
+$isJobAdOwner = Validator::ownsResource($jobApplicationView->fetchEmployerID($jobApplicationId));
 ?>
 <div class="container">
     <div class="goBackLink">

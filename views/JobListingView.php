@@ -32,11 +32,22 @@ class JobListingView
         return $jobAds;
     }
 
+
+
+      /**
+     * This function is used to get all job advertisements.     
+     * @return array A list of job advertisements.
+     */
+
+
+
     public function fetchJobAdByJobListingId($jobListing_id)
     {
         $jobAdDetail = $this->jobListingModel->getJobAdByJobListingId($jobListing_id);
         return $jobAdDetail;
     }
+
+
 
     public function fetchAllJobAdsByEmployerId($employerId)
     {

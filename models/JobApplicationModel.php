@@ -110,6 +110,23 @@ class JobApplicationModel
         }
     }
 
+    /**
+     * This function is used to fetch the employerID of the employer of the associated jobapplication.
+     * @param int $jobApplicationId The ID of jobapplication
+     * @return mixed The associated id or false if something failed
+     */
+
+    public function getEmployerIDForListing($jobListing_id){
+        $this->db->query("SELECT employer.employer_id FROM employer INNER JOIN joblisting ON employer.employer_id = joblisting.employer_id INNER JOIN jobapplication on jobapplication.jobListing_id = joblisting.jobListing_id WHERE jobapplication.jobListing_id = :jobListing_id");
+        $this->db->bind(":jobListing_id", $jobListing_id);
+        $row = $this->db->fetchSingleRow();
+        if ($this->db->rowCount() > 0) {
+            return $row;
+        } else {
+            return false;
+        }
+    }
+
     public function fetchEmployerID($employerId)
     {
         $this->db->query("SELECT e.employer_id, e.company_name, e.orgNumber, e.email, e.phone_number, e.summary, e.profile_picture, l.location_name, i.industry_name 
